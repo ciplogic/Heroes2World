@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>26fe43a8-c293-4644-9e28-2aa5c9236fd6</ProjectGuid>
+    <ProjectGuid>{26FE43A8-C293-4644-9E28-2AA5C9236FD6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NHeroes2</RootNamespace>
     <AssemblyName>NHeroes2</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,10 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agg\Agg.cs" />
+    <Compile Include="Agg\AggFile.cs" />
     <Compile Include="Agg\AggFat.cs" />
-    <Compile Include="Agg\ByteVectorReader.cs" />
+    <Compile Include="Agg\Icns\Icn.cs" />
+    <Compile Include="Agg\Icns\IcnHeader.cs" />
+    <Compile Include="Agg\Icns\IcnKind.cs" />
+    <Compile Include="Agg\Icns\IcnSprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialize\ByteVectorReader.cs" />
+    <Compile Include="Serialize\ByteVectorReaderReflect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

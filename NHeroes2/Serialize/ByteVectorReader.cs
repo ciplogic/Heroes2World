@@ -1,8 +1,6 @@
-using System;
-
-namespace NHeroes2.Agg
+namespace NHeroes2.Serialize
 {
-    class ByteVectorReader
+    public class ByteVectorReader
     {
         private readonly byte[] _fileContent;
         int _pos;
@@ -56,6 +54,23 @@ namespace NHeroes2.Agg
             var lo = getLE16();
             var hi = getLE16();
             return lo + (hi << 16);
+        }
+
+        public byte[] getRaw(int size)
+        {
+            var result = new byte[size];
+            for (var i = 0; i < size; i++)
+            {
+                result[i] = _fileContent[i+_pos];
+            }
+
+            _pos += size;
+            return result;
+        }
+
+        public void skip(int s)
+        {
+            _pos += s;
         }
     }
 }

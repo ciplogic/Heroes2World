@@ -60,6 +60,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NHeroes2\NHeroes2.csproj">
+      <Project>{26FE43A8-C293-4644-9E28-2AA5C9236FD6}</Project>
+      <Name>NHeroes2</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,7 @@ namespace HeroesWorld
         static void Main(string[] args)
         {
             var aggFile = new AggFile();
-            aggFile.Read("../data/heroes2.agg");
+            aggFile.Open("../data/heroes2.agg");
             
             var settings = new GameSettings()
             {
