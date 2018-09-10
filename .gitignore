@@ -1,0 +1,11 @@
+/bin
+/DATA/
+/files/save/*.sav
+.vs
+bin
+.idea
+/files/images/*
+obj
+packages
+/MAPS
+/SOUND/*

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeroesWorld", "HeroesWorld\HeroesWorld.csproj", "{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdl2.Core", "Sdl2.Core\Sdl2.Core.csproj", "{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VisualTools", "VisualTools", "{65049379-1DD6-41C8-BD39-3169A42AD760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualEditor", "VisualEditor\VisualEditor.csproj", "{0469B00D-4918-44EE-8E12-F5516BF46CA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHeroes2", "NHeroes2\NHeroes2.csproj", "{26FE43A8-C293-4644-9E28-2AA5C9236FD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		MACOS|Any CPU = MACOS|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}.Debug|Any CPU.ActiveCfg = MACOS|Any CPU
+		{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}.Debug|Any CPU.Build.0 = MACOS|Any CPU
+		{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}.MACOS|Any CPU.ActiveCfg = MACOS|Any CPU
+		{0FF4BA83-93DF-43AF-B4F8-DFF353ED4008}.MACOS|Any CPU.Build.0 = MACOS|Any CPU
+		{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}.Debug|Any CPU.ActiveCfg = MACOS|Any CPU
+		{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}.Debug|Any CPU.Build.0 = MACOS|Any CPU
+		{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}.MACOS|Any CPU.ActiveCfg = MACOS|Any CPU
+		{AA67F9FA-4DDA-4B69-B464-32DBA83B6328}.MACOS|Any CPU.Build.0 = MACOS|Any CPU
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5}.Debug|Any CPU.ActiveCfg = MACOS|Any CPU
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5}.Debug|Any CPU.Build.0 = MACOS|Any CPU
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5}.MACOS|Any CPU.ActiveCfg = MACOS|Any CPU
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5}.MACOS|Any CPU.Build.0 = MACOS|Any CPU
+		{26FE43A8-C293-4644-9E28-2AA5C9236FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FE43A8-C293-4644-9E28-2AA5C9236FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26FE43A8-C293-4644-9E28-2AA5C9236FD6}.Debug|Any CPU.ActiveCfg = MACOS|Any CPU
+		{26FE43A8-C293-4644-9E28-2AA5C9236FD6}.Debug|Any CPU.Build.0 = MACOS|Any CPU
+		{26FE43A8-C293-4644-9E28-2AA5C9236FD6}.MACOS|Any CPU.ActiveCfg = MACOS|Any CPU
+		{26FE43A8-C293-4644-9E28-2AA5C9236FD6}.MACOS|Any CPU.Build.0 = MACOS|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0469B00D-4918-44EE-8E12-F5516BF46CA5} = {65049379-1DD6-41C8-BD39-3169A42AD760}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A04ABD42-1F7E-4248-A220-256CBC35BEAF}
+	EndGlobalSection
+EndGlobal
