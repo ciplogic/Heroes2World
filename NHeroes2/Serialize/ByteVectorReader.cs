@@ -35,11 +35,12 @@ namespace NHeroes2.Serialize
             var lenTextFinal = -1;
             for (var i = 0; i < lenText; i++)
             {
-                var curChar = (char)Get8();
-                if (curChar == 0 && lenTextFinal== -1)
+                var curChar = (char) Get8();
+                if (curChar == 0 && lenTextFinal == -1)
                 {
                     lenTextFinal = i;
                 }
+
                 chars[i] = curChar;
             }
 
@@ -61,7 +62,7 @@ namespace NHeroes2.Serialize
             var result = new byte[size];
             for (var i = 0; i < size; i++)
             {
-                result[i] = _fileContent[i+_pos];
+                result[i] = _fileContent[i + _pos];
             }
 
             _pos += size;

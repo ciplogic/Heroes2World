@@ -11,6 +11,7 @@ namespace VisualEditor
     {
         private Bitmap _bitmap;
         AggFile aggFile = new AggFile();
+
         public MainForm()
         {
             InitializeComponent();
@@ -21,10 +22,12 @@ namespace VisualEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            aggFile.RenderICNSprite((int) IcnKind.ADVMCO, 0);
+            var mouse = aggFile.RenderICNSprite((int) IcnKind.HEROES, 0);
             var graphics = panel1.CreateGraphics();
             Pen pen = new Pen(Color.Red);
-            graphics.DrawLine(pen, 0,0, 100,100);
+            graphics.DrawLine(pen, 0, 0, 100, 100);
+            
+            graphics.DrawImage(mouse.first, new Point());
         }
     }
 }

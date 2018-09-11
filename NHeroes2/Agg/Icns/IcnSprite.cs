@@ -14,7 +14,7 @@ namespace NHeroes2.Agg.Icns
             var bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
             if (isFirst)
                 first = bmp;
-            else 
+            else
                 second = bmp;
         }
     }

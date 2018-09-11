@@ -17,10 +17,9 @@ namespace HeroesWorld.Engine
         {
             //Your code here.
             screen.DrawSprite(
-                _texture, 
+                _texture,
                 _rect.ToSdlRect(),
-                new SDL2.SDL.SDL_Rect() { x = x, y = y, w = _rect.Width, h = _rect.Height});
-
+                new SDL2.SDL.SDL_Rect() {x = x, y = y, w = _rect.Width, h = _rect.Height});
         }
     }
 }

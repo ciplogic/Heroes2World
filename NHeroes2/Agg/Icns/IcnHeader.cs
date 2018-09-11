@@ -10,6 +10,5 @@ namespace NHeroes2.Agg.Icns
         public UInt16 height;
         public byte type;
         public UInt32 offsetData;
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.Agg.Icns
 {
-    public enum IcnKind 
+    public enum IcnKind
     {
         UNKNOWN,
         ADVBORDE,

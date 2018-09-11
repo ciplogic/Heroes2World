@@ -896,9 +896,7 @@ namespace NHeroes2.Agg.Icns
 
         public static string GetString(int icn)
         {
-            return ((int)IcnKind. UNKNOWN <= icn) && ((int)IcnKind.LASTICN > icn) ? Values[(IcnKind)icn] : "CUSTOM";
+            return ((int) IcnKind.UNKNOWN <= icn) && ((int) IcnKind.LASTICN > icn) ? Values[(IcnKind) icn] : "CUSTOM";
         }
     }
 }
-
-

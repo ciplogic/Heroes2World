@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Engine\CORE.cs" />
     <Compile Include="Engine\Rect.cs" />
+      <Compile Include="Engine\Screen.cs"/>
     <Compile Include="Engine\Surface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

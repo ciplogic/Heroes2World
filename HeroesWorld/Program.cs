@@ -12,7 +12,7 @@ namespace HeroesWorld
         {
             var aggFile = new AggFile();
             aggFile.Open("../data/heroes2.agg");
-            
+
             var settings = new GameSettings()
             {
                 ScreenWidth = 800,
@@ -21,10 +21,10 @@ namespace HeroesWorld
             settings.SerializeToFile("config.json");
 
             var screen = new Screen();
-            screen.SetWindow(settings.ScreenWidth,  settings.ScreenHeight);
-            
-            
-            CORE myCore = new CORE();
+            screen.SetWindow(settings.ScreenWidth, settings.ScreenHeight);
+
+
+            Core myCore = new Core();
 
             //load a sample image
             IntPtr myTexture = screen.LoadTexture("mmmmIcon.png");
@@ -38,19 +38,20 @@ namespace HeroesWorld
             //Setup the game controller
             IntPtr gc = SDL2.SDL.SDL_GameControllerOpen(0);
 
-            while(myCore.bRunning)
+            while (myCore.IsRunning)
             {
                 //Don't forget this.
                 myCore.MainLoop();
 
                 //Your code here.
                 screen.DrawSprite(
-                    myTexture, 
-                    new SDL2.SDL.SDL_Rect() { x = 0, y = 0, w = 128, h = 128},
-                    new SDL2.SDL.SDL_Rect() { x = 100, y = 100, w = 256, h = 256});
-                
+                    myTexture,
+                    new SDL2.SDL.SDL_Rect() {x = 0, y = 0, w = 128, h = 128},
+                    new SDL2.SDL.SDL_Rect() {x = 100, y = 100, w = 256, h = 256});
+
                 //read a sample button
-                if (SDL2.SDL.SDL_GameControllerGetButton(gc, SDL2.SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A) == 1)
+                if (SDL2.SDL.SDL_GameControllerGetButton(gc,
+                        SDL2.SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A) == 1)
                 {
                     myCore.PlaySound(mySound);
                 }
