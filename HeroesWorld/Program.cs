@@ -2,7 +2,8 @@
 using HeroesWorld.Engine;
 using HeroesWorld.Settings;
 using NHeroes2.Agg;
-using SDL2SharpTutorial.Utilities;
+using NHeroes2.Agg.Music;
+using NHeroes2.Utilities;
 
 namespace HeroesWorld
 {
@@ -13,12 +14,22 @@ namespace HeroesWorld
             var aggFile = new AggFile();
             aggFile.Open("../data/heroes2.agg");
 
+            MusicPlayer.Play(aggFile, 1);
+            
+            var extract = new ExtractFrames();
+            var result = extract.Extract(aggFile, "/Users/cipriankhlud/FH2Pics/");
+            foreach (var pic in result.Items)
+            {
+                Console.WriteLine("Pic: "+pic.SerializeToJsonString());
+            }
+            return;
+
             var settings = new GameSettings()
             {
                 ScreenWidth = 800,
                 ScreenHeight = 600
             };
-            settings.SerializeToFile("config.json");
+            settings.SerializeToJsonFile("config.json");
 
             var screen = new Screen();
             screen.SetWindow(settings.ScreenWidth, settings.ScreenHeight);

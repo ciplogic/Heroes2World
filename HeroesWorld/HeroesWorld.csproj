@@ -44,16 +44,17 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+      <Reference Include="System.Drawing"/>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\CORE.cs" />
     <Compile Include="Engine\Rect.cs" />
       <Compile Include="Engine\Screen.cs"/>
     <Compile Include="Engine\Surface.cs" />
+      <Compile Include="ExtractFrames.cs"/>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\GameSettings.cs" />
-    <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

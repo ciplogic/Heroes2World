@@ -3,7 +3,7 @@ using SDL2;
 
 namespace HeroesWorld.Engine
 {
-    class Core
+    internal class Core
     {
         public Core()
         {
@@ -17,13 +17,13 @@ namespace HeroesWorld.Engine
         public bool IsRunning
             => _bRunning;
 
-        SDL.SDL_Event systemEvent;
+        SDL.SDL_Event _systemEvent;
 
         public void MainLoop()
         {
-            while (SDL.SDL_PollEvent(out systemEvent) != 0)
+            while (SDL.SDL_PollEvent(out _systemEvent) != 0)
             {
-                if (systemEvent.type == SDL.SDL_EventType.SDL_QUIT)
+                if (_systemEvent.type == SDL.SDL_EventType.SDL_QUIT)
                 {
                     _bRunning = false;
                 }

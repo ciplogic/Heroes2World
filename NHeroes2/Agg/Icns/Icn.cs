@@ -894,9 +894,9 @@ namespace NHeroes2.Agg.Icns
             {IcnKind.CSLMARKER, "CSLMARKER.ICN"}
         };
 
-        public static string GetString(int icn)
+        public static string GetString(IcnKind icn)
         {
-            return ((int) IcnKind.UNKNOWN <= icn) && ((int) IcnKind.LASTICN > icn) ? Values[(IcnKind) icn] : "CUSTOM";
+            return ((int) IcnKind.UNKNOWN <= icn) && (IcnKind.LASTICN > icn) ? Values[(IcnKind) icn] : "CUSTOM";
         }
     }
 }

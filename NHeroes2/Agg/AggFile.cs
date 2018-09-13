@@ -64,7 +64,7 @@ namespace NHeroes2.Agg
         }
 
 
-        byte[] ReadICNChunk(int icn)
+        byte[] ReadICNChunk(IcnKind icn)
         {
             // hard fix artifact "ultimate stuff" sprite for loyalty version
             return Read(Icn.GetString(icn));
@@ -125,6 +125,11 @@ namespace NHeroes2.Agg
 
         void DrawPointFast(Bitmap srf, int x, int y, byte palette)
         {
+            if(x<0 || y<0)
+                return;
+
+            if (x >= srf.Width || y >= srf.Height)
+                return;
             var r = kb_pal[palette * 3]*4;
             var g = kb_pal[palette * 3 + 1]*4;
             var b = kb_pal[palette * 3 + 2]*4;
@@ -132,7 +137,22 @@ namespace NHeroes2.Agg
             srf.SetPixel(x, y, palColor);
         }
 
-        public IcnSprite RenderICNSprite(int icn, int index)
+
+        public int IcnSpriteCount(IcnKind icn)
+        {
+            var body = ReadICNChunk(icn);
+            if (body.Length == 0)
+            {
+                return 0;
+            }
+
+            ByteVectorReader st = new ByteVectorReader(body);
+
+            var count = st.getLE16();
+            return count;
+        }
+
+        public IcnSprite RenderICNSprite(IcnKind icn, int index)
         {
             var res = new IcnSprite();
 

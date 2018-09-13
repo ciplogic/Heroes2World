@@ -73,5 +73,16 @@ namespace NHeroes2.Serialize
         {
             _pos += s;
         }
+
+        public uint getBE32()
+        {
+            var lo1 = Get8();
+            var hi1 = Get8();
+            var lo2 = Get8();
+            var hi2 = Get8();
+            var lo = (hi1 << 16) + (lo1 << 24);
+            var hi = hi2 + (lo2 << 8);
+            return (uint) (hi + lo);
+        }
     }
 }

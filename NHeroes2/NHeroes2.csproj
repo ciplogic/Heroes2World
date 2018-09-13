@@ -35,6 +35,9 @@
     <OutputPath>bin\MACOS\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+      <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+          <HintPath>..\HeroesWorld\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -48,13 +51,26 @@
   <ItemGroup>
     <Compile Include="Agg\AggFile.cs" />
     <Compile Include="Agg\AggFat.cs" />
+      <Compile Include="Agg\H2Log.cs"/>
     <Compile Include="Agg\Icns\Icn.cs" />
     <Compile Include="Agg\Icns\IcnHeader.cs" />
     <Compile Include="Agg\Icns\IcnKind.cs" />
     <Compile Include="Agg\Icns\IcnSprite.cs" />
+      <Compile Include="Agg\Music\GroupChunkHeader.cs"/>
+      <Compile Include="Agg\Music\IFFChunkHeader.cs"/>
+      <Compile Include="Agg\Music\MidData.cs"/>
+      <Compile Include="Agg\Music\MusicPlayer.cs"/>
+      <Compile Include="Agg\Music\XMIData.cs"/>
+      <Compile Include="Agg\Music\XmiKind.cs"/>
+      <Compile Include="Agg\Music\XMITrack.cs"/>
+      <Compile Include="Agg\Music\XMITracks.cs"/>
+      <Compile Include="Agg\Music\Xml2Mid.cs"/>
+      <Compile Include="Agg\MusKind.cs"/>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialize\ByteVectorReader.cs" />
     <Compile Include="Serialize\ByteVectorReaderReflect.cs" />
+      <Compile Include="Serialize\ByteVectorWriter.cs"/>
+      <Compile Include="Utilities\Extensions.cs"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
