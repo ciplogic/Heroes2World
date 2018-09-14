@@ -1,32 +1,36 @@
 using System.Collections.Generic;
-using NHeroes2.Agg.Music;
+using NHeroes2.Serialize;
 
-namespace NHeroes2.Agg
+namespace NHeroes2.Agg.Music
 {
-    class MidEvent
-    {
-        byte[] pack;
-        byte[] data = new byte[4];
-    }
-
-    class  MidEvents
-    {
-        List<MidEvent> _items;
-    }
-    class MidTrack
+    public class MidTrack
     {
         IFFChunkHeader mtrk;
         MidEvents events;
-        
-    }
-    class MidTracks
-    {
-        public List<MidTrack> _items;
-    }
 
-    class XMITrack
+        public MidTrack(XMITrack track)
+        {
+            mtrk = new IFFChunkHeader(Xml2Mid.TAG_MTRK, 0);
+            events = new MidEvents(track);
+            {
+                mtrk.length = events._items.Count;
+            }
+        }
+
+        static MidTrack()
+        {
+            
+            ByteVectorReflect.AddTypeWriter((ByteVectorWriter sb, MidTrack st) =>
+            {
+                sb.Write(st.mtrk);
+                sb.Write(st.events);
+            });
+        }
+
+    }
+    public class XMITrack
     {
         public byte[] timb;
         public byte[] evnt;
-    };
+    }
 }

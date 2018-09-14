@@ -16,9 +16,10 @@ namespace NHeroes2.Serialize
             return _data.ToArray();
         }
 
-        public void put8(int val)
+        public ByteVectorWriter put8(int val)
         {
             _data.Add((byte) val);
+            return this;
         }
         
         
@@ -35,5 +36,10 @@ namespace NHeroes2.Serialize
             put8(v);
         }
 
+        public void putBE32(uint v)
+        { 
+            putBE16((ushort) (v >> 16));
+            putBE16((ushort) v);
+        }
     }
 }

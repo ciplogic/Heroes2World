@@ -9,14 +9,21 @@ namespace NHeroes2.Agg.Music
         public int format;
         public int ppqn;
         public MidTracks tracks;
-        public MidData(XMITracks xmiTracks, int i)
+        
+        public MidData() 
         {
-            throw new NotImplementedException();
+            mthd = new IFFChunkHeader(Xml2Mid.TAG_MTHD, 6);
         }
 
+        public MidData(XMITracks t, int p) 
+        {
+            mthd = new IFFChunkHeader(Xml2Mid.TAG_MTHD, 6);
+            ppqn = p;
+            tracks = new MidTracks(t);
+        }
         static MidData()
         {
-        ByteVectorReaderReflect.AddTypeWriter<MidData>(
+        ByteVectorReflect.AddTypeWriter<MidData>(
             (sb, st) =>
             {
                 sb.Write(st.mthd); 

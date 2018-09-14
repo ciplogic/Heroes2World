@@ -11,7 +11,7 @@ namespace NHeroes2.Agg.Music
 
         static GroupChunkHeader()
         {
-            Serialize.ByteVectorReaderReflect.AddTypeReader<GroupChunkHeader>((sb,st) =>
+            Serialize.ByteVectorReflect.AddTypeReader<GroupChunkHeader>((sb,st) =>
             {
                 st.ID = sb.getBE32();
                 st.length = sb.getBE32();

@@ -13,7 +13,6 @@ namespace NHeroes2.Agg.Music
             ByteVectorReader sb = new ByteVectorReader(buf);
 
             // FORM XDIR
-
             var group = sb.ReadData<GroupChunkHeader>();
             if (group.ID != TAG_FORM || group.type != TAG_XDIR)
             {
@@ -40,8 +39,6 @@ namespace NHeroes2.Agg.Music
             {
                 tracks.Add(new XMITrack());
 
-                byte[] timb = tracks.Last().timb;
-                byte[] evnt = tracks.Last().evnt;
 
                 group =sb.ReadData<GroupChunkHeader>();
                 // FORM XMID
@@ -54,8 +51,8 @@ namespace NHeroes2.Agg.Music
                 // [TIMB]
                 if (iff.ID == TAG_TIMB)
                 {
-                    timb = sb.getRaw(iff.length);
-                    if (timb.Length != iff.length)
+                    tracks.Last().timb = sb.getRaw(iff.length);
+                    if (tracks.Last().timb.Length != iff.length)
                     {
                         H2Log.H2ERROR("parse H2ERROR: " + "out of range");
                         break;
@@ -69,7 +66,7 @@ namespace NHeroes2.Agg.Music
                     sb.skip(iff.length);
                     iff = sb.ReadData<IFFChunkHeader>();
                 }
-
+            
                 // EVNT
                 if (iff.ID != TAG_EVNT)
                 {
@@ -77,9 +74,9 @@ namespace NHeroes2.Agg.Music
                     break;
                 }
 
-                evnt = sb.getRaw(iff.length);
+                tracks.Last().evnt = sb.getRaw(iff.length);
 
-                if (evnt.Length != iff.length)
+                if (tracks.Last().evnt.Length != iff.length)
                 {
                     H2Log.H2ERROR("parse H2ERROR: " + "out of range");
                     break;
