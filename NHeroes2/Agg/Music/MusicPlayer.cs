@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using NHeroes2.Serialize;
+using SDL2;
 
 namespace NHeroes2.Agg.Music
 {
@@ -10,8 +12,10 @@ namespace NHeroes2.Agg.Music
             //XmiKind xmi = XmiKind.MIDI0003;
             XmiKind xmi = (XmiKind) 16;
             byte[]v = GetMID(aggFile, xmi);
-            //PlayMid(v, loop);
+            Play(v);
             
+            //PlayMid(v, loop);
+
         }
 
         private static byte[] GetMID(AggFile aggFile, XmiKind xmi)
@@ -36,9 +40,15 @@ namespace NHeroes2.Agg.Music
             return sb.data();
         }
 
-        private byte[] GetMID(int xmi)
-        { 
-            throw new NotImplementedException();
+        static void Play(byte[] buf)
+        {
+            
+            File.WriteAllBytes("play.wav", buf);
+            
+
+            IntPtr mix = SDL_mixer.Mix_LoadWAV("play.wav");
+            SDL_mixer.Mix_PlayMusic(mix, 1);
         }
+
     }
 }

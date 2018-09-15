@@ -1,5 +1,6 @@
 using System;
 using NHeroes2.Serialize;
+using NHeroes2.Utilities;
 
 namespace NHeroes2.Agg.Music
 {
@@ -9,7 +10,12 @@ namespace NHeroes2.Agg.Music
         public int format;
         public int ppqn;
         public MidTracks tracks;
-        
+
+        public override string ToString()
+        {
+            return this.SerializeToJsonString();
+        }
+
         public MidData() 
         {
             mthd = new IFFChunkHeader(Xml2Mid.TAG_MTHD, 6);

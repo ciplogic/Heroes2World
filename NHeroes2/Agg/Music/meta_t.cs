@@ -1,7 +1,20 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace NHeroes2.Agg.Music
 {
+
+    internal class MetaTComparer : IComparer<meta_t>
+    {
+        public int Compare(meta_t x, meta_t y)
+        {
+            Debug.Assert(x != null, nameof(x) + " != null");
+            Debug.Assert(y != null, nameof(y) + " != null");
+            return (int) x.duration - (int) y.duration;
+        }
+    }
+    
     class meta_t
     {
         public meta_t()

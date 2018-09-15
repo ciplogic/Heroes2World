@@ -17,5 +17,18 @@ namespace NHeroes2.Agg.Music
 
         }
 
+        static MidTracks()
+        {
+            ByteVectorReflect.AddTypeWriter(
+                (ByteVectorWriter sb, MidTracks st) =>
+                {
+                    foreach (var item in st._items)
+                    {
+                        sb.Write(item);
+                    }
+                }
+                );
+        }
+
     }
 }

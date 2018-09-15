@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NHeroes2.Serialize;
 using NHeroes2.Utilities;
 using static NHeroes2.Agg.H2Log;
 
@@ -9,6 +10,18 @@ namespace NHeroes2.Agg.Music
     {
         public List<MidEvent> _items = new List<MidEvent>();
 
+        static MidEvents()
+        {
+            ByteVectorReflect.AddTypeWriter(
+                (ByteVectorWriter sb, MidEvents st) =>
+                {
+                    foreach (var item in st._items)
+                    {
+                        sb.Write(item);
+                    }
+                });
+        }
+        
         public MidEvents(XMITrack t)
 
         {
@@ -25,7 +38,7 @@ namespace NHeroes2.Agg.Music
                 if (delta != 0)
                 {
                     // sort duration
-                    //notesoff.sort();
+                    notesoff.Sort(new MetaTComparer());
 
                     var it1 = 0;
                     var it2 = notesoff.Count;

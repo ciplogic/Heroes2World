@@ -1,5 +1,6 @@
 using System;
 using NHeroes2.Serialize;
+using NHeroes2.Utilities;
 
 namespace NHeroes2.Agg.Music
 {
@@ -7,6 +8,11 @@ namespace NHeroes2.Agg.Music
     {
         public UInt32 ID = 0; // 4 upper case ASCII chars, padded with 0x20 (space)
         public int length = 0; // big-endian
+
+        public override string ToString()
+        {
+            return this.SerializeToJsonString();
+        }
 
         static IFFChunkHeader()
         {
