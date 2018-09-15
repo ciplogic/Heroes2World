@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using NHeroes2.Utilities;
 
 namespace NHeroes2.Agg.Music
 {
@@ -26,7 +27,6 @@ namespace NHeroes2.Agg.Music
             command = c;
             quantity = q;
             duration = d;
-
         }
 
         public bool LessThan(meta_t m) 
@@ -37,6 +37,11 @@ namespace NHeroes2.Agg.Music
         public void decrease_duration(UInt32 delta)
         {
             duration -= delta;
+        }
+
+        public override string ToString()
+        {
+            return this.SerializeToJsonString();
         }
 
         public byte command = 0;

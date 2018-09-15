@@ -30,7 +30,7 @@ namespace NHeroes2.Agg.Music
             var endSize = t.evnt.Length;
 
             UInt32 delta = 0;
-            List<meta_t> notesoff = new List<meta_t>();
+            var notesoff = new List<meta_t>();
 
             while (ptr[ptrPos] != 0 && ptrPos < endSize)
             {
@@ -161,7 +161,7 @@ namespace NHeroes2.Agg.Music
                 ++p;
             }
 
-            res.first += ptr[ptrPos];
+            res.first += ptr[p];
             res.second = (uint) (p - ptrPos + 1);
 
             return res;

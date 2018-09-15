@@ -43,10 +43,10 @@ namespace NHeroes2.Agg.Music
         static void Play(byte[] buf)
         {
             
-            File.WriteAllBytes("play.wav", buf);
+            File.WriteAllBytes("play.mid", buf);
             
 
-            IntPtr mix = SDL_mixer.Mix_LoadWAV("play.wav");
+            IntPtr mix = SDL_mixer.Mix_LoadMUS("play.mid");
             SDL_mixer.Mix_PlayMusic(mix, 1);
         }
 
