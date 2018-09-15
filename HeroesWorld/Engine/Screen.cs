@@ -11,7 +11,7 @@ namespace HeroesWorld.Engine
         public void SetWindow(int screenWidth, int screenHeight, string title = "SDL2 Sharp",
             SDL.SDL_WindowFlags flags = SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN)
         {
-            SDL.SDL_Init(SDL.SDL_INIT_VIDEO);
+            SDL.SDL_Init(SDL.SDL_INIT_VIDEO | SDL.SDL_INIT_AUDIO);
             win = SDL.SDL_CreateWindow(title, 50, 50, screenWidth, screenHeight, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
             ren = SDL.SDL_CreateRenderer(win, -1,
                 SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);

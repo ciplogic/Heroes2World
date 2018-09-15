@@ -62,6 +62,7 @@
       <Compile Include="Agg\Music\MidEvents.cs"/>
       <Compile Include="Agg\Music\MidTrack.cs"/>
       <Compile Include="Agg\Music\MidTracks.cs"/>
+      <Compile Include="Agg\Music\MiniLog.cs"/>
       <Compile Include="Agg\Music\MusicPlayer.cs"/>
       <Compile Include="Agg\Music\pack_t.cs"/>
       <Compile Include="Agg\Music\XMIData.cs"/>

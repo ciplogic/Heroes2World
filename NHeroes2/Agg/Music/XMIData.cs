@@ -37,9 +37,8 @@ namespace NHeroes2.Agg.Music
             }
             for (int track = 0; track < numTracks; ++track)
             {
-                tracks.Add(new XMITrack());
-
-
+                var xmiTrack = new XMITrack();
+                tracks.Add(xmiTrack);
                 group =sb.ReadData<GroupChunkHeader>();
                 // FORM XMID
                 if (group.ID != TAG_FORM || group.type != TAG_XMID)
@@ -51,7 +50,7 @@ namespace NHeroes2.Agg.Music
                 // [TIMB]
                 if (iff.ID == TAG_TIMB)
                 {
-                    tracks.Last().timb = sb.getRaw(iff.length);
+                    xmiTrack.timb = sb.getRaw(iff.length);
                     if (tracks.Last().timb.Length != iff.length)
                     {
                         H2Log.H2ERROR("parse H2ERROR: " + "out of range");
@@ -74,9 +73,9 @@ namespace NHeroes2.Agg.Music
                     break;
                 }
 
-                tracks.Last().evnt = sb.getRaw(iff.length);
+                xmiTrack.evnt = sb.getRaw(iff.length);
 
-                if (tracks.Last().evnt.Length != iff.length)
+                if (xmiTrack.evnt.Length != iff.length)
                 {
                     H2Log.H2ERROR("parse H2ERROR: " + "out of range");
                     break;

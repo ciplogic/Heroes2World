@@ -77,5 +77,9 @@ namespace NHeroes2.Agg.Music
             return res.ToArray();
         }
 
+        public int size()
+        {
+            return pack.Length + data[3] + 1;
+        }
     }
 }

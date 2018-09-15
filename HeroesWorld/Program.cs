@@ -14,16 +14,14 @@ namespace HeroesWorld
             var aggFile = new AggFile();
             aggFile.Open("../data/heroes2.agg");
 
-            MusicPlayer.Play(aggFile, 1);
-            
+            /*
             var extract = new ExtractFrames();
             var result = extract.Extract(aggFile, "/Users/cipriankhlud/FH2Pics/");
             foreach (var pic in result.Items)
             {
                 Console.WriteLine("Pic: "+pic.SerializeToJsonString());
             }
-            return;
-
+*/
             var settings = new GameSettings()
             {
                 ScreenWidth = 800,
@@ -41,10 +39,11 @@ namespace HeroesWorld
             IntPtr myTexture = screen.LoadTexture("mmmmIcon.png");
 
             //load a sample sound
-            IntPtr mySound = myCore.LoadSound("PlayerJump.wav");
+            //IntPtr mySound = myCore.LoadSound("PlayerJump.wav");
 
+            //MusicPlayer.Play(aggFile, 1);
             //play the sound
-            myCore.PlaySound(mySound);
+            //myCore.PlaySound(mySound);
 
             //Setup the game controller
             IntPtr gc = SDL2.SDL.SDL_GameControllerOpen(0);
@@ -64,7 +63,7 @@ namespace HeroesWorld
                 if (SDL2.SDL.SDL_GameControllerGetButton(gc,
                         SDL2.SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A) == 1)
                 {
-                    myCore.PlaySound(mySound);
+                   // myCore.PlaySound(mySound);
                 }
 
                 //Finish Renderering

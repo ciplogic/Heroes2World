@@ -1,6 +1,7 @@
 using System;
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
+using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {
@@ -20,6 +21,8 @@ namespace NHeroes2.Agg.Music
             {
                 st.ID = sb.getBE32();
                 st.length = (int) sb.getBE32();
+                
+                addLine("IFFChunkHeader", st.length);
             });
             ByteVectorReflect.AddTypeWriter((ByteVectorWriter sb, IFFChunkHeader st) =>
             {

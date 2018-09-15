@@ -1,29 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
 using static NHeroes2.Agg.H2Log;
+using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {
     class MidEvents
     {
-        public List<MidEvent> _items = new List<MidEvent>();
+        public readonly List<MidEvent> _items = new List<MidEvent>();
 
         static MidEvents()
         {
-            ByteVectorReflect.AddTypeWriter(
-                (ByteVectorWriter sb, MidEvents st) =>
+            ByteVectorReflect.AddTypeWriter<MidEvents>(
+                (sb, st) =>
                 {
                     foreach (var item in st._items)
                     {
                         sb.Write(item);
+
+                        writeBuf("MidEvent", sb);
                     }
                 });
         }
-        
-        public MidEvents(XMITrack t)
 
+        public MidEvents(XMITrack t)
         {
             var ptr = t.evnt;
             var ptrPos = 0;
@@ -52,7 +56,7 @@ namespace NHeroes2.Agg.Music
                             var item = notesoff[it1];
                             // note off
                             _items.Add(new MidEvent(item.duration - delta2, item.command, item.quantity, 0x7F));
-                                
+
                             delta2 += item.duration - delta2;
                         }
                     }
@@ -62,7 +66,7 @@ namespace NHeroes2.Agg.Music
                         notesoff.RemoveAt(0);
 
                     // fixed delta
-                    if (delta2!=0) delta -= delta2;
+                    if (delta2 != 0) delta -= delta2;
 
                     // decrease duration
                     foreach (var it in notesoff)
@@ -91,7 +95,7 @@ namespace NHeroes2.Agg.Music
                         case 0x0F:
                         {
                             pack_t pack = unpackValue(ptr, ptrPos + 2);
-                            ptrPos += (int)(pack.first + pack.second + 1);
+                            ptrPos += (int) (pack.first + pack.second + 1);
                             delta = 0;
                         }
                             break;
@@ -103,7 +107,7 @@ namespace NHeroes2.Agg.Music
                         // pitch bend
                         case 0x0E:
                         {
-                            _items.Add(new MidEvent( delta, ptr[ptrPos], ptr[ptrPos +1], ptr[ptrPos +2]));
+                            _items.Add(new MidEvent(delta, ptr[ptrPos], ptr[ptrPos + 1], ptr[ptrPos + 2]));
                             ptrPos += 3;
                             delta = 0;
                         }
@@ -114,10 +118,10 @@ namespace NHeroes2.Agg.Music
                         // note on
                         case 0x09:
                         {
-                            _items.Add(new MidEvent (delta, ptr[ptrPos], ptr[ptrPos + 1], ptr[ptrPos + 2]));
-                            pack_t pack = unpackValue(ptr,ptrPos + 3);
-                            notesoff.Add(new meta_t((byte) (ptr[ptrPos] - 0x10), ptr[ptrPos + 1], pack.first)); 
-                            ptrPos += 3 + (int)pack.second;
+                            _items.Add(new MidEvent(delta, ptr[ptrPos], ptr[ptrPos + 1], ptr[ptrPos + 2]));
+                            pack_t pack = unpackValue(ptr, ptrPos + 3);
+                            notesoff.Add(new meta_t((byte) (ptr[ptrPos] - 0x10), ptr[ptrPos + 1], pack.first));
+                            ptrPos += 3 + (int) pack.second;
                             delta = 0;
                         }
                             break;
@@ -127,7 +131,7 @@ namespace NHeroes2.Agg.Music
                         // chanel pressure
                         case 0x0D:
                         {
-                            _items.Add(new MidEvent (delta, ptr[ptrPos], ptr[ptrPos + 1]));
+                            _items.Add(new MidEvent(delta, ptr[ptrPos], ptr[ptrPos + 1]));
                             ptrPos += 2;
                             delta = 0;
                         }
@@ -135,7 +139,7 @@ namespace NHeroes2.Agg.Music
 
                         // unused command
                         default:
-                            _items.Add(new MidEvent (0, 0xFF, 0x2F, 0));
+                            _items.Add(new MidEvent(0, 0xFF, 0x2F, 0));
                             H2ERROR("unknown st: 0x");
                             break;
                     }
@@ -156,7 +160,7 @@ namespace NHeroes2.Agg.Music
                     break;
                 }
 
-                res.first |= (UInt32)(0x0000007F & ptr[p]);
+                res.first |= (UInt32) (0x0000007F & ptr[p]);
                 res.first <<= 7;
                 ++p;
             }
@@ -165,6 +169,18 @@ namespace NHeroes2.Agg.Music
             res.second = (uint) (p - ptrPos + 1);
 
             return res;
+        }
+
+        public int size()
+        {
+            int res = 0;
+            foreach (var it in _items)
+            {
+                res += it.size();
+            }
+
+            return res;
+
         }
     }
 }

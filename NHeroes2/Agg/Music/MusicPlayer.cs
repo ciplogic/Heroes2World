@@ -28,26 +28,22 @@ namespace NHeroes2.Agg.Music
 
         static byte[] Xmi2Mid(byte[] buf)
         {
-            XMIData xmi = new XMIData (buf);
-            ByteVectorWriter sb = new ByteVectorWriter(16 * 4096);
+            var xmi = new XMIData (buf);
 
-            if (xmi.isvalid())
-            {
-                MidData mid = new MidData(xmi.tracks, 64);
-                sb.Write(mid); 
-            }
+            if (!xmi.isvalid()) 
+                return Array.Empty<byte>();
+            var sb = new ByteVectorWriter(16 * 4096);
+            var mid = new MidData(xmi.tracks, 64);
+            sb.Write(mid);
 
             return sb.data();
         }
 
         static void Play(byte[] buf)
         {
-            
             File.WriteAllBytes("play.mid", buf);
-            
-
-            IntPtr mix = SDL_mixer.Mix_LoadMUS("play.mid");
-            SDL_mixer.Mix_PlayMusic(mix, 1);
+            //IntPtr mix = SDL_mixer.Mix_LoadMUS("play.mid");
+            //SDL_mixer.Mix_PlayMusic(mix, 1);
         }
 
     }

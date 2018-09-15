@@ -1,5 +1,6 @@
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
+using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {
@@ -12,9 +13,8 @@ namespace NHeroes2.Agg.Music
         {
             mtrk = new IFFChunkHeader(Xml2Mid.TAG_MTRK, 0);
             events = new MidEvents(track);
-            {
-                mtrk.length = events._items.Count;
-            }
+            mtrk.length = events.size();
+            //_items.Count; 
         }
 
         public override string ToString()

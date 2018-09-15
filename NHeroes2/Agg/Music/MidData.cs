@@ -1,6 +1,7 @@
 using System;
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
+using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {
@@ -36,7 +37,11 @@ namespace NHeroes2.Agg.Music
                 sb.putBE16((ushort) st.format);
                 sb.putBE16((ushort) st.tracks._items.Count);
                 sb.putBE16((ushort) st.ppqn);
+                
                 sb.Write(st.tracks);
+                
+                
+                flushLog();
             }
             );
         }
