@@ -21,6 +21,10 @@ namespace HeroesWorld.Engine
         {
             SDL.SDL_RenderCopy(ren, myTexture, ref sourceRect, ref destinationRect);
         }
+        public void DrawSprite(Surface surface, int x, int y)
+        {
+            surface.Draw(this, x, y);
+        }
 
         public void Present()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace HeroesWorld.Engine
 {
@@ -11,6 +12,13 @@ namespace HeroesWorld.Engine
         {
             _texture = texture;
             _rect = rect;
+        }
+
+        public Surface(Screen screen, Bitmap icnFirst)
+        {
+            icnFirst.Save("pic.png");
+            _texture = screen.LoadTexture("pic.png");
+            _rect = new Rect(0,0,icnFirst.Width, icnFirst.Height);
         }
 
         public void Draw(Screen screen, int x, int y)

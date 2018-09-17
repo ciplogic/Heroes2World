@@ -2,6 +2,7 @@
 using HeroesWorld.Engine;
 using HeroesWorld.Settings;
 using NHeroes2.Agg;
+using NHeroes2.Agg.Icns;
 using NHeroes2.Agg.Music;
 using NHeroes2.Utilities;
 
@@ -16,17 +17,20 @@ namespace HeroesWorld
 
             /*
             var extract = new ExtractFrames();
-            var result = extract.Extract(aggFile, "/Users/cipriankhlud/FH2Pics/");
+            var result = extract.Extract(aggFile, "/cs-oss/FH2Pics/");
             foreach (var pic in result.Items)
             {
                 Console.WriteLine("Pic: "+pic.SerializeToJsonString());
-            }
-*/
-            var settings = new GameSettings()
+            }*/
+
+            var settings = new GameSettings
             {
                 ScreenWidth = 800,
                 ScreenHeight = 600
             };
+            var icn = aggFile.RenderICNSprite(IcnKind.HEROES, 0);
+            
+            
             settings.SerializeToJsonFile("config.json");
 
             var screen = new Screen();
@@ -36,14 +40,21 @@ namespace HeroesWorld
             Core myCore = new Core();
 
             //load a sample image
-            IntPtr myTexture = screen.LoadTexture("mmmmIcon.png");
+            //IntPtr myTexture = screen.LoadTexture("mmmmIcon.png");
 
+            icn.first.Save("h2.png");
+            //IntPtr myTexture = screen.LoadTexture("h2.png");
+            Surface surface = new Surface(screen, icn.first);
+
+            
             //load a sample sound
             //IntPtr mySound = myCore.LoadSound("PlayerJump.wav");
+            //IntPtr myMid = myCore.LoadMidi(@"play.mid");
+            //myCore.PlaySound(myMid);
 
-            //MusicPlayer.Play(aggFile, 1);
+            MusicPlayer.Play(aggFile, (int) 16);
             //play the sound
-            //myCore.PlaySound(mySound);
+            //myCore.PlaySound(myMid);
 
             //Setup the game controller
             IntPtr gc = SDL2.SDL.SDL_GameControllerOpen(0);
@@ -53,11 +64,14 @@ namespace HeroesWorld
                 //Don't forget this.
                 myCore.MainLoop();
 
+                var rectSize = new SDL2.SDL.SDL_Rect() {x = 0, y = 0, w = icn.first.Width, h = icn.first.Height};
                 //Your code here.
-                screen.DrawSprite(
+                
+                /*screen.DrawSprite(
                     myTexture,
-                    new SDL2.SDL.SDL_Rect() {x = 0, y = 0, w = 128, h = 128},
-                    new SDL2.SDL.SDL_Rect() {x = 100, y = 100, w = 256, h = 256});
+                    rectSize,
+                    rectSize);*/
+                surface.Draw(screen, 10, 10);
 
                 //read a sample button
                 if (SDL2.SDL.SDL_GameControllerGetButton(gc,

@@ -1,6 +1,6 @@
 namespace NHeroes2.Agg.Music
 {
-    enum XmiKind
+    public enum XmiKind
     {
         UNKNOWN,
         MIDI0002,

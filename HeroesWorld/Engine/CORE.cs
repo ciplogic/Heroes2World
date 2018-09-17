@@ -36,6 +36,14 @@ namespace HeroesWorld.Engine
             return SDL_mixer.Mix_LoadWAV(filepath);
         }
 
+
+        public IntPtr LoadMidi(string filepath)
+        {
+            var s = SDL_mixer.Mix_LoadMUS(filepath);
+            SDL_mixer.Mix_PlayMusic(s, 1);
+            return s;
+        }
+
         public void PlaySound(IntPtr mySound)
         {
             SDL_mixer.Mix_PlayChannel(-1, mySound, 0);

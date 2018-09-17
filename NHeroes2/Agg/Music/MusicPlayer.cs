@@ -10,7 +10,7 @@ namespace NHeroes2.Agg.Music
         public static void Play(AggFile aggFile, int midSong)
         {
             //XmiKind xmi = XmiKind.MIDI0003;
-            XmiKind xmi = (XmiKind) 16;
+            XmiKind xmi = (XmiKind) midSong;
             byte[]v = GetMID(aggFile, xmi);
             Play(v);
             
@@ -42,8 +42,8 @@ namespace NHeroes2.Agg.Music
         static void Play(byte[] buf)
         {
             File.WriteAllBytes("play.mid", buf);
-            //IntPtr mix = SDL_mixer.Mix_LoadMUS("play.mid");
-            //SDL_mixer.Mix_PlayMusic(mix, 1);
+            IntPtr mix = SDL_mixer.Mix_LoadMUS("play.mid");
+            SDL_mixer.Mix_PlayMusic(mix, 1);
         }
 
     }
