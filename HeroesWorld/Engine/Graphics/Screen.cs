@@ -17,6 +17,7 @@ namespace HeroesWorld.Engine.Graphics
             win = SDL.SDL_CreateWindow(title, 50, 50, screenWidth, screenHeight, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
             ren = SDL.SDL_CreateRenderer(win, -1,
                 SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+            SDL.SDL_ShowCursor(0);
         }
 
         public void DrawSprite(IntPtr myTexture, SDL.SDL_Rect sourceRect, SDL.SDL_Rect destinationRect)
@@ -47,6 +48,11 @@ namespace HeroesWorld.Engine.Graphics
         public IntPtr LoadTexture(string filepath)
         {
             return SDL_image.IMG_LoadTexture(ren, filepath);
+        }
+
+        public void Clear()
+        {
+            SDL.SDL_RenderClear(ren);
         }
     }
 }

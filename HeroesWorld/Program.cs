@@ -26,8 +26,8 @@ namespace HeroesWorld
 
             var settings = new GameSettings
             {
-                ScreenWidth = 1600,
-                ScreenHeight = 1200
+                ScreenWidth = 1200,
+                ScreenHeight = 850
             };
 
             settings.SerializeToJsonFile("config.json");
@@ -39,6 +39,9 @@ namespace HeroesWorld
             var icn = aggFile.RenderICNSprite(IcnKind.HEROES, 0);
             icn.first.Save("h2.png");
             Surface surface = new Surface(screen, icn.first);
+
+            var mouse = aggFile.RenderICNSprite(IcnKind.ADVMCO, 0);
+
 
 
             Core myCore = new Core(false);
@@ -63,21 +66,26 @@ namespace HeroesWorld
             screen.Transforms
                 .ScaleMatrix(1.5, 1.2)
                 .TranslateMatrix(25, 150);
+
+            Surface mouseSurface = new Surface(screen, mouse.first);
             while (myCore.IsRunning)
             {
                 //Don't forget this.
                 myCore.MainLoop();
 
                 //Your code here.
-                
+
+                screen.Clear();
                 screen.DrawSprite(surface, 10, 10);
+                myCore.PaintMouse(screen, mouseSurface);
+
                 //surface.Draw(screen, 10, 10);
 
                 //read a sample button
                 if (SDL2.SDL.SDL_GameControllerGetButton(gc,
                         SDL2.SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A) == 1)
                 {
-                   // myCore.PlaySound(mySound);
+                    // myCore.PlaySound(mySound);
                 }
 
                 //Finish Renderering

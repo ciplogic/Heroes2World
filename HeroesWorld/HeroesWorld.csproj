@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Engine\CORE.cs" />
       <Compile Include="Engine\Graphics\Matrix2D.cs"/>
+      <Compile Include="Engine\Graphics\Pastel\BitmapPainter.cs"/>
       <Compile Include="Engine\Graphics\Rect.cs"/>
       <Compile Include="Engine\Graphics\Screen.cs"/>
       <Compile Include="Engine\Graphics\Surface.cs"/>

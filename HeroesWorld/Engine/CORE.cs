@@ -1,4 +1,5 @@
 ﻿using System;
+using HeroesWorld.Engine.Graphics;
 using SDL2;
 
 namespace HeroesWorld.Engine
@@ -22,6 +23,18 @@ namespace HeroesWorld.Engine
             => _bRunning;
 
         SDL.SDL_Event _systemEvent;
+        (int x, int y) _mousePos = (x: 0, y: 0);
+
+        public void PaintMouse(Screen screen, Surface surface)
+        {
+            var destRect = new SDL.SDL_Rect
+            {
+                x = _mousePos.x, y = _mousePos.y,
+                w = surface.Sizes.Width,
+                h = surface.Sizes.Height
+            };
+            screen.DrawSprite(surface._texture, surface.Sizes.ToSdlRect(), destRect);
+        }
 
         public void MainLoop()
         {
@@ -30,6 +43,11 @@ namespace HeroesWorld.Engine
                 if (_systemEvent.type == SDL.SDL_EventType.SDL_QUIT)
                 {
                     _bRunning = false;
+                }
+
+                if (_systemEvent.type == SDL.SDL_EventType.SDL_MOUSEMOTION)
+                {
+                    _mousePos = (x: _systemEvent.motion.x, y: _systemEvent.motion.y);
                 }
             }
         }
