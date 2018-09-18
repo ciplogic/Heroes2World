@@ -1,7 +1,6 @@
-using System.Collections;
 using SDL2;
 
-namespace HeroesWorld.Engine
+namespace HeroesWorld.Engine.Graphics
 {
     public struct Rect
     {

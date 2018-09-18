@@ -41,6 +41,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+      <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+          <Private>True</Private>
+      </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
@@ -82,6 +86,9 @@
             <Project>{aa67f9fa-4dda-4b69-b464-32dba83b6328}</Project>
             <Name>Sdl2.Core</Name>
         </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="packages.config"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

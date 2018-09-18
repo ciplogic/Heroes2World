@@ -1,14 +1,16 @@
 ﻿using System;
 using SDL2;
 
-namespace HeroesWorld.Engine
+namespace HeroesWorld.Engine.Graphics
 {
     public class Screen
     {
         public IntPtr win;
         public IntPtr ren;
 
-        public void SetWindow(int screenWidth, int screenHeight, string title = "SDL2 Sharp",
+        public Matrix2D Transforms = Matrix2D.MakeIdentity();
+
+        public void SetWindow(int screenWidth, int screenHeight, string title = "Heroes World",
             SDL.SDL_WindowFlags flags = SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN)
         {
             SDL.SDL_Init(SDL.SDL_INIT_VIDEO | SDL.SDL_INIT_AUDIO);
@@ -23,7 +25,18 @@ namespace HeroesWorld.Engine
         }
         public void DrawSprite(Surface surface, int x, int y)
         {
-            surface.Draw(this, x, y);
+            SDL.SDL_Rect sourceRect = surface.Sizes.ToSdlRect();
+            
+            var topLeftCoord = (x:x, y:y);
+            topLeftCoord = Transforms.TransformCoordinate(topLeftCoord);
+            var botRight = (x:x + sourceRect.w, y: y + sourceRect.h);
+            botRight = Transforms.TransformCoordinate(botRight);
+
+
+            var destinationRect = new SDL.SDL_Rect {
+                x = topLeftCoord.x, y = topLeftCoord.y,
+                w = botRight.x-topLeftCoord.x, h = botRight.y - topLeftCoord.y};
+            SDL.SDL_RenderCopy(ren, surface._texture, ref sourceRect, ref destinationRect);
         }
 
         public void Present()

@@ -1,12 +1,13 @@
 using System;
 using System.Drawing;
 
-namespace HeroesWorld.Engine
+namespace HeroesWorld.Engine.Graphics
 {
     public class Surface
     {
-        private readonly IntPtr _texture;
+        public readonly IntPtr _texture;
         private readonly Rect _rect;
+        public Rect Sizes => _rect;
 
         public Surface(IntPtr texture, Rect rect)
         {
