@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
-namespace HeroesWorld.Engine.Graphics
+namespace HeroesWorld.Engine.Graphical
 {
     public class Matrix2D
     {

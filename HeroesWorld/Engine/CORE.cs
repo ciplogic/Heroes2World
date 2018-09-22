@@ -1,5 +1,6 @@
 ﻿using System;
-using HeroesWorld.Engine.Graphics;
+using HeroesWorld.Engine.Graphical;
+using HeroesWorld.Engine.Graphical.Pastel;
 using SDL2;
 
 namespace HeroesWorld.Engine
@@ -8,13 +9,13 @@ namespace HeroesWorld.Engine
     {
         public Core(bool initSound)
         {
-            if(initSound){
-            SDL.SDL_Init(SDL.SDL_INIT_AUDIO);
-            SDL_mixer.Mix_OpenAudio(SDL_mixer.MIX_DEFAULT_FREQUENCY, SDL_mixer.MIX_DEFAULT_FORMAT, 2, 128);
+            if (initSound)
+            {
+                SDL.SDL_Init(SDL.SDL_INIT_AUDIO);
+                SDL_mixer.Mix_OpenAudio(SDL_mixer.MIX_DEFAULT_FREQUENCY, SDL_mixer.MIX_DEFAULT_FORMAT, 2, 128);
 
-            SDL.SDL_InitSubSystem(SDL.SDL_INIT_GAMECONTROLLER);
-                
-                }
+                SDL.SDL_InitSubSystem(SDL.SDL_INIT_GAMECONTROLLER);
+            }
         }
 
         private bool _bRunning = true;

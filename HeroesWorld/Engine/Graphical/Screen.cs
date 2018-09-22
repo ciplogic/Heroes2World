@@ -1,7 +1,8 @@
 ﻿using System;
+using HeroesWorld.Engine.Graphical.Pastel;
 using SDL2;
 
-namespace HeroesWorld.Engine.Graphics
+namespace HeroesWorld.Engine.Graphical
 {
     public class Screen
     {

@@ -1,15 +1,19 @@
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace HeroesWorld.Engine.Graphics.Pastel
+namespace HeroesWorld.Engine.Graphical.Pastel
 {
     public class BitmapPainter
     {
         private readonly int _width;
         private readonly int _height;
         private readonly string _outFile;
-        private Bitmap _bitmap;
+        private readonly Bitmap _bitmap;
+
+        public List<IBitmapPainterCommand> Commands = new List<IBitmapPainterCommand>();
 
         public BitmapPainter(int width, int height, string outFile)
         {
@@ -21,11 +25,16 @@ namespace HeroesWorld.Engine.Graphics.Pastel
 
         public void Paint()
         {
-            var graphics = System.Drawing.Graphics.FromImage(_bitmap);
+            var graphics = Graphics.FromImage(_bitmap);
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            foreach (var command in Commands)
+            {
+                command.Paint(new Size(_width, _height), graphics);
+            }
 
             graphics.Dispose();
             _bitmap.Save(_outFile);
+            Environment.Exit(0);
         }
         
         

@@ -49,14 +49,17 @@
           <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
           <Private>True</Private>
       </Reference>
+      <Reference Include="System.Windows.Forms"/>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\CORE.cs" />
-      <Compile Include="Engine\Graphics\Matrix2D.cs"/>
-      <Compile Include="Engine\Graphics\Pastel\BitmapPainter.cs"/>
-      <Compile Include="Engine\Graphics\Rect.cs"/>
-      <Compile Include="Engine\Graphics\Screen.cs"/>
-      <Compile Include="Engine\Graphics\Surface.cs"/>
+      <Compile Include="Engine\Graphical\Matrix2D.cs"/>
+      <Compile Include="Engine\Graphical\Pastel\BitmapPainter.cs"/>
+      <Compile Include="Engine\Graphical\Pastel\BitmapPainterCommand.cs"/>
+      <Compile Include="Engine\Graphical\Pastel\BitmapUtils.cs"/>
+      <Compile Include="Engine\Graphical\Pastel\ScalableBitmapPainter.cs"/>
+      <Compile Include="Engine\Graphical\Screen.cs"/>
+      <Compile Include="Engine\Graphical\Surface.cs"/>
       <Compile Include="ExtractFrames.cs"/>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

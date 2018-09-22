@@ -1,25 +1,25 @@
 using System;
 using System.Drawing;
+using HeroesWorld.Engine.Graphical.Pastel;
 
-namespace HeroesWorld.Engine.Graphics
+namespace HeroesWorld.Engine.Graphical
 {
     public class Surface
     {
         public readonly IntPtr _texture;
-        private readonly Rect _rect;
-        public Rect Sizes => _rect;
+        public Rectangle Sizes { get; }
 
-        public Surface(IntPtr texture, Rect rect)
+        public Surface(IntPtr texture, Rectangle rect)
         {
             _texture = texture;
-            _rect = rect;
+            Sizes = rect;
         }
 
         public Surface(Screen screen, Bitmap icnFirst)
         {
             icnFirst.Save("pic.png");
             _texture = screen.LoadTexture("pic.png");
-            _rect = new Rect(0,0,icnFirst.Width, icnFirst.Height);
+            Sizes = new Rectangle(0,0,icnFirst.Width, icnFirst.Height);
         }
 
         public void Draw(Screen screen, int x, int y)
@@ -27,8 +27,8 @@ namespace HeroesWorld.Engine.Graphics
             //Your code here.
             screen.DrawSprite(
                 _texture,
-                _rect.ToSdlRect(),
-                new SDL2.SDL.SDL_Rect() {x = x, y = y, w = _rect.Width, h = _rect.Height});
+                Sizes.ToSdlRect(),
+                new SDL2.SDL.SDL_Rect() {x = x, y = y, w = Sizes.Width, h = Sizes.Height});
         }
     }
 }

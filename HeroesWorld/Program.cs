@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 using HeroesWorld.Engine;
-using HeroesWorld.Engine.Graphics;
+using HeroesWorld.Engine.Graphical;
+using HeroesWorld.Engine.Graphical.Pastel;
 using HeroesWorld.Settings;
 using NHeroes2.Agg;
 using NHeroes2.Agg.Icns;
 using NHeroes2.Agg.Music;
 using NHeroes2.Utilities;
+using Screen = HeroesWorld.Engine.Graphical.Screen;
 
 namespace HeroesWorld
 {
@@ -61,6 +65,26 @@ namespace HeroesWorld
             //play the sound
             //myCore.PlaySound(myMid);
 
+            var bitmapPainter = new BitmapPainter(800, 500, "dialog.png");
+            var picBmp = new Bitmap(@"..\Extras\Buttons\BtnPic.png");
+/*
+            bitmapPainter.Commands.Add(new ScalableBitmapPainter(picBmp,
+                new Rectangle(20, 20, 200, 130),
+                new Rectangle(0, 0, 777, 480)
+            ));
+*/
+            bitmapPainter.Commands.Add(new ScalableBitmapPainter(/*picBmp*/icn.first, 
+                new Padding(20, 20, 30, 30), 
+                new Rectangle(30, 20, 577, 420)
+                ));
+            
+            /*
+            bitmapPainter.Commands.Add(new ScalableBitmapPainter(picBmp,
+                new Padding(20, 20, 20, 20), 
+                new Rectangle(450, 120, 277, 120)
+            ));
+            */
+            bitmapPainter.Paint();
             //Setup the game controller
             IntPtr gc = SDL2.SDL.SDL_GameControllerOpen(0);
             screen.Transforms
