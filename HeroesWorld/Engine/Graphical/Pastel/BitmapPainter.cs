@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -8,10 +7,10 @@ namespace HeroesWorld.Engine.Graphical.Pastel
 {
     public class BitmapPainter
     {
-        private readonly int _width;
+        private readonly Bitmap _bitmap;
         private readonly int _height;
         private readonly string _outFile;
-        private readonly Bitmap _bitmap;
+        private readonly int _width;
 
         public List<IBitmapPainterCommand> Commands = new List<IBitmapPainterCommand>();
 
@@ -34,9 +33,6 @@ namespace HeroesWorld.Engine.Graphical.Pastel
 
             graphics.Dispose();
             _bitmap.Save(_outFile);
-            Environment.Exit(0);
         }
-        
-        
     }
 }

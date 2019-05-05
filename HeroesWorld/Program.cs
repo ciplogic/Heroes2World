@@ -47,9 +47,8 @@ namespace HeroesWorld
             var mouse = aggFile.RenderICNSprite(IcnKind.ADVMCO, 0);
 
 
-
             Core myCore = new Core(false);
-            MusicPlayer.Play(aggFile, (int)16);
+            MusicPlayer.Play(aggFile, (int) 16);
 
             //load a sample image
             //IntPtr myTexture = screen.LoadTexture("mmmmIcon.png");
@@ -73,11 +72,11 @@ namespace HeroesWorld
                 new Rectangle(0, 0, 777, 480)
             ));
 */
-            bitmapPainter.Commands.Add(new ScalableBitmapPainter(/*picBmp*/icn.first, 
-                new Padding(20, 20, 30, 30), 
+            bitmapPainter.Commands.Add(new ScalableBitmapPainter( /*picBmp*/icn.first,
+                new Padding(2, 2, 2, 2),
                 new Rectangle(30, 20, 577, 420)
-                ));
-            
+            ));
+
             /*
             bitmapPainter.Commands.Add(new ScalableBitmapPainter(picBmp,
                 new Padding(20, 20, 20, 20), 

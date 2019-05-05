@@ -7,6 +7,11 @@ namespace HeroesWorld.Engine
 {
     internal class Core
     {
+        private bool _bRunning = true;
+        (int x, int y) _mousePos = (x: 0, y: 0);
+
+        SDL.SDL_Event _systemEvent;
+
         public Core(bool initSound)
         {
             if (initSound)
@@ -18,13 +23,8 @@ namespace HeroesWorld.Engine
             }
         }
 
-        private bool _bRunning = true;
-
         public bool IsRunning
             => _bRunning;
-
-        SDL.SDL_Event _systemEvent;
-        (int x, int y) _mousePos = (x: 0, y: 0);
 
         public void PaintMouse(Screen screen, Surface surface)
         {
@@ -39,6 +39,7 @@ namespace HeroesWorld.Engine
 
         public void MainLoop()
         {
+            _bRunning = true;
             while (SDL.SDL_PollEvent(out _systemEvent) != 0)
             {
                 if (_systemEvent.type == SDL.SDL_EventType.SDL_QUIT)
