@@ -84,5 +84,20 @@ namespace NHeroes2.Serialize
             var hi = hi2 + (lo2 << 8);
             return (uint) (hi + lo);
         }
+
+        public int size()
+        {
+            return _fileContent.Length;
+        }
+
+        public int get()
+        {
+            return Get8();
+        }
+
+        public int tell()
+        {
+            return _pos;
+        }
     }
 }

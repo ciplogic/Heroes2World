@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -75,6 +75,16 @@
       <Compile Include="Agg\Music\XMITracks.cs"/>
       <Compile Include="Agg\Music\Xml2Mid.cs"/>
       <Compile Include="Agg\MusKind.cs"/>
+      <Compile Include="Engine\Size.cs"/>
+      <Compile Include="Game\GameStatic.cs"/>
+      <Compile Include="Kingdom\World.cs"/>
+      <Compile Include="Maps\MapIndexes.cs"/>
+      <Compile Include="Maps\mapsize_t.cs"/>
+      <Compile Include="Maps\mp2addon_t.cs"/>
+      <Compile Include="Maps\Mp2Consts.cs"/>
+      <Compile Include="Maps\Mp2Obj.cs"/>
+      <Compile Include="Maps\mp2tile_t.cs"/>
+      <Compile Include="Maps\Tiles.cs"/>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialize\ByteVectorReader.cs" />
       <Compile Include="Serialize\ByteVectorReflect.cs"/>

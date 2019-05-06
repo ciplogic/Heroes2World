@@ -37,5 +37,16 @@ namespace NHeroes2.Utilities
         {
             return items.Count == 0;
         }
+
+        public static void SetSize<T>(this List<T> collection, int newSize)
+        where T:new()
+        {
+            collection.Clear();
+            collection.Capacity = newSize;
+            for (int i = 0; i < newSize; i++)
+            {
+                collection.Add(new T());
+            }
+        }
     }
 }
