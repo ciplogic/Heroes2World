@@ -1,6 +1,6 @@
-﻿namespace NHeroes2.Kingdom
+﻿namespace NHeroes2.KingdomNs
 {
-    enum RaceType
+    public enum RaceType
     {
         NONE = 0x00,
         KNGT = 0x01,

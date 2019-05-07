@@ -1,28 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
+using System.Linq;
 using HeroesWorld.Engine.Graphical;
 using NHeroes2.CastleNs;
+using NHeroes2.Engine;
 using NHeroes2.Game;
-using NHeroes2.Serialize;
+using NHeroes2.HeroesNs;
+using NHeroes2.Kingdom;
 using NHeroes2.Maps;
+using NHeroes2.Serialize;
 using NHeroes2.Utilities;
-using Size = NHeroes2.Engine.Size;
 
-namespace NHeroes2.Kingdom
+namespace NHeroes2.KingdomNs
 {
-    class World : Size
+    class World : H2Size
     {
         MapsTiles vec_tiles = new MapsTiles();
         AllCastles vec_castles = new AllCastles();
+
+        AllHeroes vec_heroes = new AllHeroes();
         CapturedObjects map_captureobj = new CapturedObjects();
 
+
+        MapObjects map_objects = new MapObjects();
+        MapActions map_actions = new MapActions();
+        EventsDate vec_eventsday = new EventsDate();
+        Rumors vec_rumors = new Rumors();
 
         private Castle GetCastle(H2Point getPoint)
         {
             throw new NotImplementedException();
         }
+
+
+
+        private KingdomNs.Kingdom GetKingdom(H2Color color)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Heroes GetFreemanHeroes(RaceType race)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PostLoad()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void Defaults()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void Reset()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool LoadMapMP2(string filename)
         {
             Reset();
@@ -298,10 +335,10 @@ fs.seek(endof_addons + 72 * 3 + 144 * 3);
     while (true)
     {
         int l = fs.get();
-int h = fs.get();
+        int h = fs.get();
 
-if (0 == h && 0 == l) break;
-                countblock = (uint) (256 * h + l - 1);
+        if (0 == h && 0 == l) break;
+        countblock = (uint) (256 * h + l - 1);
     }
 
     // castle or heroes or (events, rumors, etc)
@@ -309,28 +346,28 @@ if (0 == h && 0 == l) break;
     {
         int findobject = -1;
 
-// read block
-var sizeblock = fs.getLE16();
-var pblock = fs.getRaw(sizeblock);
+        // read block
+        var sizeblock = fs.getLE16();
+        var pblock = fs.getRaw(sizeblock);
 
-for (var it_index = 0; it_index != vec_object.Count && findobject < 0; ++it_index)
-{
-    Maps.Tiles tile = vec_tiles[it_index];
+        for (var it_index = 0; it_index != vec_object.Count && findobject < 0; ++it_index)
+        {
+            Maps.Tiles tile = vec_tiles[it_index];
 
-    // orders(quantity2, quantity1)
-    int orders = tile.GetQuantity2() != 0 ? tile.GetQuantity2() : 0;
-    orders <<= 8;
-    orders |= tile.GetQuantity1();
+            // orders(quantity2, quantity1)
+            int orders = tile.GetQuantity2() != 0 ? tile.GetQuantity2() : 0;
+            orders <<= 8;
+            orders |= tile.GetQuantity1();
 
 
-    if (orders != 0 && (orders % 0x08 == 0) && (ii + 1 == orders / 0x08))
-        findobject = it_index;
-}
+            if (orders != 0 && (orders % 0x08 == 0) && (ii + 1 == orders / 0x08))
+                findobject = it_index;
+        }
 
-if (0 <= findobject)
+        if (0 <= findobject)
         {
             Maps.Tiles tile = vec_tiles[findobject];
-TilesAddon addon;
+            TilesAddon addon = null;
 
             switch (tile.GetObject())
             {
@@ -342,40 +379,42 @@ TilesAddon addon;
                 else
                 {
                     Castle castle = GetCastle(MapsStatic.GetPoint(findobject));
-                    if (castle!=null)
+                    if (castle != null)
                     {
-                        ByteVectorReader bvr= new ByteVectorReader(pblock);
-castle.LoadFromMP2(bvr);
+                        ByteVectorReader bvr = new ByteVectorReader(pblock);
+                        castle.LoadFromMP2(bvr);
                         MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
                         map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
                     }
                 }
+
                 break;
             case Mp2Obj.OBJ_RNDTOWN:
             case Mp2Obj.OBJ_RNDCASTLE:
                             // add rnd castle
                             if (Mp2Consts.SIZEOFMP2CASTLE != pblock.Length)
+                            {}
+                            else
                             {
-                }
-                else
-                {
-                    Castle castle = GetCastle(Maps.GetPoint(findobject));
-                    if (castle != null)
+                                Castle castle = GetCastle(MapsStatic.GetPoint(findobject));
+                                if (castle != null)
                                 {
-                        ByteVectorReader bvr = new ByteVectorReader(pblock);
+                                    ByteVectorReader bvr = new ByteVectorReader(pblock);
                                     castle.LoadFromMP2(bvr);
-                        Maps.UpdateRNDSpriteForCastle(castle.GetCenter(), castle.GetRace(), castle.isCastle());
-                        Maps.MinimizeAreaForCastle(castle.GetCenter());
-                        map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
-                    }
-                    else
-                    {
-                    }
-                }
-                break;
+                                    MapsStatic.UpdateRNDSpriteForCastle(castle.GetCenter(), castle.GetRace(),
+                                        castle.isCastle());
+                                    MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
+                                    map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
+                                }
+                                else
+                                {
+                                }
+                            }
+
+                            break;
             case Mp2Obj.OBJ_JAIL:
                 // add jail
-                if (SIZEOFMP2HEROES != pblock.Length)
+                if (Mp2Consts.SIZEOFMP2HEROES != pblock.Length)
                 {
                 }
                 else
@@ -404,44 +443,46 @@ castle.LoadFromMP2(bvr);
 
                     Heroes hero = GetFreemanHeroes(race);
 
-                    if (hero)
+                    if (hero!=null)
                     {
-                        ByteVectorReader bvr(pblock);
-hero.LoadFromMP2(findobject, Color.NONE, hero.GetRace(), bvr);
-                        hero.SetModes(Heroes.JAIL);
+
+                        ByteVectorReader bvr = new ByteVectorReader(pblock);
+                        hero.LoadFromMP2(findobject, H2Color.NONE, hero.GetRace(), bvr);
+                        hero.SetModes(HeroesFlags.JAIL);
                     }
                 }
                 break;
             case Mp2Obj.OBJ_HEROES:
                 // add heroes
-                if (SIZEOFMP2HEROES != pblock.Length)
+                if (Mp2Consts.SIZEOFMP2HEROES != pblock.Length)
                 {
                 }
                 else if (null!= (addon = tile.FindObjectConst(Mp2Obj.OBJ_HEROES)))
                 {
-                    var colorRace = Maps.TilesAddon.ColorRaceFromHeroSprite(*addon);
-Kingdom kingdom = GetKingdom(colorRace.first);
+                    var colorRace = Maps.TilesAddon.ColorRaceFromHeroSprite(addon);
+KingdomNs.Kingdom kingdom = GetKingdom(colorRace.Item1);
 
-                    if (colorRace.second == Race.RAND
-                        colorRace.first != Color.NONE)
-                        colorRace.second = kingdom.GetRace();
+if (colorRace.Item2 == RaceType.RAND &&
+    colorRace.Item1 != H2Color.NONE)
+                                    colorRace.Item2 = kingdom.GetRace();
 
                     // check heroes max count
                     if (kingdom.AllowRecruitHero(false, 0))
                     {
-                        Heroes hero = nullptr;
+                        Heroes hero = null;
 
-                        if (pblock[17]
-                            pblock[18] < Heroes.BAX)
+
+                        if (pblock[17]!=0 &&
+                            pblock[18] < (int) HeroKinds.BAX)
                             hero = vec_heroes.Get(pblock[18]);
 
-                        if (!hero || !hero.isFreeman())
-                            hero = vec_heroes.GetFreeman(colorRace.second);
+                        if (hero ==null || !hero.isFreeman())
+                            hero = vec_heroes.GetFreeman(colorRace.Item2);
 
-                        if (hero)
+                                    if (hero!=null)
                         {
-                            ByteVectorReader bvr(pblock);
-hero.LoadFromMP2(findobject, colorRace.first, colorRace.second, bvr);
+                            ByteVectorReader bvr = new ByteVectorReader(pblock);
+                            hero.LoadFromMP2(findobject, colorRace.Item1, colorRace.Item2, bvr);
                         }
                     }
                 }
@@ -449,17 +490,17 @@ hero.LoadFromMP2(findobject, colorRace.first, colorRace.second, bvr);
             case Mp2Obj.OBJ_SIGN:
             case Mp2Obj.OBJ_BOTTLE:
                 // add sign or buttle
-                if (SIZEOFMP2SIGN - 1 < pblock.Length  0x01 == pblock[0])
+                if (Mp2Consts.SIZEOFMP2SIGN - 1 < pblock.Length && 0x01 == pblock[0])
                 {
                     var obj = new MapSign();
                     ByteVectorReader bvr = new ByteVectorReader(pblock);
-        obj.LoadFromMP2(findobject, bvr);
+                 obj.LoadFromMP2(findobject, bvr);
                     map_objects.add(obj);
                 }
                 break;
             case Mp2Obj.OBJ_EVENT:
                 // add event maps
-                if (SIZEOFMP2EVENT - 1 < pblock.Length  0x01 == pblock[0])
+                if (Mp2Consts.SIZEOFMP2EVENT - 1 < pblock.Length && 0x01 == pblock[0])
                 {
                     var obj = new MapEvent();
                     ByteVectorReader bvr = new ByteVectorReader(pblock);
@@ -485,23 +526,23 @@ obj.LoadFromMP2(findobject, bvr);
         else if (0x00 == pblock[0])
         {
             // add event day
-            if (SIZEOFMP2EVENT - 1 < pblock.Length  1 == pblock[42])
+            if (Mp2Consts.SIZEOFMP2EVENT - 1 < pblock.Length &&  1 == pblock[42])
             {
-                vec_eventsday.Add();
+                vec_eventsday.Add(new EventDate());
                 ByteVectorReader bvr = new ByteVectorReader(pblock);
                 vec_eventsday.Last().LoadFromMP2(bvr);
             }
                 // add rumors
-            else if (SIZEOFMP2RUMOR - 1 < pblock.Length)
+            else if (Mp2Consts.SIZEOFMP2RUMOR - 1 < pblock.Length)
             {
-                if (pblock[8])
+                if (pblock[8]!=0)
                 {
                     List<byte> subBlock = new List<byte>();
                     //(pblock.begin() + 8, pblock.end());
 
                     ByteVectorReader bvr = new ByteVectorReader(pblock);
                     string valueRumor = bvr.toString(subBlock.Count);
-                    vec_rumors.Add(Game.GetEncodeString(valueRumor));
+                    vec_rumors.Add(GameStatic.GetEncodeString(valueRumor));
                 }
             }
         }
@@ -516,24 +557,18 @@ obj.LoadFromMP2(findobject, bvr);
             
             return true;
         }
+    }
 
-        private void PostLoad()
-        {
-            throw new NotImplementedException();
-        }
+    public class EventsDate : List<EventDate>
+    {
 
-        private static void Defaults()
-        {
-            throw new NotImplementedException();
-        }
+    }
 
-        private static void Reset()
+    public class EventDate
+    {
+        public void LoadFromMP2(ByteVectorReader bvr)
         {
             throw new NotImplementedException();
         }
     }
-}
-
-namespace NHeroes2.Game
-{
 }

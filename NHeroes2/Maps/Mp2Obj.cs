@@ -1,6 +1,6 @@
 namespace NHeroes2.Maps
 {
-    enum Mp2Obj
+    public enum Mp2Obj
     {
         OBJ_ZERO = 0x00,
         OBJ_UNKNW_02 = 0x02,

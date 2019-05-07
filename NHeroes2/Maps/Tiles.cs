@@ -36,5 +36,15 @@ namespace NHeroes2.Maps
         {
             throw new System.NotImplementedException();
         }
+
+        public int GetIndex()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public TilesAddon FindObjectConst(Mp2Obj objHeroes)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

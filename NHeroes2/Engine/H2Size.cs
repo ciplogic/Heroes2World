@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.Engine
 {
-    class Size
+    class H2Size
     {
         public ushort W, H;
         public int w() => W;

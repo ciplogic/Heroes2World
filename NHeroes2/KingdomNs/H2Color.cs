@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NHeroes2.Kingdom
+﻿namespace NHeroes2.KingdomNs
 {
-    enum H2Color
+    public enum H2Color
     {
     NONE = 0x00,
     BLUE = 0x01,
