@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CodeReplacer
@@ -25,6 +19,7 @@ namespace CodeReplacer
         private List<ReplaceRule> _replaceRules = new List<ReplaceRule>()
         {
             new ReplaceRule("::", "."),
+            new ReplaceRule("->", "."),
             new ReplaceRule("struct", "class"),
             new ReplaceRule("uint32_t", "UInt32"),
             new ReplaceRule("u16", "UInt16"),
@@ -33,6 +28,10 @@ namespace CodeReplacer
             new ReplaceRule("const ", ""),
             new ReplaceRule("std::string", "string"),
             new ReplaceRule("vector<", "List<"),
+            new ReplaceRule("push_back", "Add"),
+            new ReplaceRule("null_ptr ", "null "),
+            new ReplaceRule( " null_ptr", " null"),
+            new ReplaceRule("auto ", "var "),
         };
 
 

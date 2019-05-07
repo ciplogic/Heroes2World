@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NHeroes2.Maps
+﻿namespace NHeroes2.Maps
 {
     class Mp2Consts
     {

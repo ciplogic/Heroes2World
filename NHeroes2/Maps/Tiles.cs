@@ -21,5 +21,20 @@ namespace NHeroes2.Maps
         {
             throw new System.NotImplementedException();
         }
+
+        public int GetQuantity2()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetQuantity1()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Mp2Obj GetObject()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

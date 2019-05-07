@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace NHeroes2.Agg.Music
 {
     public class XMITrack

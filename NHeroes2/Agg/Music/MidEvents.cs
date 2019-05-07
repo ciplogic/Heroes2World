@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
 using static NHeroes2.Agg.H2Log;

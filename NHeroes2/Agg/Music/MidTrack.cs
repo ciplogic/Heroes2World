@@ -1,6 +1,5 @@
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
-using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {

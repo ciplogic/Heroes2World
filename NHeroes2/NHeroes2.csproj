@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NHeroes2</RootNamespace>
     <AssemblyName>NHeroes2</AssemblyName>
-      <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -35,16 +35,16 @@
     <OutputPath>bin\MACOS\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-      <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-          <HintPath>..\HeroesWorld\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\HeroesWorld\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-      <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-          <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-          <Private>True</Private>
-      </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
@@ -53,52 +53,63 @@
   <ItemGroup>
     <Compile Include="Agg\AggFile.cs" />
     <Compile Include="Agg\AggFat.cs" />
-      <Compile Include="Agg\H2Log.cs"/>
+    <Compile Include="Agg\H2Log.cs" />
     <Compile Include="Agg\Icns\Icn.cs" />
     <Compile Include="Agg\Icns\IcnHeader.cs" />
     <Compile Include="Agg\Icns\IcnKind.cs" />
     <Compile Include="Agg\Icns\IcnSprite.cs" />
-      <Compile Include="Agg\Music\GroupChunkHeader.cs"/>
-      <Compile Include="Agg\Music\IFFChunkHeader.cs"/>
-      <Compile Include="Agg\Music\meta_t.cs"/>
-      <Compile Include="Agg\Music\MidData.cs"/>
-      <Compile Include="Agg\Music\MidEvent.cs"/>
-      <Compile Include="Agg\Music\MidEvents.cs"/>
-      <Compile Include="Agg\Music\MidTrack.cs"/>
-      <Compile Include="Agg\Music\MidTracks.cs"/>
-      <Compile Include="Agg\Music\MiniLog.cs"/>
-      <Compile Include="Agg\Music\MusicPlayer.cs"/>
-      <Compile Include="Agg\Music\pack_t.cs"/>
-      <Compile Include="Agg\Music\XMIData.cs"/>
-      <Compile Include="Agg\Music\XmiKind.cs"/>
-      <Compile Include="Agg\Music\XMITrack.cs"/>
-      <Compile Include="Agg\Music\XMITracks.cs"/>
-      <Compile Include="Agg\Music\Xml2Mid.cs"/>
-      <Compile Include="Agg\MusKind.cs"/>
-      <Compile Include="Engine\Size.cs"/>
-      <Compile Include="Game\GameStatic.cs"/>
-      <Compile Include="Kingdom\World.cs"/>
-      <Compile Include="Maps\MapIndexes.cs"/>
-      <Compile Include="Maps\mapsize_t.cs"/>
-      <Compile Include="Maps\mp2addon_t.cs"/>
-      <Compile Include="Maps\Mp2Consts.cs"/>
-      <Compile Include="Maps\Mp2Obj.cs"/>
-      <Compile Include="Maps\mp2tile_t.cs"/>
-      <Compile Include="Maps\Tiles.cs"/>
+    <Compile Include="Agg\Music\GroupChunkHeader.cs" />
+    <Compile Include="Agg\Music\IFFChunkHeader.cs" />
+    <Compile Include="Agg\Music\meta_t.cs" />
+    <Compile Include="Agg\Music\MidData.cs" />
+    <Compile Include="Agg\Music\MidEvent.cs" />
+    <Compile Include="Agg\Music\MidEvents.cs" />
+    <Compile Include="Agg\Music\MidTrack.cs" />
+    <Compile Include="Agg\Music\MidTracks.cs" />
+    <Compile Include="Agg\Music\MiniLog.cs" />
+    <Compile Include="Agg\Music\MusicPlayer.cs" />
+    <Compile Include="Agg\Music\pack_t.cs" />
+    <Compile Include="Agg\Music\XMIData.cs" />
+    <Compile Include="Agg\Music\XmiKind.cs" />
+    <Compile Include="Agg\Music\XMITrack.cs" />
+    <Compile Include="Agg\Music\XMITracks.cs" />
+    <Compile Include="Agg\Music\Xml2Mid.cs" />
+    <Compile Include="Agg\MusKind.cs" />
+    <Compile Include="CastleNs\AllCastles.cs" />
+    <Compile Include="CastleNs\Castle.cs" />
+    <Compile Include="CastleNs\VecCastles.cs" />
+    <Compile Include="Engine\H2Point.cs" />
+    <Compile Include="Engine\Size.cs" />
+    <Compile Include="Game\GameStatic.cs" />
+    <Compile Include="Kingdom\CapturedObjects.cs" />
+    <Compile Include="Kingdom\H2Color.cs" />
+    <Compile Include="HeroesNs\Heroes.cs" />
+    <Compile Include="Kingdom\MapsTiles.cs" />
+    <Compile Include="Kingdom\RaceType.cs" />
+    <Compile Include="Kingdom\World.cs" />
+    <Compile Include="Maps\MapIndexes.cs" />
+    <Compile Include="Maps\mapsize_t.cs" />
+    <Compile Include="Maps\MapsStatic.cs" />
+    <Compile Include="Maps\mp2addon_t.cs" />
+    <Compile Include="Maps\Mp2Consts.cs" />
+    <Compile Include="Maps\Mp2Obj.cs" />
+    <Compile Include="Maps\mp2tile_t.cs" />
+    <Compile Include="Maps\Tiles.cs" />
+    <Compile Include="Maps\TilesAddon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialize\ByteVectorReader.cs" />
-      <Compile Include="Serialize\ByteVectorReflect.cs"/>
-      <Compile Include="Serialize\ByteVectorWriter.cs"/>
-      <Compile Include="Utilities\Extensions.cs"/>
+    <Compile Include="Serialize\ByteVectorReflect.cs" />
+    <Compile Include="Serialize\ByteVectorWriter.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\Sdl2.Core\Sdl2.Core.csproj">
-            <Project>{aa67f9fa-4dda-4b69-b464-32dba83b6328}</Project>
-            <Name>Sdl2.Core</Name>
-        </ProjectReference>
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="packages.config"/>
+  <ItemGroup>
+    <ProjectReference Include="..\Sdl2.Core\Sdl2.Core.csproj">
+      <Project>{aa67f9fa-4dda-4b69-b464-32dba83b6328}</Project>
+      <Name>Sdl2.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
