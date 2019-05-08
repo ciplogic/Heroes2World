@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using HeroesWorld.Engine;
 using HeroesWorld.Engine.Graphical;
@@ -17,8 +18,14 @@ namespace HeroesWorld
     {
         static void Main(string[] args)
         {
+            if (!File.Exists("../DATA/HEROES2.AGG"))
+            {
+                var mapsDownloader = new DownloaderMaps();
+                if(!mapsDownloader.DownloadSuccessful())
+                    return;
+            }
             var aggFile = new AggFile();
-            aggFile.Open("../data/heroes2.agg");
+            aggFile.Open("../DATA/HEROES2.AGG");
 
             /*
             var extract = new ExtractFrames();
