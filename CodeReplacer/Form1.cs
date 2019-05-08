@@ -18,7 +18,6 @@ namespace CodeReplacer
 
         private List<ReplaceRule> _replaceRules = new List<ReplaceRule>()
         {
-            new ReplaceRule("::", "."),
             new ReplaceRule("->", "."),
             new ReplaceRule("struct", "class"),
             new ReplaceRule("uint32_t", "UInt32"),
@@ -32,6 +31,7 @@ namespace CodeReplacer
             new ReplaceRule("null_ptr ", "null "),
             new ReplaceRule( " null_ptr", " null"),
             new ReplaceRule("auto ", "var "),
+            new ReplaceRule("::", "."),
         };
 
 
