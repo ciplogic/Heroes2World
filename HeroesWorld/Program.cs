@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using HeroesWorld.Engine;
 using HeroesWorld.Engine.Graphical;
@@ -9,6 +10,7 @@ using HeroesWorld.Settings;
 using NHeroes2.Agg;
 using NHeroes2.Agg.Icns;
 using NHeroes2.Agg.Music;
+using NHeroes2.KingdomNs;
 using NHeroes2.Utilities;
 using Screen = HeroesWorld.Engine.Graphical.Screen;
 
@@ -34,6 +36,8 @@ namespace HeroesWorld
             {
                 Console.WriteLine("Pic: "+pic.SerializeToJsonString());
             }*/
+            var world = new World();
+            world.LoadMapMP2("../MAPS/BROKENA.MP2");
 
             var settings = new GameSettings
             {

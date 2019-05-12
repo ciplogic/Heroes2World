@@ -10,6 +10,11 @@ namespace NHeroes2.Maps
 {
     public class TilesAddon
     {
+        public TilesAddon(int lv, uint gid, int obj, uint ii)
+        {
+
+        }
+
         public static (H2Color, RaceType) ColorRaceFromHeroSprite(TilesAddon addon)
         {
             throw new NotImplementedException();

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHeroes2", "NHeroes2\NHeroe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReplacer", "CodeReplacer\CodeReplacer.csproj", "{843BE1CB-663B-4CA1-850D-EE4F3CD88B7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FH2OpenTK", "FH2OpenTK\FH2OpenTK.csproj", "{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,12 @@ Global
 		{843BE1CB-663B-4CA1-850D-EE4F3CD88B7A}.MACOS|Any CPU.Build.0 = Release|Any CPU
 		{843BE1CB-663B-4CA1-850D-EE4F3CD88B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{843BE1CB-663B-4CA1-850D-EE4F3CD88B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}.MACOS|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}.MACOS|Any CPU.Build.0 = Release|Any CPU
+		{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF6FEB3-AD3C-40AD-B692-AB5E4E563889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

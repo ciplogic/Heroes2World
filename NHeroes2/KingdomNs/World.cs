@@ -14,7 +14,7 @@ using NHeroes2.Utilities;
 
 namespace NHeroes2.KingdomNs
 {
-    class World : H2Size
+    public class World : H2Size
     {
         MapsTiles vec_tiles = new MapsTiles();
         AllCastles vec_castles = new AllCastles();
@@ -27,6 +27,7 @@ namespace NHeroes2.KingdomNs
         MapActions map_actions = new MapActions();
         EventsDate vec_eventsday = new EventsDate();
         Rumors vec_rumors = new Rumors();
+        private int day, week, month;
 
         private Castle GetCastle(H2Point getPoint)
         {
@@ -52,12 +53,42 @@ namespace NHeroes2.KingdomNs
 
         private static void Defaults()
         {
-            throw new NotImplementedException();
         }
 
-        private static void Reset()
-        {
-            throw new NotImplementedException();
+        private void Reset()
+        { // maps tiles
+            vec_tiles.Clear();
+
+            // kingdoms
+//            vec_kingdoms.clear();
+
+            // event day
+            vec_eventsday.Clear();
+
+            // rumors
+            vec_rumors.Clear();
+
+            // castles
+            vec_castles._items.Clear();
+
+            // heroes
+            vec_heroes.Clear();
+
+            // extra
+            map_captureobj.Clear();
+            
+//            ultimate_artifact.Reset();
+
+            day = 0;
+            week = 0;
+            month = 0;
+            /*
+            week_current = Week::TORTOISE;
+            week_next = Week::WeekRand();
+
+            heroes_cond_wins = Heroes::UNKNOWN;
+            heroes_cond_loss = Heroes::UNKNOWN;
+            */
         }
 
         public bool LoadMapMP2(string filename)

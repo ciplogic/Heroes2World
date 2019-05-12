@@ -83,6 +83,7 @@
     <Compile Include="Engine\H2Size.cs" />
     <Compile Include="Game\GameStatic.cs" />
     <Compile Include="HeroesNs\AllHeroes.cs" />
+    <Compile Include="HeroesNs\DirectionNs.cs" />
     <Compile Include="HeroesNs\HeroKinds.cs" />
     <Compile Include="HeroesNs\VecHeroes.cs" />
     <Compile Include="KingdomNs\CapturedObjects.cs" />
