@@ -11,9 +11,16 @@ namespace NHeroes2.Maps
 {
     class MapsStatic
     {
-        public static int GetIndexFromAbsPoint(int cx, int cy)
+        public static int GetIndexFromAbsPoint(int px, int py)
         {
-            throw new NotImplementedException();
+            var res = py * World.Instance.w() + px;
+
+            if (px < 0 || py < 0)
+            {
+                return -1;
+            }
+
+            return res;
         }
 
         public static H2Point GetPoint(int findobject)

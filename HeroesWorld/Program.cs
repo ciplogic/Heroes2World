@@ -36,7 +36,7 @@ namespace HeroesWorld
             {
                 Console.WriteLine("Pic: "+pic.SerializeToJsonString());
             }*/
-            var world = new World();
+            var world = World.Instance;
             world.LoadMapMP2("../MAPS/BROKENA.MP2");
 
             var settings = new GameSettings

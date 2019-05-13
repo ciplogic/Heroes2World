@@ -63,9 +63,12 @@ namespace NHeroes2.Maps
                 AddonsPushLevel1(new TilesAddon(0, mt.uniqNumber1, mt.objectName1, mt.indexName1));
         }
 
-        public void AddonsPushLevel1(TilesAddon mt)
+        public void AddonsPushLevel1(TilesAddon ta)
         {
-            throw new NotImplementedException();
+            if (TilesAddon.ForceLevel2(ta))
+                addons_level2._items.Add(ta);
+            else
+                addons_level1._items.Add(ta);
         }
 
         public void AddonsPushLevel1(mp2addon_t ma)
@@ -80,9 +83,12 @@ namespace NHeroes2.Maps
                 AddonsPushLevel2(new TilesAddon(0, mt.uniqNumber2, mt.objectName2, mt.indexName2));
         }
 
-        private void AddonsPushLevel2(TilesAddon mt)
+        private void AddonsPushLevel2(TilesAddon ta)
         {
-            throw new NotImplementedException();
+            if (TilesAddon.ForceLevel2(ta))
+                addons_level2._items.Add(ta);
+            else
+                addons_level1._items.Add(ta);
         }
 
         public void AddonsPushLevel2(mp2addon_t ma)
@@ -94,7 +100,9 @@ namespace NHeroes2.Maps
 
     public void AddonsSort()
         {
-            throw new System.NotImplementedException();
+            addons_level1._items.Sort((ta1, ta2) => (ta1.level % 4) > (ta2.level % 4)?1:-1);
+            addons_level2._items.Sort((ta1, ta2) => (ta1.level % 4) > (ta2.level % 4) ? 1 : -1);
+
         }
 
         public int GetQuantity2()

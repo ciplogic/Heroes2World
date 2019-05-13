@@ -29,6 +29,12 @@ namespace NHeroes2.KingdomNs
         Rumors vec_rumors = new Rumors();
         private int day, week, month;
 
+        private World()
+        {
+
+        }
+        public static World Instance { get; } = new World();
+
         private Castle GetCastle(H2Point getPoint)
         {
             throw new NotImplementedException();

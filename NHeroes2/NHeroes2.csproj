@@ -86,6 +86,7 @@
     <Compile Include="HeroesNs\DirectionNs.cs" />
     <Compile Include="HeroesNs\HeroKinds.cs" />
     <Compile Include="HeroesNs\VecHeroes.cs" />
+    <Compile Include="KingdomNs\CapturedObject.cs" />
     <Compile Include="KingdomNs\CapturedObjects.cs" />
     <Compile Include="KingdomNs\H2Color.cs" />
     <Compile Include="HeroesNs\Heroes.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Maps\Mp2Consts.cs" />
     <Compile Include="Maps\Mp2Obj.cs" />
     <Compile Include="Maps\mp2tile_t.cs" />
+    <Compile Include="Maps\ObjKind.cs" />
     <Compile Include="Maps\Tiles.cs" />
     <Compile Include="Maps\TilesAddon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,8 +20,4 @@ namespace NHeroes2.Kingdom
             throw new NotImplementedException();
         }
     }
-
-    internal class CapturedObject
-    {
-    }
 }
