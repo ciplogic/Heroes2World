@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using NHeroes2.Agg;
 using NHeroes2.Agg.Icns;

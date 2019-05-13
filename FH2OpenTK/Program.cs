@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 using BeginMode = OpenTK.Graphics.BeginMode;
 using ClearBufferMask = OpenTK.Graphics.ClearBufferMask;
 using EnableCap = OpenTK.Graphics.EnableCap;

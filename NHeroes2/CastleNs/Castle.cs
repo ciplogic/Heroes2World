@@ -1,5 +1,4 @@
 ﻿using HeroesWorld.Engine.Graphical;
-using NHeroes2.Kingdom;
 using NHeroes2.KingdomNs;
 using NHeroes2.Serialize;
 

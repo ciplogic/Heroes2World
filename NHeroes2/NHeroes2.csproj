@@ -76,6 +76,7 @@
     <Compile Include="Agg\Music\XMITracks.cs" />
     <Compile Include="Agg\Music\Xml2Mid.cs" />
     <Compile Include="Agg\MusKind.cs" />
+    <Compile Include="ArmyNs\Troop.cs" />
     <Compile Include="CastleNs\AllCastles.cs" />
     <Compile Include="CastleNs\Castle.cs" />
     <Compile Include="CastleNs\VecCastles.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Maps\Mp2Consts.cs" />
     <Compile Include="Maps\Mp2Obj.cs" />
     <Compile Include="Maps\mp2tile_t.cs" />
+    <Compile Include="Maps\ObjectColor.cs" />
     <Compile Include="Maps\ObjKind.cs" />
     <Compile Include="Maps\Tiles.cs" />
     <Compile Include="Maps\TilesAddon.cs" />

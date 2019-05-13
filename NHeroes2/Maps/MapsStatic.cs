@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HeroesWorld.Engine.Graphical;
-using NHeroes2.Kingdom;
 using NHeroes2.KingdomNs;
 
 namespace NHeroes2.Maps
