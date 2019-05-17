@@ -78,13 +78,17 @@
     <Compile Include="Agg\MusKind.cs" />
     <Compile Include="ArmyNs\Troop.cs" />
     <Compile Include="CastleNs\AllCastles.cs" />
+    <Compile Include="CastleNs\BuildCondType.cs" />
+    <Compile Include="CastleNs\BuildingType.cs" />
     <Compile Include="CastleNs\Castle.cs" />
+    <Compile Include="CastleNs\CastleFlags.cs" />
     <Compile Include="CastleNs\VecCastles.cs" />
     <Compile Include="Engine\H2Point.cs" />
     <Compile Include="Engine\H2Size.cs" />
     <Compile Include="Game\GameStatic.cs" />
     <Compile Include="HeroesNs\AllHeroes.cs" />
     <Compile Include="HeroesNs\DirectionNs.cs" />
+    <Compile Include="HeroesNs\HeroBase.cs" />
     <Compile Include="HeroesNs\HeroKinds.cs" />
     <Compile Include="HeroesNs\VecHeroes.cs" />
     <Compile Include="KingdomNs\CapturedObject.cs" />
@@ -113,10 +117,22 @@
     <Compile Include="Maps\ObjKind.cs" />
     <Compile Include="Maps\Tiles.cs" />
     <Compile Include="Maps\TilesAddon.cs" />
+    <Compile Include="MonsterNs\Monster.cs" />
+    <Compile Include="MonsterNs\MonsterJoinCondition.cs" />
+    <Compile Include="MonsterNs\MonsterLevel.cs" />
+    <Compile Include="MonsterNs\MonsterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceNs\cost_t.cs" />
+    <Compile Include="ResourceNs\Funds.cs" />
+    <Compile Include="ResourceNs\ResourceKind.cs" />
     <Compile Include="Serialize\ByteVectorReader.cs" />
     <Compile Include="Serialize\ByteVectorReflect.cs" />
     <Compile Include="Serialize\ByteVectorWriter.cs" />
+    <Compile Include="SpellNs\Spell.cs" />
+    <Compile Include="SpellNs\SpellBook.cs" />
+    <Compile Include="SpellNs\spellstats_t.cs" />
+    <Compile Include="SpellNs\SpellStorage.cs" />
+    <Compile Include="SpellNs\SpellType.cs" />
     <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
