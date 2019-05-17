@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using NHeroes2.KingdomNs;
 using NHeroes2.Maps;
+using NHeroes2.Utilities;
 
-namespace NHeroes2.Kingdom
+namespace NHeroes2.KingdomNs
 {
-    class CapturedObjects : Dictionary<int, CapturedObject>
+    class CapturedObjects 
     {
-        public void Set(int mapIndex, Mp2Obj mp2Obj, H2Color h2Color)
+        public Dictionary<int, CapturedObject> Items { get; } = new Dictionary<int, CapturedObject>();
+        public void Set(int index, ObjKind obj, H2Color col)
         {
-            throw new NotImplementedException();
+            var co = Items.Set(index);
+            
+
+            if (co.GetColor() != col && co.guardians.IsValid())
+                co.guardians.Reset();
+
+            co.Set(obj, col);
         }
 
-        public void SetColor(int getIndex, H2Color getColor)
+        public void SetColor(int index, H2Color col)
         {
-            throw new NotImplementedException();
+             Items.Set(index).SetColor(col);
+            
         }
     }
 }

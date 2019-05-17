@@ -8,5 +8,10 @@ namespace NHeroes2.MonsterNs
         {
             id = monsterType;
         }
+
+        public bool IsValid()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

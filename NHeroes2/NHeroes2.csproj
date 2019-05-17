@@ -106,12 +106,12 @@
     <Compile Include="KingdomNs\RaceType.cs" />
     <Compile Include="KingdomNs\Rumors.cs" />
     <Compile Include="KingdomNs\World.cs" />
+    <Compile Include="Maps\Addons.cs" />
     <Compile Include="Maps\MapIndexes.cs" />
     <Compile Include="Maps\mapsize_t.cs" />
     <Compile Include="Maps\MapsStatic.cs" />
     <Compile Include="Maps\mp2addon_t.cs" />
     <Compile Include="Maps\Mp2Consts.cs" />
-    <Compile Include="Maps\Mp2Obj.cs" />
     <Compile Include="Maps\mp2tile_t.cs" />
     <Compile Include="Maps\ObjectColor.cs" />
     <Compile Include="Maps\ObjKind.cs" />

@@ -6,9 +6,10 @@ namespace NHeroes2.CastleNs
 {
     class Castle
     {
+        public MapPosition Position;
         public Castle(int cx, int cy, RaceType kngt)
         {
-            throw new System.NotImplementedException();
+            Position = new MapPosition(cx, cy);
         }
 
         public void LoadFromMP2(ByteVectorReader bvr)

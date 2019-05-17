@@ -81,7 +81,7 @@ namespace NHeroes2.KingdomNs
             vec_heroes.Clear();
 
             // extra
-            map_captureobj.Clear();
+            map_captureobj.Items.Clear();
             
 //            ultimate_artifact.Reset();
 
@@ -175,17 +175,17 @@ namespace NHeroes2.KingdomNs
             // read all addons
             var vec_mp2addons = new List<mp2addon_t>(fs.getLE32() /* count mp2addon_t */);
 
-            foreach (var mp2addon in vec_mp2addons)
+            foreach (var mp2Addon in vec_mp2addons)
             {
-                mp2addon.indexAddon = (ushort) fs.getLE16();
-                mp2addon.objectNameN1 = (byte) (fs.get() * 2);
-                mp2addon.indexNameN1 = (byte) fs.get();
-                mp2addon.quantityN = (byte) fs.get();
-                mp2addon.objectNameN2 = (byte) fs.get();
-                mp2addon.indexNameN2 = (byte) fs.get();
+                mp2Addon.indexAddon = (ushort) fs.getLE16();
+                mp2Addon.objectNameN1 = (byte) (fs.get() * 2);
+                mp2Addon.indexNameN1 = (byte) fs.get();
+                mp2Addon.quantityN = (byte) fs.get();
+                mp2Addon.objectNameN2 = (byte) fs.get();
+                mp2Addon.indexNameN2 = (byte) fs.get();
 
-                mp2addon.uniqNumberN1 = (uint) fs.getLE32();
-                mp2addon.uniqNumberN2 = (uint) fs.getLE32();
+                mp2Addon.uniqNumberN1 = (uint) fs.getLE32();
+                mp2Addon.uniqNumberN2 = (uint) fs.getLE32();
             }
 
             var endof_addons = fs.tell();
@@ -211,17 +211,17 @@ namespace NHeroes2.KingdomNs
                 mp2tile.shape = (byte) fs.get();
                 mp2tile.generalObject = (byte) fs.get();
 
-                switch ((Mp2Obj)mp2tile.generalObject)
+                switch ((ObjKind)mp2tile.generalObject)
                 {
-                    case Mp2Obj.OBJ_RNDTOWN:
-                    case Mp2Obj.OBJ_RNDCASTLE:
-                    case Mp2Obj.OBJ_CASTLE:
-                    case Mp2Obj.OBJ_HEROES:
-                    case Mp2Obj.OBJ_SIGN:
-                    case Mp2Obj.OBJ_BOTTLE:
-                    case Mp2Obj.OBJ_EVENT:
-                    case Mp2Obj.OBJ_SPHINX:
-                    case Mp2Obj.OBJ_JAIL:
+                    case ObjKind.OBJ_RNDTOWN:
+                    case ObjKind.OBJ_RNDCASTLE:
+                    case ObjKind.OBJ_CASTLE:
+                    case ObjKind.OBJ_HEROES:
+                    case ObjKind.OBJ_SIGN:
+                    case ObjKind.OBJ_BOTTLE:
+                    case ObjKind.OBJ_EVENT:
+                    case ObjKind.OBJ_SPHINX:
+                    case ObjKind.OBJ_JAIL:
                         vec_object.Add(index);
                         break;
                     default:
@@ -307,7 +307,7 @@ namespace NHeroes2.KingdomNs
                     break;
             }
             // preload in to capture objects cache
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_CASTLE, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_CASTLE, H2Color.NONE);
         }
 
         fs.seek(endof_addons + 72 * 3);
@@ -327,11 +327,11 @@ namespace NHeroes2.KingdomNs
         {
             // mines: wood
         case 0x00:
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_SAWMILL, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_SAWMILL, H2Color.NONE);
             break;
             // mines: mercury
         case 0x01:
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_ALCHEMYLAB, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_ALCHEMYLAB, H2Color.NONE);
             break;
             // mines: ore
         case 0x02:
@@ -343,19 +343,19 @@ namespace NHeroes2.KingdomNs
         case 0x05:
             // mines: gold
         case 0x06:
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_MINES, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_MINES, H2Color.NONE);
             break;
             // lighthouse
         case 0x64:
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_LIGHTHOUSE, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_LIGHTHOUSE, H2Color.NONE);
             break;
             // dragon city
         case 0x65:
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_DRAGONCITY, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_DRAGONCITY, H2Color.NONE);
             break;
             // abandoned mines
         case 0x67:
-            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), Mp2Obj.OBJ_ABANDONEDMINE, H2Color.NONE);
+            map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_ABANDONEDMINE, H2Color.NONE);
             break;
         default:
             break;
@@ -408,158 +408,164 @@ fs.seek(endof_addons + 72 * 3 + 144 * 3);
 
             switch (tile.GetObject())
             {
-            case Mp2Obj.OBJ_CASTLE:
-                // add castle
-                if (Mp2Consts. SIZEOFMP2CASTLE != pblock.Length)
-                {
-                }
-                else
-                {
-                    Castle castle = GetCastle(MapsStatic.GetPoint(findobject));
-                    if (castle != null)
+                case ObjKind.OBJ_CASTLE:
+                    // add castle
+                    if (Mp2Consts.SIZEOFMP2CASTLE != pblock.Length)
                     {
-                        ByteVectorReader bvr = new ByteVectorReader(pblock);
-                        castle.LoadFromMP2(bvr);
-                        MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
-                        map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
                     }
-                }
-
-                break;
-            case Mp2Obj.OBJ_RNDTOWN:
-            case Mp2Obj.OBJ_RNDCASTLE:
-                            // add rnd castle
-                            if (Mp2Consts.SIZEOFMP2CASTLE != pblock.Length)
-                            {}
-                            else
-                            {
-                                Castle castle = GetCastle(MapsStatic.GetPoint(findobject));
-                                if (castle != null)
-                                {
-                                    ByteVectorReader bvr = new ByteVectorReader(pblock);
-                                    castle.LoadFromMP2(bvr);
-                                    MapsStatic.UpdateRNDSpriteForCastle(castle.GetCenter(), castle.GetRace(),
-                                        castle.isCastle());
-                                    MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
-                                    map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
-                                }
-                                else
-                                {
-                                }
-                            }
-
-                            break;
-            case Mp2Obj.OBJ_JAIL:
-                // add jail
-                if (Mp2Consts.SIZEOFMP2HEROES != pblock.Length)
-                {
-                }
-                else
-                {
-                    RaceType race = RaceType.KNGT;
-                    switch (pblock[0x3c])
+                    else
                     {
-                    case 1:
-                        race = RaceType.BARB;
-                        break;
-                    case 2:
-                        race = RaceType.SORC;
-                        break;
-                    case 3:
-                        race = RaceType.WRLK;
-                        break;
-                    case 4:
-                        race = RaceType.WZRD;
-                        break;
-                    case 5:
-                        race = RaceType.NECR;
-                        break;
-                    default:
-                        break;
-                    }
-
-                    Heroes hero = GetFreemanHeroes(race);
-
-                    if (hero!=null)
-                    {
-
-                        ByteVectorReader bvr = new ByteVectorReader(pblock);
-                        hero.LoadFromMP2(findobject, H2Color.NONE, hero.GetRace(), bvr);
-                        hero.SetModes(HeroesFlags.JAIL);
-                    }
-                }
-                break;
-            case Mp2Obj.OBJ_HEROES:
-                // add heroes
-                if (Mp2Consts.SIZEOFMP2HEROES != pblock.Length)
-                {
-                }
-                else if (null!= (addon = tile.FindObjectConst(Mp2Obj.OBJ_HEROES)))
-                {
-                    var colorRace = Maps.TilesAddon.ColorRaceFromHeroSprite(addon);
-KingdomNs.Kingdom kingdom = GetKingdom(colorRace.Item1);
-
-if (colorRace.Item2 == RaceType.RAND &&
-    colorRace.Item1 != H2Color.NONE)
-                                    colorRace.Item2 = kingdom.GetRace();
-
-                    // check heroes max count
-                    if (kingdom.AllowRecruitHero(false, 0))
-                    {
-                        Heroes hero = null;
-
-
-                        if (pblock[17]!=0 &&
-                            pblock[18] < (int) HeroKinds.BAX)
-                            hero = vec_heroes.Get(pblock[18]);
-
-                        if (hero ==null || !hero.isFreeman())
-                            hero = vec_heroes.GetFreeman(colorRace.Item2);
-
-                                    if (hero!=null)
+                        Castle castle = GetCastle(MapsStatic.GetPoint(findobject));
+                        if (castle != null)
                         {
                             ByteVectorReader bvr = new ByteVectorReader(pblock);
-                            hero.LoadFromMP2(findobject, colorRace.Item1, colorRace.Item2, bvr);
+                            castle.LoadFromMP2(bvr);
+                            MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
+                            map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
                         }
                     }
-                }
-                break;
-            case Mp2Obj.OBJ_SIGN:
-            case Mp2Obj.OBJ_BOTTLE:
-                // add sign or buttle
-                if (Mp2Consts.SIZEOFMP2SIGN - 1 < pblock.Length && 0x01 == pblock[0])
-                {
-                    var obj = new MapSign();
-                    ByteVectorReader bvr = new ByteVectorReader(pblock);
-                 obj.LoadFromMP2(findobject, bvr);
-                    map_objects.add(obj);
-                }
-                break;
-            case Mp2Obj.OBJ_EVENT:
-                // add event maps
-                if (Mp2Consts.SIZEOFMP2EVENT - 1 < pblock.Length && 0x01 == pblock[0])
-                {
-                    var obj = new MapEvent();
-                    ByteVectorReader bvr = new ByteVectorReader(pblock);
-    obj.LoadFromMP2(findobject, bvr);
-                    map_objects.add(obj);
-                }
-                break;
-            case Mp2Obj.OBJ_SPHINX:
-                // add riddle sphinx
-                if (Mp2Consts.SIZEOFMP2RIDDLE - 1 < pblock.Length &&  0x00 == pblock[0])
-                {
-                    var obj = new MapSphinx();
-                    ByteVectorReader bvr = new ByteVectorReader(pblock);
-obj.LoadFromMP2(findobject, bvr);
-                    map_objects.add(obj);
-                }
-                break;
-            default:
-                break;
+
+                    break;
+                case ObjKind.OBJ_RNDTOWN:
+                case ObjKind.OBJ_RNDCASTLE:
+                    // add rnd castle
+                    if (Mp2Consts.SIZEOFMP2CASTLE != pblock.Length)
+                    {
+                    }
+                    else
+                    {
+                        Castle castle = GetCastle(MapsStatic.GetPoint(findobject));
+                        if (castle != null)
+                        {
+                            ByteVectorReader bvr = new ByteVectorReader(pblock);
+                            castle.LoadFromMP2(bvr);
+                            MapsStatic.UpdateRNDSpriteForCastle(castle.GetCenter(), castle.GetRace(),
+                                castle.isCastle());
+                            MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
+                            map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
+                        }
+                        else
+                        {
+                        }
+                    }
+
+                    break;
+                case ObjKind.OBJ_JAIL:
+                    // add jail
+                    if (Mp2Consts.SIZEOFMP2HEROES != pblock.Length)
+                    {
+                    }
+                    else
+                    {
+                        RaceType race = RaceType.KNGT;
+                        switch (pblock[0x3c])
+                        {
+                            case 1:
+                                race = RaceType.BARB;
+                                break;
+                            case 2:
+                                race = RaceType.SORC;
+                                break;
+                            case 3:
+                                race = RaceType.WRLK;
+                                break;
+                            case 4:
+                                race = RaceType.WZRD;
+                                break;
+                            case 5:
+                                race = RaceType.NECR;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        Heroes hero = GetFreemanHeroes(race);
+
+                        if (hero != null)
+                        {
+
+                            ByteVectorReader bvr = new ByteVectorReader(pblock);
+                            hero.LoadFromMP2(findobject, H2Color.NONE, hero.GetRace(), bvr);
+                            hero.SetModes(HeroesFlags.JAIL);
+                        }
+                    }
+
+                    break;
+                case ObjKind.OBJ_HEROES:
+                    // add heroes
+                    if (Mp2Consts.SIZEOFMP2HEROES != pblock.Length)
+                    {
+                    }
+                    else if (null != (addon = tile.FindObjectConst(ObjKind.OBJ_HEROES)))
+                    {
+                        var colorRace = Maps.TilesAddon.ColorRaceFromHeroSprite(addon);
+                        KingdomNs.Kingdom kingdom = GetKingdom(colorRace.Item1);
+
+                        if (colorRace.Item2 == RaceType.RAND &&
+                            colorRace.Item1 != H2Color.NONE)
+                            colorRace.Item2 = kingdom.GetRace();
+
+                        // check heroes max count
+                        if (kingdom.AllowRecruitHero(false, 0))
+                        {
+                            Heroes hero = null;
+
+
+                            if (pblock[17] != 0 &&
+                                pblock[18] < (int) HeroKinds.BAX)
+                                hero = vec_heroes.Get(pblock[18]);
+
+                            if (hero == null || !hero.isFreeman())
+                                hero = vec_heroes.GetFreeman(colorRace.Item2);
+
+                            if (hero != null)
+                            {
+                                ByteVectorReader bvr = new ByteVectorReader(pblock);
+                                hero.LoadFromMP2(findobject, colorRace.Item1, colorRace.Item2, bvr);
+                            }
+                        }
+                    }
+
+                    break;
+                case ObjKind.OBJ_SIGN:
+                case ObjKind.OBJ_BOTTLE:
+                    // add sign or buttle
+                    if (Mp2Consts.SIZEOFMP2SIGN - 1 < pblock.Length && 0x01 == pblock[0])
+                    {
+                        var obj = new MapSign();
+                        ByteVectorReader bvr = new ByteVectorReader(pblock);
+                        obj.LoadFromMP2(findobject, bvr);
+                        map_objects.add(obj);
+                    }
+
+                    break;
+                case ObjKind.OBJ_EVENT:
+                    // add event maps
+                    if (Mp2Consts.SIZEOFMP2EVENT - 1 < pblock.Length && 0x01 == pblock[0])
+                    {
+                        var obj = new MapEvent();
+                        ByteVectorReader bvr = new ByteVectorReader(pblock);
+                        obj.LoadFromMP2(findobject, bvr);
+                        map_objects.add(obj);
+                    }
+
+                    break;
+                case ObjKind.OBJ_SPHINX:
+                    // add riddle sphinx
+                    if (Mp2Consts.SIZEOFMP2RIDDLE - 1 < pblock.Length && 0x00 == pblock[0])
+                    {
+                        var obj = new MapSphinx();
+                        ByteVectorReader bvr = new ByteVectorReader(pblock);
+                        obj.LoadFromMP2(findobject, bvr);
+                        map_objects.add(obj);
+                    }
+
+                    break;
+                default:
+                    break;
             }
         }
-            // other events
+        // other events
         else if (0x00 == pblock[0])
         {
             // add event day

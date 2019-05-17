@@ -7,6 +7,14 @@ namespace NHeroes2.Utilities
 {
     public static class Extensions
     {
+        public static T Set<TK, T>(this Dictionary<TK, T> dictionary, TK key) where T : new()
+        {
+            if (dictionary.TryGetValue(key, out var result))
+                return result;
+            result = new T();
+            dictionary[key] = result;
+            return result;
+        }
         public static void SerializeToJsonFile(this Object data, string fileName)
         {
             var jsonText = data.SerializeToJsonString();
