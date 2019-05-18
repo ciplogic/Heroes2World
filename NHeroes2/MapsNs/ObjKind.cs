@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.Maps
 {
-    public enum ObjKind
+    public enum ObjKind : byte
     {
         OBJ_ZERO = 0x00,
         OBJ_UNKNW_02 = 0x02,

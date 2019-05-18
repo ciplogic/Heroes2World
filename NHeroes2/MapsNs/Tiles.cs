@@ -1,6 +1,9 @@
 using System;
+using System.Linq;
+using NHeroes2.Agg.Icns;
 using NHeroes2.HeroesNs;
 using NHeroes2.KingdomNs;
+using NHeroes2.SystemNs;
 
 namespace NHeroes2.Maps
 {
@@ -105,12 +108,12 @@ namespace NHeroes2.Maps
 
         public int GetQuantity2()
         {
-            throw new System.NotImplementedException();
+            return quantity2;
         }
 
         public int GetQuantity1()
         {
-            throw new System.NotImplementedException();
+            return quantity1;
         }
 
         public ObjKind GetObject()
@@ -126,6 +129,74 @@ namespace NHeroes2.Maps
         public TilesAddon FindObjectConst(ObjKind objHeroes)
         {
             throw new System.NotImplementedException();
+        }
+
+        public static void FixedPreload(Tiles tile)
+        {
+    // fix skeleton: left position
+    var it = tile.addons_level1._items.FirstOrDefault(addon => TilesAddon.isSkeletonFix(addon));
+
+    if (it != null)
+    {
+        tile.SetObject((byte) Maps.ObjKind.OBJN_SKELETON);
+    }
+
+    // fix price loyalty objects.
+    if (!H2Settings.Get().PriceLoyaltyVersion())
+        return;
+    switch (tile.GetObject())
+    {
+    case ObjKind.OBJ_UNKNW_79:
+    case ObjKind.OBJ_UNKNW_7A:
+    case ObjKind.OBJ_UNKNW_F9:
+    case ObjKind.OBJ_UNKNW_FA:
+        {
+            var newobj = ObjKind.OBJ_ZERO;
+            it = tile.addons_level1._items.FirstOrDefault(TilesAddon.isX_LOC123);
+            if (it != null)
+            {
+                newobj = TilesAddon.GetLoyaltyObject(it);
+            }
+            else
+            {
+                it = tile.addons_level2._items.FirstOrDefault(TilesAddon.isX_LOC123);
+                if (it != null)
+                    newobj = TilesAddon.GetLoyaltyObject(it);
+            }
+
+            if (ObjKind.OBJ_ZERO != newobj)
+                tile.SetObject((byte) newobj);
+        }
+        break;
+
+    default:
+        break;
+    }
+        }
+
+        public void QuantityUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void QuantityReset()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TilesAddon FindAddonICN1(IcnKind minihero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(uint addonUniq)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetHeroes(object getHeroes)
+        {
+            throw new NotImplementedException();
         }
     }
 }

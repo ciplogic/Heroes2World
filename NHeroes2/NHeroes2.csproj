@@ -93,6 +93,8 @@
     <Compile Include="HeroesNs\VecHeroes.cs" />
     <Compile Include="KingdomNs\CapturedObject.cs" />
     <Compile Include="KingdomNs\CapturedObjects.cs" />
+    <Compile Include="KingdomNs\EventDate.cs" />
+    <Compile Include="KingdomNs\EventsDate.cs" />
     <Compile Include="KingdomNs\H2Color.cs" />
     <Compile Include="HeroesNs\Heroes.cs" />
     <Compile Include="KingdomNs\HeroesFlags.cs" />
@@ -106,17 +108,18 @@
     <Compile Include="KingdomNs\RaceType.cs" />
     <Compile Include="KingdomNs\Rumors.cs" />
     <Compile Include="KingdomNs\World.cs" />
-    <Compile Include="Maps\Addons.cs" />
-    <Compile Include="Maps\MapIndexes.cs" />
-    <Compile Include="Maps\mapsize_t.cs" />
-    <Compile Include="Maps\MapsStatic.cs" />
-    <Compile Include="Maps\mp2addon_t.cs" />
-    <Compile Include="Maps\Mp2Consts.cs" />
-    <Compile Include="Maps\mp2tile_t.cs" />
-    <Compile Include="Maps\ObjectColor.cs" />
-    <Compile Include="Maps\ObjKind.cs" />
-    <Compile Include="Maps\Tiles.cs" />
-    <Compile Include="Maps\TilesAddon.cs" />
+    <Compile Include="MapsNs\Addons.cs" />
+    <Compile Include="MapsNs\MapIndexes.cs" />
+    <Compile Include="MapsNs\mapsize_t.cs" />
+    <Compile Include="MapsNs\MapsStatic.cs" />
+    <Compile Include="MapsNs\Mp2.cs" />
+    <Compile Include="MapsNs\mp2addon_t.cs" />
+    <Compile Include="MapsNs\Mp2Consts.cs" />
+    <Compile Include="MapsNs\mp2tile_t.cs" />
+    <Compile Include="MapsNs\ObjectColor.cs" />
+    <Compile Include="MapsNs\ObjKind.cs" />
+    <Compile Include="MapsNs\Tiles.cs" />
+    <Compile Include="MapsNs\TilesAddon.cs" />
     <Compile Include="MonsterNs\Monster.cs" />
     <Compile Include="MonsterNs\MonsterJoinCondition.cs" />
     <Compile Include="MonsterNs\MonsterLevel.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="SpellNs\spellstats_t.cs" />
     <Compile Include="SpellNs\SpellStorage.cs" />
     <Compile Include="SpellNs\SpellType.cs" />
+    <Compile Include="SystemNs\System.cs" />
     <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>

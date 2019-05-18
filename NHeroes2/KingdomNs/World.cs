@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using HeroesWorld.Engine.Graphical;
+using NHeroes2.Agg.Icns;
 using NHeroes2.CastleNs;
 using NHeroes2.Engine;
 using NHeroes2.Game;
@@ -53,6 +54,110 @@ namespace NHeroes2.KingdomNs
         }
 
         private void PostLoad()
+        {
+            // modify other objects
+            for (int ii = 0; ii < vec_tiles.Count; ++ii)
+            {
+                Maps.Tiles tile = vec_tiles[ii];
+
+                Maps.Tiles.FixedPreload(tile);
+
+                //
+                switch (tile.GetObject())
+                {
+                    case ObjKind.OBJ_WITCHSHUT:
+                    case ObjKind.OBJ_SHRINE1:
+                    case ObjKind.OBJ_SHRINE2:
+                    case ObjKind.OBJ_SHRINE3:
+                    case ObjKind.OBJ_STONELIGHTS:
+                    case ObjKind.OBJ_FOUNTAIN:
+                    case ObjKind.OBJ_EVENT:
+                    case ObjKind.OBJ_BOAT:
+                    case ObjKind.OBJ_RNDARTIFACT:
+                    case ObjKind.OBJ_RNDARTIFACT1:
+                    case ObjKind.OBJ_RNDARTIFACT2:
+                    case ObjKind.OBJ_RNDARTIFACT3:
+                    case ObjKind.OBJ_RNDRESOURCE:
+                    case ObjKind.OBJ_WATERCHEST:
+                    case ObjKind.OBJ_TREASURECHEST:
+                    case ObjKind.OBJ_ARTIFACT:
+                    case ObjKind.OBJ_RESOURCE:
+                    case ObjKind.OBJ_MAGICGARDEN:
+                    case ObjKind.OBJ_WATERWHEEL:
+                    case ObjKind.OBJ_WINDMILL:
+                    case ObjKind.OBJ_WAGON:
+                    case ObjKind.OBJ_SKELETON:
+                    case ObjKind.OBJ_LEANTO:
+                    case ObjKind.OBJ_CAMPFIRE:
+                    case ObjKind.OBJ_FLOTSAM:
+                    case ObjKind.OBJ_SHIPWRECKSURVIROR:
+                    case ObjKind.OBJ_DERELICTSHIP:
+                    case ObjKind.OBJ_SHIPWRECK:
+                    case ObjKind.OBJ_GRAVEYARD:
+                    case ObjKind.OBJ_PYRAMID:
+                    case ObjKind.OBJ_DAEMONCAVE:
+                    case ObjKind.OBJ_ABANDONEDMINE:
+                    case ObjKind.OBJ_ALCHEMYLAB:
+                    case ObjKind.OBJ_SAWMILL:
+                    case ObjKind.OBJ_MINES:
+                    case ObjKind.OBJ_TREEKNOWLEDGE:
+                    case ObjKind.OBJ_BARRIER:
+                    case ObjKind.OBJ_TRAVELLERTENT:
+                    case ObjKind.OBJ_MONSTER:
+                    case ObjKind.OBJ_RNDMONSTER:
+                    case ObjKind.OBJ_RNDMONSTER1:
+                    case ObjKind.OBJ_RNDMONSTER2:
+                    case ObjKind.OBJ_RNDMONSTER3:
+                    case ObjKind.OBJ_RNDMONSTER4:
+                    case ObjKind.OBJ_ANCIENTLAMP:
+                    case ObjKind.OBJ_WATCHTOWER:
+                    case ObjKind.OBJ_EXCAVATION:
+                    case ObjKind.OBJ_CAVE:
+                    case ObjKind.OBJ_TREEHOUSE:
+                    case ObjKind.OBJ_ARCHERHOUSE:
+                    case ObjKind.OBJ_GOBLINHUT:
+                    case ObjKind.OBJ_DWARFCOTT:
+                    case ObjKind.OBJ_HALFLINGHOLE:
+                    case ObjKind.OBJ_PEASANTHUT:
+                    case ObjKind.OBJ_THATCHEDHUT:
+                    case ObjKind.OBJ_RUINS:
+                    case ObjKind.OBJ_TREECITY:
+                    case ObjKind.OBJ_WAGONCAMP:
+                    case ObjKind.OBJ_DESERTTENT:
+                    case ObjKind.OBJ_TROLLBRIDGE:
+                    case ObjKind.OBJ_DRAGONCITY:
+                    case ObjKind.OBJ_CITYDEAD:
+                        tile.QuantityUpdate();
+                        break;
+
+                    case ObjKind.OBJ_WATERALTAR:
+                    case ObjKind.OBJ_AIRALTAR:
+                    case ObjKind.OBJ_FIREALTAR:
+                    case ObjKind.OBJ_EARTHALTAR:
+                    case ObjKind.OBJ_BARROWMOUNDS:
+                        tile.QuantityReset();
+                        tile.QuantityUpdate();
+                        break;
+
+                    case ObjKind.OBJ_HEROES:
+                        {
+                            Maps.TilesAddon addon = tile.FindAddonICN1(IcnKind.MINIHERO);
+                            // remove event sprite
+                            if (addon!=null) tile.Remove(addon.uniq);
+
+                            tile.SetHeroes(GetHeroes(MapsStatic.GetPoint(ii)));
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            
+            throw new NotImplementedException();
+        }
+
+        private Heroes GetHeroes(H2Point getPoint)
         {
             throw new NotImplementedException();
         }
@@ -599,19 +704,6 @@ fs.seek(endof_addons + 72 * 3 + 144 * 3);
             
             
             return true;
-        }
-    }
-
-    public class EventsDate : List<EventDate>
-    {
-
-    }
-
-    public class EventDate
-    {
-        public void LoadFromMP2(ByteVectorReader bvr)
-        {
-            throw new NotImplementedException();
         }
     }
 }
