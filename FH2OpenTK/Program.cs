@@ -54,7 +54,7 @@ namespace FH2OpenTK
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
                     (int) TextureMagFilter.Linear);
 
-                BitmapData data = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                var data = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
                     ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
                 GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, data.Width, data.Height, 0,
@@ -149,7 +149,7 @@ namespace FH2OpenTK
             [STAThread]
             public static void Main()
             {
-                using (Textures example = new Textures())
+                using (var example = new Textures())
                 {
                     // Get the title and category  of this example using reflection.
                     example.Title = $"OpenTK";

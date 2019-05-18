@@ -27,7 +27,7 @@ namespace HeroesWorld.Engine.Graphical
         }
         public void DrawSprite(Surface surface, int x, int y)
         {
-            SDL.SDL_Rect sourceRect = surface.Sizes.ToSdlRect();
+            var sourceRect = surface.Sizes.ToSdlRect();
             
             var topLeftCoord = (x:x, y:y);
             topLeftCoord = Transforms.TransformCoordinate(topLeftCoord);

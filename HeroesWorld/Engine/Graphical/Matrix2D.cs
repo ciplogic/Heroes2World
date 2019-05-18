@@ -10,7 +10,7 @@ namespace HeroesWorld.Engine.Graphical
 
         public static Matrix2D MakeIdentity()
         {
-            Matrix2D result = new Matrix2D();
+            var result = new Matrix2D();
             for (var i = 0; i < 3; i++)
                 result.SetCell(i, i, 1.0);
             return result;

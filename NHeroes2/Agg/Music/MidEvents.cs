@@ -92,7 +92,7 @@ namespace NHeroes2.Agg.Music
                         // meta
                         case 0x0F:
                         {
-                            pack_t pack = unpackValue(ptr, ptrPos + 2);
+                            var pack = unpackValue(ptr, ptrPos + 2);
                             ptrPos += (int) (pack.first + pack.second + 1);
                             delta = 0;
                         }
@@ -117,7 +117,7 @@ namespace NHeroes2.Agg.Music
                         case 0x09:
                         {
                             _items.Add(new MidEvent(delta, ptr[ptrPos], ptr[ptrPos + 1], ptr[ptrPos + 2]));
-                            pack_t pack = unpackValue(ptr, ptrPos + 3);
+                            var pack = unpackValue(ptr, ptrPos + 3);
                             notesoff.Add(new meta_t((byte) (ptr[ptrPos] - 0x10), ptr[ptrPos + 1], pack.first));
                             ptrPos += 3 + (int) pack.second;
                             delta = 0;
@@ -148,7 +148,7 @@ namespace NHeroes2.Agg.Music
         private pack_t unpackValue(byte[] ptr, int ptrPos)
         {
             var p = ptrPos;
-            pack_t res = new pack_t();
+            var res = new pack_t();
 
             while ((ptr[p] & 0x80) != 0)
             {
@@ -171,7 +171,7 @@ namespace NHeroes2.Agg.Music
 
         public int size()
         {
-            int res = 0;
+            var res = 0;
             foreach (var it in _items)
             {
                 res += it.size();

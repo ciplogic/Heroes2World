@@ -10,7 +10,7 @@ namespace NHeroes2.Agg.Music
 
         public XMIData(byte[] buf)
         {
-            ByteVectorReader sb = new ByteVectorReader(buf);
+            var sb = new ByteVectorReader(buf);
 
             // FORM XDIR
             var group = sb.ReadData<GroupChunkHeader>();
@@ -26,7 +26,7 @@ namespace NHeroes2.Agg.Music
                 H2Log.H2ERROR("parse H2ERROR: " + "info");
                 return;
             }
-            int numTracks = sb.getLE16();
+            var numTracks = sb.getLE16();
 
             // CAT XMID
             group = sb.ReadData<GroupChunkHeader>();
@@ -35,7 +35,7 @@ namespace NHeroes2.Agg.Music
                 H2Log.H2ERROR("parse H2ERROR: " + "cat xmid");
                 return;
             }
-            for (int track = 0; track < numTracks; ++track)
+            for (var track = 0; track < numTracks; ++track)
             {
                 var xmiTrack = new XMITrack();
                 tracks.Add(xmiTrack);

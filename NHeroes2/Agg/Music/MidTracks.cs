@@ -12,7 +12,7 @@ namespace NHeroes2.Agg.Music
         public MidTracks(XMITracks xmiTracks)
         {
 
-            foreach (XMITrack track in xmiTracks)
+            foreach (var track in xmiTracks)
             {
                 _items.Add(new MidTrack(track));
             }

@@ -53,12 +53,12 @@ namespace HeroesWorld
 
             var icn = aggFile.RenderICNSprite(IcnKind.HEROES, 0);
             icn.first.Save("h2.png");
-            Surface surface = new Surface(screen, icn.first);
+            var surface = new Surface(screen, icn.first);
 
             var mouse = aggFile.RenderICNSprite(IcnKind.ADVMCO, 0);
 
 
-            Core myCore = new Core(false);
+            var myCore = new Core(false);
             MusicPlayer.Play(aggFile, (int) 16);
 
             //load a sample image
@@ -96,12 +96,12 @@ namespace HeroesWorld
             */
             bitmapPainter.Paint();
             //Setup the game controller
-            IntPtr gc = SDL.SDL_GameControllerOpen(0);
+            var gc = SDL.SDL_GameControllerOpen(0);
             screen.Transforms
                 .ScaleMatrix(1.5, 1.2)
                 .TranslateMatrix(25, 150);
 
-            Surface mouseSurface = new Surface(screen, mouse.first);
+            var mouseSurface = new Surface(screen, mouse.first);
             while (myCore.IsRunning)
             {
                 //Don't forget this.

@@ -39,11 +39,11 @@ namespace HeroesWorld.Engine.Graphical.Pastel
             var targetScalableImage = new Bitmap(_targetPaint.Width, _targetPaint.Height, PixelFormat.Format32bppArgb);
             var graphics = Graphics.FromImage(targetScalableImage);
             var rightMargin = _innerRect.Right;
-            int widthTarget = _targetPaint.Width - _innerRect.Left - _innerRect.Right;
+            var widthTarget = _targetPaint.Width - _innerRect.Left - _innerRect.Right;
             var innerRectWidth = _bitmap.Width - _innerRect.Left - _innerRect.Right;
             var innerRectHeight = _bitmap.Height - _innerRect.Top - _innerRect.Bottom;
 
-            int heightTarget = _targetPaint.Height - _innerRect.Bottom - _innerRect.Top;
+            var heightTarget = _targetPaint.Height - _innerRect.Bottom - _innerRect.Top;
        
             //left
             DrawScaled(new Rectangle(0, _innerRect.Top, _innerRect.Left, innerRectHeight),

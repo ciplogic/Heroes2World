@@ -78,7 +78,7 @@ namespace Sdl2.Core
         public static SDL.SDL_version IMG_LinkedVersion()
         {
             SDL.SDL_version result;
-            IntPtr result_ptr = INTERNAL_IMG_LinkedVersion();
+            var result_ptr = INTERNAL_IMG_LinkedVersion();
             result = (SDL.SDL_version) Marshal.PtrToStructure(
                 result_ptr,
                 typeof(SDL.SDL_version)

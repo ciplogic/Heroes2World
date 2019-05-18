@@ -153,7 +153,7 @@ private const string nativeLibName = "SDL2_mixer.dylib";
         public static SDL.SDL_version MIX_Linked_Version()
         {
             SDL.SDL_version result;
-            IntPtr result_ptr = INTERNAL_MIX_Linked_Version();
+            var result_ptr = INTERNAL_MIX_Linked_Version();
             result = (SDL.SDL_version) Marshal.PtrToStructure(
                 result_ptr,
                 typeof(SDL.SDL_version)
@@ -197,7 +197,7 @@ private const string nativeLibName = "SDL2_mixer.dylib";
         /* This is an RWops macro in the C header. */
         public static IntPtr Mix_LoadWAV(string file)
         {
-            IntPtr rwops = SDL.INTERNAL_SDL_RWFromFile(file, "rb");
+            var rwops = SDL.INTERNAL_SDL_RWFromFile(file, "rb");
             return Mix_LoadWAV_RW(rwops, 1);
         }
 

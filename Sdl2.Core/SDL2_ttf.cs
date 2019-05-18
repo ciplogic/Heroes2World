@@ -83,7 +83,7 @@ namespace Sdl2.Core
         public static SDL.SDL_version TTF_LinkedVersion()
         {
             SDL.SDL_version result;
-            IntPtr result_ptr = INTERNAL_TTF_LinkedVersion();
+            var result_ptr = INTERNAL_TTF_LinkedVersion();
             result = (SDL.SDL_version) Marshal.PtrToStructure(
                 result_ptr,
                 typeof(SDL.SDL_version)

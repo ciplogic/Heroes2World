@@ -13,15 +13,15 @@ namespace HeroesWorld.Engine.Graphical.Pastel
 
         static double Distance(double x1, double y1, double x2, double y2)
         {
-            double deltaX = x2 - x1;
-            double deltaY = y2 - y1;
+            var deltaX = x2 - x1;
+            var deltaY = y2 - y1;
             var distance = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
             return distance;
         }
 
         static bool IsInteger(double x)
         {
-            int intX = (int) x;
+            var intX = (int) x;
             var deltaX = (x - intX);
             return deltaX < Epsilon;
         }

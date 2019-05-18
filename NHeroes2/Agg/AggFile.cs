@@ -50,7 +50,7 @@ namespace NHeroes2.Agg
             for (var ii = 0; ii < count_items; ++ii)
             {
                 var itemName = vectorNames[ii];
-                AggFat f = new AggFat();
+                var f = new AggFat();
                 var crc = stream.getLE32();
                 f.crc = crc;
                 var offset = stream.getLE32();
@@ -146,7 +146,7 @@ namespace NHeroes2.Agg
                 return 0;
             }
 
-            ByteVectorReader st = new ByteVectorReader(body);
+            var st = new ByteVectorReader(body);
 
             var count = st.getLE16();
             return count;
@@ -162,7 +162,7 @@ namespace NHeroes2.Agg
                 return res;
             }
 
-            ByteVectorReader st = new ByteVectorReader(body);
+            var st = new ByteVectorReader(body);
 
             var count = st.getLE16();
             if (index >= count)

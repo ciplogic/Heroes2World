@@ -46,10 +46,10 @@ namespace NHeroes2.Agg.Music
         
         byte[] packValue(UInt32 delta)
         {
-            byte c1 = (byte) (delta & 0x0000007F);
-            byte c2 = (byte) ((delta & 0x00003F80) >> 7);
-            byte c3 = (byte) ((delta & 0x001FC000) >> 14);
-            byte c4 = (byte) ((delta & 0x0FE00000) >> 21);
+            var c1 = (byte) (delta & 0x0000007F);
+            var c2 = (byte) ((delta & 0x00003F80) >> 7);
+            var c3 = (byte) ((delta & 0x001FC000) >> 14);
+            var c4 = (byte) ((delta & 0x0FE00000) >> 21);
 
             var res = new List<byte>(4);
             

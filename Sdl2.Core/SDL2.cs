@@ -841,7 +841,7 @@ namespace Sdl2.Core
             };
 
             var buttons = new INTERNAL_SDL_MessageBoxButtonData[messageboxdata.numbuttons];
-            for (int i = 0; i < messageboxdata.numbuttons; i++)
+            for (var i = 0; i < messageboxdata.numbuttons; i++)
             {
                 buttons[i] = new INTERNAL_SDL_MessageBoxButtonData()
                 {
@@ -865,7 +865,7 @@ namespace Sdl2.Core
             }
 
             Marshal.FreeHGlobal(data.colorScheme);
-            for (int i = 0; i < messageboxdata.numbuttons; i++)
+            for (var i = 0; i < messageboxdata.numbuttons; i++)
             {
                 utf8.CleanUpNativeData(buttons[i].text);
             }
@@ -2569,7 +2569,7 @@ namespace Sdl2.Core
                 return false;
             }
 
-            SDL_PIXELTYPE_ENUM pType =
+            var pType =
                 (SDL_PIXELTYPE_ENUM) SDL_PIXELTYPE(format);
             return (
                 pType == SDL_PIXELTYPE_ENUM.SDL_PIXELTYPE_INDEX1 ||
@@ -2585,7 +2585,7 @@ namespace Sdl2.Core
                 return false;
             }
 
-            SDL_PIXELORDER_ENUM pOrder =
+            var pOrder =
                 (SDL_PIXELORDER_ENUM) SDL_PIXELORDER(format);
             return (
                 pOrder == SDL_PIXELORDER_ENUM.SDL_PACKEDORDER_ARGB ||
@@ -3438,7 +3438,7 @@ namespace Sdl2.Core
 
         public static IntPtr SDL_LoadBMP(string file)
         {
-            IntPtr rwops = INTERNAL_SDL_RWFromFile(file, "rb");
+            var rwops = INTERNAL_SDL_RWFromFile(file, "rb");
             return INTERNAL_SDL_LoadBMP_RW(rwops, 1);
         }
 
@@ -3476,7 +3476,7 @@ namespace Sdl2.Core
 
         public static int SDL_SaveBMP(IntPtr surface, string file)
         {
-            IntPtr rwops = INTERNAL_SDL_RWFromFile(file, "wb");
+            var rwops = INTERNAL_SDL_RWFromFile(file, "wb");
             return INTERNAL_SDL_SaveBMP_RW(surface, rwops, 1);
         }
 
@@ -5285,7 +5285,7 @@ namespace Sdl2.Core
 
         public static int SDL_GameControllerAddMappingsFromFile(string file)
         {
-            IntPtr rwops = INTERNAL_SDL_RWFromFile(file, "rb");
+            var rwops = INTERNAL_SDL_RWFromFile(file, "rb");
             return INTERNAL_SDL_GameControllerAddMappingsFromRW(rwops, 1);
         }
 
@@ -5974,8 +5974,8 @@ namespace Sdl2.Core
         )
         {
             SDL_AudioSpec result;
-            IntPtr rwops = INTERNAL_SDL_RWFromFile(file, "rb");
-            IntPtr result_ptr = INTERNAL_SDL_LoadWAV_RW(
+            var rwops = INTERNAL_SDL_RWFromFile(file, "rb");
+            var result_ptr = INTERNAL_SDL_LoadWAV_RW(
                 rwops,
                 1,
                 ref spec,

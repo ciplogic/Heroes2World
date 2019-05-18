@@ -23,7 +23,7 @@ namespace HeroesWorld
         {
             var data = new List<PictureData>();
             
-            for (int i = 0; i < (int) IcnKind.LASTICN; i++)
+            for (var i = 0; i < (int) IcnKind.LASTICN; i++)
             {
                 var picKind = (IcnKind) i;
                 var countPics = aggFile.IcnSpriteCount(picKind);

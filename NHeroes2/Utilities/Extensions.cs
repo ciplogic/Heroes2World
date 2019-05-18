@@ -51,7 +51,7 @@ namespace NHeroes2.Utilities
         {
             collection.Clear();
             collection.Capacity = newSize;
-            for (int i = 0; i < newSize; i++)
+            for (var i = 0; i < newSize; i++)
             {
                 collection.Add(new T());
             }
