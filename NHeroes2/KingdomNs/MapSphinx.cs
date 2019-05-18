@@ -17,7 +17,7 @@ namespace NHeroes2.KingdomNs
         public int type;
     }
 
-    internal class MapPosition
+    public class MapPosition
     {
         public H2Point center = new H2Point();
 

@@ -18,9 +18,10 @@ namespace NHeroes2.MapsNs
             return res;
         }
 
-        public static H2Point GetPoint(int findobject)
+        public static H2Point GetPoint(int index)
         {
-            throw new NotImplementedException();
+            var world = World.Instance;
+            return new H2Point(index%world.W, index/world.W);
         }
 
         public static void MinimizeAreaForCastle(H2Point getCenter)

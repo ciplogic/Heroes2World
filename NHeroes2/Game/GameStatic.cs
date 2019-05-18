@@ -6,7 +6,7 @@
 
         public static string GetEncodeString(string valueRumor)
         {
-            throw new System.NotImplementedException();
+            return valueRumor;
         }
     }
 }

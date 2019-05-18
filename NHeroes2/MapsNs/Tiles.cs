@@ -118,7 +118,7 @@ namespace NHeroes2.MapsNs
 
         public ObjKind GetObject()
         {
-            throw new System.NotImplementedException();
+            return (ObjKind) this.mp2_object;
         }
 
         public int GetIndex()
@@ -176,17 +176,19 @@ namespace NHeroes2.MapsNs
 
         public void QuantityUpdate()
         {
-            throw new NotImplementedException();
+            //TODO Finish
+            
         }
 
         public void QuantityReset()
         {
-            throw new NotImplementedException();
+            //TODO Finish
         }
 
         public TilesAddon FindAddonICN1(IcnKind minihero)
         {
-            throw new NotImplementedException();
+            //TODO Finish
+            return null;
         }
 
         public void Remove(uint addonUniq)

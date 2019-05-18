@@ -156,9 +156,15 @@ namespace NHeroes2.KingdomNs
             throw new NotImplementedException();
         }
 
-        private Heroes GetHeroes(H2Point getPoint)
+        private Heroes GetHeroes(H2Point center)
         {
-            throw new NotImplementedException();
+            foreach (var hero in vec_heroes)
+            {
+                if (hero.isPosition(center))
+                    return hero;
+            }
+
+            return null;
         }
 
         private static void Defaults()
@@ -280,7 +286,9 @@ namespace NHeroes2.KingdomNs
             fs.skip(w() * h() * Mp2Consts.SIZEOFMP2TILE);
 
             // read all addons
-            var vec_mp2addons = new List<mp2addon_t>(fs.getLE32() /* count mp2addon_t */);
+            var addonsSize = fs.getLE32();
+            var vec_mp2addons = new List<mp2addon_t>(/* count mp2addon_t */);
+            vec_mp2addons.SetSize(addonsSize);
 
             foreach (var mp2Addon in vec_mp2addons)
             {

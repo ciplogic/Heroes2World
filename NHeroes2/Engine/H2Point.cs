@@ -9,5 +9,10 @@
             x = (short) cx;
             y = (short) cy;
         }
+
+        public bool AreEqual(H2Point center)
+        {
+            return x == center.x && y == center.y;
+        }
     }
 }
