@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using HeroesWorld.Engine.Graphical;
 using NHeroes2.Agg.Icns;
 using NHeroes2.CastleNs;
 using NHeroes2.Engine;
 using NHeroes2.Game;
 using NHeroes2.HeroesNs;
-using NHeroes2.Kingdom;
-using NHeroes2.Maps;
+using NHeroes2.MapsNs;
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
 
@@ -58,9 +56,9 @@ namespace NHeroes2.KingdomNs
             // modify other objects
             for (int ii = 0; ii < vec_tiles.Count; ++ii)
             {
-                Maps.Tiles tile = vec_tiles[ii];
+                Tiles tile = vec_tiles[ii];
 
-                Maps.Tiles.FixedPreload(tile);
+                Tiles.FixedPreload(tile);
 
                 //
                 switch (tile.GetObject())
@@ -141,7 +139,7 @@ namespace NHeroes2.KingdomNs
 
                     case ObjKind.OBJ_HEROES:
                         {
-                            Maps.TilesAddon addon = tile.FindAddonICN1(IcnKind.MINIHERO);
+                            TilesAddon addon = tile.FindAddonICN1(IcnKind.MINIHERO);
                             // remove event sprite
                             if (addon!=null) tile.Remove(addon.uniq);
 
@@ -494,7 +492,7 @@ fs.seek(endof_addons + 72 * 3 + 144 * 3);
 
         for (var it_index = 0; it_index != vec_object.Count && findobject < 0; ++it_index)
         {
-            Maps.Tiles tile = vec_tiles[it_index];
+            Tiles tile = vec_tiles[it_index];
 
             // orders(quantity2, quantity1)
             int orders = tile.GetQuantity2() != 0 ? tile.GetQuantity2() : 0;
@@ -508,7 +506,7 @@ fs.seek(endof_addons + 72 * 3 + 144 * 3);
 
         if (0 <= findobject)
         {
-            Maps.Tiles tile = vec_tiles[findobject];
+            Tiles tile = vec_tiles[findobject];
             TilesAddon addon = null;
 
             switch (tile.GetObject())
@@ -603,7 +601,7 @@ fs.seek(endof_addons + 72 * 3 + 144 * 3);
                     }
                     else if (null != (addon = tile.FindObjectConst(ObjKind.OBJ_HEROES)))
                     {
-                        var colorRace = Maps.TilesAddon.ColorRaceFromHeroSprite(addon);
+                        var colorRace = TilesAddon.ColorRaceFromHeroSprite(addon);
                         KingdomNs.Kingdom kingdom = GetKingdom(colorRace.Item1);
 
                         if (colorRace.Item2 == RaceType.RAND &&

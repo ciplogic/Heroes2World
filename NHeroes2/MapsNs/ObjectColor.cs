@@ -1,6 +1,6 @@
 ﻿using NHeroes2.KingdomNs;
 
-namespace NHeroes2.Maps
+namespace NHeroes2.MapsNs
 {
     class ObjectColor
     {

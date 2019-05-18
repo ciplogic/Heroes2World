@@ -1,5 +1,5 @@
 ﻿using NHeroes2.ArmyNs;
-using NHeroes2.Maps;
+using NHeroes2.MapsNs;
 
 namespace NHeroes2.KingdomNs
 {

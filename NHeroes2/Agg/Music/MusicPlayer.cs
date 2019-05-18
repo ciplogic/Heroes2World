@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using NHeroes2.Serialize;
-using SDL2;
+using Sdl2.Core;
 
 namespace NHeroes2.Agg.Music
 {

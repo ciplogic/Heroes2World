@@ -5,7 +5,7 @@ using NHeroes2.HeroesNs;
 using NHeroes2.KingdomNs;
 using NHeroes2.SystemNs;
 
-namespace NHeroes2.Maps
+namespace NHeroes2.MapsNs
 {
     public class Tiles
     {
@@ -138,7 +138,7 @@ namespace NHeroes2.Maps
 
     if (it != null)
     {
-        tile.SetObject((byte) Maps.ObjKind.OBJN_SKELETON);
+        tile.SetObject((byte) ObjKind.OBJN_SKELETON);
     }
 
     // fix price loyalty objects.

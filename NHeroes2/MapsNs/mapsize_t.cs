@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NHeroes2.Maps
+namespace NHeroes2.MapsNs
 {
     // origin mp2 tile
     enum mapsize_t

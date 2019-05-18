@@ -11,6 +11,7 @@ using NHeroes2.Agg.Icns;
 using NHeroes2.Agg.Music;
 using NHeroes2.KingdomNs;
 using NHeroes2.Utilities;
+using Sdl2.Core;
 using Screen = HeroesWorld.Engine.Graphical.Screen;
 
 namespace HeroesWorld
@@ -95,7 +96,7 @@ namespace HeroesWorld
             */
             bitmapPainter.Paint();
             //Setup the game controller
-            IntPtr gc = SDL2.SDL.SDL_GameControllerOpen(0);
+            IntPtr gc = SDL.SDL_GameControllerOpen(0);
             screen.Transforms
                 .ScaleMatrix(1.5, 1.2)
                 .TranslateMatrix(25, 150);
@@ -115,8 +116,8 @@ namespace HeroesWorld
                 //surface.Draw(screen, 10, 10);
 
                 //read a sample button
-                if (SDL2.SDL.SDL_GameControllerGetButton(gc,
-                        SDL2.SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A) == 1)
+                if (SDL.SDL_GameControllerGetButton(gc,
+                        SDL.SDL_GameControllerButton.SDL_CONTROLLER_BUTTON_A) == 1)
                 {
                     // myCore.PlaySound(mySound);
                 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace NHeroes2.Maps
+namespace NHeroes2.MapsNs
 {
     public class mp2addon_t
     {

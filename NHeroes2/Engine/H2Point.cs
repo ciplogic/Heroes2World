@@ -1,4 +1,4 @@
-﻿namespace HeroesWorld.Engine.Graphical
+﻿namespace NHeroes2.Engine
 {
     public struct H2Point
     {

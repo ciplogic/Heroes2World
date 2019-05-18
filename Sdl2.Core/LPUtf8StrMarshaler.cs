@@ -25,10 +25,10 @@
  */
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace SDL2
+namespace Sdl2.Core
 {
     internal unsafe class LPUtf8StrMarshaler : ICustomMarshaler
     {

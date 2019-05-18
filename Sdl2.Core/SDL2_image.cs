@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace SDL2
+namespace Sdl2.Core
 {
     public static class SDL_image
     {

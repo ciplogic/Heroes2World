@@ -1,4 +1,4 @@
-﻿namespace NHeroes2.Maps
+﻿namespace NHeroes2.MapsNs
 {
     public enum ObjKind : byte
     {

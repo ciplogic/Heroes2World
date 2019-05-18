@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NHeroes2.Maps;
+using NHeroes2.MapsNs;
 using NHeroes2.Utilities;
 
 namespace NHeroes2.KingdomNs

@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace SDL2
+namespace Sdl2.Core
 {
     /// <summary>
     /// Entry point for all SDL-related (non-extension) types and methods

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-
 using OpenTK;
 using BeginMode = OpenTK.Graphics.BeginMode;
 using ClearBufferMask = OpenTK.Graphics.ClearBufferMask;

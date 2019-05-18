@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using NHeroes2.Utilities;
-using SDL2;
+using Sdl2.Core;
 
 namespace HeroesWorld.Engine.Graphical.Pastel
 {

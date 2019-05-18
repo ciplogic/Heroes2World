@@ -1,7 +1,7 @@
 using NHeroes2.Agg.Icns;
 using NHeroes2.SystemNs;
 
-namespace NHeroes2.Maps
+namespace NHeroes2.MapsNs
 {
     public class Mp2
     {

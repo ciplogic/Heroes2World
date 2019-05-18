@@ -1,5 +1,4 @@
-﻿using NHeroes2.Kingdom;
-using NHeroes2.KingdomNs;
+﻿using NHeroes2.KingdomNs;
 using NHeroes2.Serialize;
 
 namespace NHeroes2.HeroesNs

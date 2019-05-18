@@ -1,6 +1,6 @@
 ﻿using System;
 using HeroesWorld.Engine.Graphical.Pastel;
-using SDL2;
+using Sdl2.Core;
 
 namespace HeroesWorld.Engine.Graphical
 {

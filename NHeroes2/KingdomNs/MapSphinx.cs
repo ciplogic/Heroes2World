@@ -1,4 +1,4 @@
-﻿using HeroesWorld.Engine.Graphical;
+﻿using NHeroes2.Engine;
 using NHeroes2.Serialize;
 
 namespace NHeroes2.KingdomNs

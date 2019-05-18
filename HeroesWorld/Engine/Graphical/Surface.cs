@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using HeroesWorld.Engine.Graphical.Pastel;
+using Sdl2.Core;
 
 namespace HeroesWorld.Engine.Graphical
 {
@@ -28,7 +29,7 @@ namespace HeroesWorld.Engine.Graphical
             screen.DrawSprite(
                 _texture,
                 Sizes.ToSdlRect(),
-                new SDL2.SDL.SDL_Rect() {x = x, y = y, w = Sizes.Width, h = Sizes.Height});
+                new SDL.SDL_Rect() {x = x, y = y, w = Sizes.Width, h = Sizes.Height});
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using HeroesWorld.Engine.Graphical;
+using NHeroes2.Engine;
 using NHeroes2.KingdomNs;
 
-namespace NHeroes2.Maps
+namespace NHeroes2.MapsNs
 {
     class MapsStatic
     {
