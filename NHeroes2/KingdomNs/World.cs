@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using NHeroes2.Agg.Icns;
@@ -9,6 +10,7 @@ using NHeroes2.Game;
 using NHeroes2.HeroesNs;
 using NHeroes2.MapsNs;
 using NHeroes2.Serialize;
+using NHeroes2.SystemNs;
 using NHeroes2.Utilities;
 
 namespace NHeroes2.KingdomNs
@@ -153,7 +155,155 @@ namespace NHeroes2.KingdomNs
                 }
             }
 
-            throw new NotImplementedException();
+            // add heroes to kingdoms
+            vec_kingdoms.AddHeroes(vec_heroes);
+
+            // add castles to kingdoms
+            vec_kingdoms.AddCastles(vec_castles);
+
+            // update wins, loss conditions
+            if (GameOver.WINS_HERO && H2Settings.Get().ConditionWins())
+    {
+                Heroes* hero = GetHeroes(Settings.Get().WinsMapsPositionObject());
+                heroes_cond_wins = hero ? hero.GetID() : Heroes.UNKNOWN;
+            }
+            if (GameOver.LOSS_HERO  Settings.Get().ConditionLoss())
+    {
+                Heroes* hero = GetHeroes(Settings.Get().LossMapsPositionObject());
+                if (hero)
+                {
+                    heroes_cond_loss = hero.GetID();
+                    hero.SetModes(Heroes.NOTDISMISS | Heroes.NOTDEFAULTS);
+                }
+            }
+
+            // update tile passable
+            for_each(vec_tiles.begin(), vec_tiles.end(),
+        
+                     [](Maps.Tiles tile)
+             {
+                tile.UpdatePassable();
+            });
+
+            // play with hero
+            vec_kingdoms.ApplyPlayWithStartingHero();
+
+            if (Settings.Get().ExtWorldStartHeroLossCond4Humans())
+                vec_kingdoms.AddCondLossHeroes(vec_heroes);
+
+            // play with debug hero
+            if (IS_DEVEL())
+            {
+                // get first castle position
+                Kingdom kingdom = GetKingdom(Color.GetFirst(Players.HumanColors()));
+
+                if (!kingdom.GetCastles()._items.empty())
+                {
+                    Castle* castle = kingdom.GetCastles()._items.front();
+                    Heroes* hero = vec_heroes.Get(Heroes.SANDYSANDY);
+
+                    if (hero)
+                    {
+                        Point cp = castle.GetCenter();
+                        hero.Recruit(castle.GetColor(), Point(cp.x, cp.y + 1));
+                    }
+                }
+            }
+
+            // set ultimate
+            var it = find_if(vec_tiles.begin(), vec_tiles.end(),
+        
+                              [](Maps.Tiles tile)
+                      {
+                return tile.isObject(static_cast<int>(MP2.OBJ_RNDULTIMATEARTIFACT));
+            });
+
+            Point ultimate_pos;
+
+            // not found
+            if (vec_tiles.end() == it)
+            {
+                // generate position for ultimate
+                MapsIndexes pools;
+                pools.reserve(vec_tiles.size() / 2);
+
+                for (var tile : vec_tiles)
+                {
+                    s32 x = tile.GetIndex() % w();
+                    s32 y = tile.GetIndex() / w();
+                    if (tile.GoodForUltimateArtifact()
+                        x > 5  x < w() - 5  y > 5  y < h() - 5)
+                pools.Add(tile.GetIndex());
+            }
+
+            if (!pools.empty())
+            {
+                s32 pos = *Rand.Get(pools);
+                ultimate_artifact.Set(pos, Artifact.Rand(Artifact.ART_ULTIMATE));
+                ultimate_pos = Maps.GetPoint(pos);
+            }
+        }
+    else
+    {
+        Maps.TilesAddon* addon = it.FindObjectConst(MP2.OBJ_RNDULTIMATEARTIFACT);
+
+        // remove ultimate artifact sprite
+        if (addon)
+        {
+            ultimate_artifact.Set((* it).GetIndex(), Artifact.FromMP2IndexSprite(addon.index));
+            (* it).Remove(addon.uniq);
+        (* it).SetObject(MP2.OBJ_ZERO);
+        ultimate_pos = (* it).GetCenter();
+    }
+}
+
+string rumor = _("The ultimate artifact is really the %{name}");
+StringReplace(rumor, "%{name}", ultimate_artifact.GetName());
+vec_rumors.Add(rumor);
+
+    rumor = _("The ultimate artifact may be found in the %{name} regions of the world.");
+
+    if (world.h() / 3 > ultimate_pos.y)
+    {
+        if (world.w() / 3 > ultimate_pos.x)
+            StringReplace(rumor, "%{name}", _("north-west"));
+        else if (2 * world.w() / 3 > ultimate_pos.x)
+            StringReplace(rumor, "%{name}", _("north"));
+        else
+            StringReplace(rumor, "%{name}", _("north-east"));
+    }
+    else if (2 * world.h() / 3 > ultimate_pos.y)
+    {
+        if (world.w() / 3 > ultimate_pos.x)
+            StringReplace(rumor, "%{name}", _("west"));
+        else if (2 * world.w() / 3 > ultimate_pos.x)
+            StringReplace(rumor, "%{name}", _("center"));
+        else
+            StringReplace(rumor, "%{name}", _("east"));
+    }
+    else
+    {
+        if (world.w() / 3 > ultimate_pos.x)
+            StringReplace(rumor, "%{name}", _("south-west"));
+        else if (2 * world.w() / 3 > ultimate_pos.x)
+            StringReplace(rumor, "%{name}", _("south"));
+        else
+            StringReplace(rumor, "%{name}", _("south-east"));
+    }
+    vec_rumors.Add(rumor);
+
+    vec_rumors.emplace_back(_("The truth is out there."));
+    vec_rumors.emplace_back(_("The dark side is stronger."));
+    vec_rumors.emplace_back(_("The end of the world is near."));
+    vec_rumors.emplace_back(_("The bones of Lord Slayer are buried in the foundation of the arena."));
+    vec_rumors.emplace_back(_("A Black Dragon will take out a Titan any day of the week."));
+    vec_rumors.emplace_back(_("He told her: Yada yada yada...  and then she said: Blah, blah, blah..."));
+
+    vec_rumors.emplace_back(
+        _("You can load the newest version of game from a site:\n http://sf.net/projects/fheroes2"));
+    vec_rumors.emplace_back(_("This game is now in beta development version. ;)"));
+}
+
         }
 
         private Heroes GetHeroes(H2Point center)
@@ -289,6 +439,7 @@ namespace NHeroes2.KingdomNs
             var addonsSize = fs.getLE32();
             var vec_mp2addons = new List<mp2addon_t>(/* count mp2addon_t */);
             vec_mp2addons.SetSize(addonsSize);
+            vec_mp2addons.SetSize(size);
 
             foreach (var mp2Addon in vec_mp2addons)
             {
