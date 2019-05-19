@@ -76,6 +76,7 @@
     <Compile Include="Agg\Music\XMITracks.cs" />
     <Compile Include="Agg\Music\Xml2Mid.cs" />
     <Compile Include="Agg\MusKind.cs" />
+    <Compile Include="ArmyNs\Army.cs" />
     <Compile Include="ArmyNs\Troop.cs" />
     <Compile Include="CastleNs\AllCastles.cs" />
     <Compile Include="CastleNs\BuildCondType.cs" />
@@ -89,14 +90,17 @@
     <Compile Include="HeroesNs\AllHeroes.cs" />
     <Compile Include="HeroesNs\DirectionNs.cs" />
     <Compile Include="HeroesNs\HeroBase.cs" />
+    <Compile Include="HeroesNs\Heroes.cs" />
     <Compile Include="HeroesNs\HeroKinds.cs" />
+    <Compile Include="HeroesNs\Route\H2Path.cs" />
+    <Compile Include="HeroesNs\SecSkills.cs" />
     <Compile Include="HeroesNs\VecHeroes.cs" />
     <Compile Include="KingdomNs\CapturedObject.cs" />
     <Compile Include="KingdomNs\CapturedObjects.cs" />
+    <Compile Include="KingdomNs\ColorBase.cs" />
     <Compile Include="KingdomNs\EventDate.cs" />
     <Compile Include="KingdomNs\EventsDate.cs" />
     <Compile Include="KingdomNs\H2Color.cs" />
-    <Compile Include="HeroesNs\Heroes.cs" />
     <Compile Include="KingdomNs\HeroesFlags.cs" />
     <Compile Include="KingdomNs\Kingdom.cs" />
     <Compile Include="KingdomNs\MapActions.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="KingdomNs\Rumors.cs" />
     <Compile Include="KingdomNs\World.cs" />
     <Compile Include="MapsNs\Addons.cs" />
+    <Compile Include="MapsNs\IndexObject.cs" />
     <Compile Include="MapsNs\MapIndexes.cs" />
     <Compile Include="MapsNs\mapsize_t.cs" />
     <Compile Include="MapsNs\MapsStatic.cs" />

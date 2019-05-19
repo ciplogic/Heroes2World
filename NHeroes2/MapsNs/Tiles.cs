@@ -178,6 +178,7 @@ namespace NHeroes2.MapsNs
         {
             //TODO Finish
             
+            
         }
 
         public void QuantityReset()
@@ -196,9 +197,37 @@ namespace NHeroes2.MapsNs
             throw new NotImplementedException();
         }
 
-        public void SetHeroes(object getHeroes)
+        public void SetHeroes(Heroes hero)
+        {
+            if (hero!=null)
+            {
+                hero.SetMapsObject((ObjKind) mp2_object);
+                SetQuantity3(hero.GetID() + 1);
+                SetObject((byte) MapsNs.ObjKind.OBJ_HEROES);
+            }
+            else
+            {
+                hero = GetHeroes();
+
+                if (hero!=null)
+                {
+                    SetObject(hero.GetMapsObject());
+                    hero.SetMapsObject(MapsNs.ObjKind.OBJ_ZERO);
+                }
+                else
+                    SetObject((byte) ObjKind.OBJ_ZERO);
+
+                SetQuantity3(0);
+            }
+        }
+
+        private Heroes GetHeroes()
         {
             throw new NotImplementedException();
+        }
+
+        private void SetQuantity3(int p0)
+        {
         }
     }
 }
