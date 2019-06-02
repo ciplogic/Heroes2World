@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using NHeroes2.MapsNs;
 
 namespace NHeroes2.SystemNs

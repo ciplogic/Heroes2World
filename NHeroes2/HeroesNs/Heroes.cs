@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NHeroes2.ArmyNs;
 using NHeroes2.Engine;
 using NHeroes2.HeroesNs.Route;
 using NHeroes2.KingdomNs;
@@ -96,6 +95,7 @@ namespace NHeroes2.HeroesNs
     public class Heroes
     {
         string name;
+        public ColorBase color;
         ColorBase killer_color;
         uint experience;
         int move_point_scale;
@@ -161,6 +161,11 @@ namespace NHeroes2.HeroesNs
         public void Recruit(ColorKind getColor, H2Point h2Point)
         {
             throw new System.NotImplementedException();
+        }
+
+        public int GetColor()
+        {
+            return color.Color;
         }
     }
 }

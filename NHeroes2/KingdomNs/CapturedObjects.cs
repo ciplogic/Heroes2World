@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NHeroes2.MapsNs;
 using NHeroes2.Utilities;
 

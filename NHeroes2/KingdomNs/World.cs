@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using NHeroes2.Agg.Icns;
@@ -311,7 +310,7 @@ namespace NHeroes2.KingdomNs
 
         }
 
-        private Heroes GetHeroes(H2Point center)
+        public Heroes GetHeroes(H2Point center)
         {
             foreach (var hero in vec_heroes)
             {
@@ -320,6 +319,11 @@ namespace NHeroes2.KingdomNs
             }
 
             return null;
+        }
+
+        public Heroes GetHeroes(int hid)
+        {
+            return vec_heroes.Get(hid);
         }
 
         private static void Defaults()

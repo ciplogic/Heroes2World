@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHeroes2.CastleNs;
 using NHeroes2.HeroesNs;
 
@@ -14,14 +10,47 @@ namespace NHeroes2.KingdomNs
 
         public Kingdom[] kingdoms = new Kingdom[KINGDOMMAX + 1];
 
-        public void AddHeroes(AllHeroes vecHeroes)
+        public void AddHeroes(AllHeroes heroes)
         {
-            throw new NotImplementedException();
+            heroes.ForEach(heroe =>
+            {
+                if (heroe.GetColor()!=0) GetKingdom((ColorKind) heroe.GetColor()).AddHeroes(heroe);
+            });
+            // skip gray color
+            
         }
 
-        public void AddCastles(AllCastles vecCastles)
+        Kingdom GetKingdom(ColorKind color)
         {
-            throw new NotImplementedException();
+            switch ((ColorKind)color)
+            {
+                case ColorKind.BLUE:
+                    return kingdoms[0];
+                case ColorKind.GREEN:
+                    return kingdoms[1];
+                case ColorKind.RED:
+                    return kingdoms[2];
+                case ColorKind.YELLOW:
+                    return kingdoms[3];
+                case ColorKind.ORANGE:
+                    return kingdoms[4];
+                case ColorKind.PURPLE:
+                    return kingdoms[5];
+                default:
+                    break;
+            }
+
+            return kingdoms[6];
+        }
+
+        public void AddCastles(AllCastles castles)
+        {
+            castles._items.ForEach(castle =>
+            {
+                // skip gray color
+                if (castle.GetColor()!=0)
+                    GetKingdom(castle.GetColor()).AddCastle(castle);
+            });
         }
 
         public void ApplyPlayWithStartingHero()

@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.Linq;
 using NHeroes2.Agg.Icns;
 using NHeroes2.Engine;
@@ -201,7 +200,26 @@ namespace NHeroes2.MapsNs
 
         public void SetHeroes(Heroes hero)
         {
-            throw new NotImplementedException();
+            if (hero!=null)
+            {
+                hero.SetMapsObject((ObjKind) mp2_object);
+                SetQuantity3(hero.GetID() + 1);
+                SetObject((byte) ObjKind.OBJ_HEROES);
+            }
+            else
+            {
+                hero = GetHeroes();
+
+                if (hero != null)
+                {
+                    SetObject(hero.GetMapsObject());
+                    hero.SetMapsObject(ObjKind.OBJ_ZERO);
+                }
+                else
+                    SetObject((byte) ObjKind.OBJ_ZERO);
+
+                SetQuantity3(0);
+            }
         }
 
         public bool isObject(ObjKind objRndultimateartifact)
@@ -225,7 +243,15 @@ namespace NHeroes2.MapsNs
 
         private Heroes GetHeroes()
         {
-            throw new NotImplementedException();
+            var world = World.Instance;
+            return MapsNs.ObjKind.OBJ_HEROES == (ObjKind) mp2_object && GetQuantity3()!=0 
+                ? world.GetHeroes(GetQuantity3() - 1) 
+                : null;
+        }
+
+        private int GetQuantity3()
+        {
+            return quantity3;
         }
 
         private void SetQuantity3(int p0)

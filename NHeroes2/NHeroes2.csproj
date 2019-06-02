@@ -93,6 +93,7 @@
     <Compile Include="HeroesNs\HeroBase.cs" />
     <Compile Include="HeroesNs\Heroes.cs" />
     <Compile Include="HeroesNs\HeroKinds.cs" />
+    <Compile Include="HeroesNs\Recruits.cs" />
     <Compile Include="HeroesNs\Route\H2Path.cs" />
     <Compile Include="HeroesNs\SecSkills.cs" />
     <Compile Include="HeroesNs\VecHeroes.cs" />
@@ -108,12 +109,14 @@
     <Compile Include="KingdomNs\Kingdom.cs" />
     <Compile Include="KingdomNs\KingdomCastles.cs" />
     <Compile Include="KingdomNs\Kingdoms.cs" />
+    <Compile Include="KingdomNs\LastLoseHero.cs" />
     <Compile Include="KingdomNs\MapActions.cs" />
     <Compile Include="KingdomNs\MapEvent.cs" />
     <Compile Include="KingdomNs\MapObjects.cs" />
     <Compile Include="KingdomNs\MapSign.cs" />
     <Compile Include="KingdomNs\MapSphinx.cs" />
     <Compile Include="KingdomNs\MapsTiles.cs" />
+    <Compile Include="KingdomNs\Puzzle.cs" />
     <Compile Include="KingdomNs\RaceType.cs" />
     <Compile Include="KingdomNs\Rumors.cs" />
     <Compile Include="KingdomNs\Week.cs" />

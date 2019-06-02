@@ -7,6 +7,7 @@ namespace NHeroes2.CastleNs
     class Castle
     {
         public MapPosition Position;
+        public ColorBase Color= new ColorBase();
         public Castle(int cx, int cy, RaceType kngt)
         {
             Position = new MapPosition(cx, cy);
@@ -24,7 +25,7 @@ namespace NHeroes2.CastleNs
 
         public ColorKind GetColor()
         {
-            throw new System.NotImplementedException();
+            return (ColorKind) Color.Color;
         }
 
         public RaceType GetRace()

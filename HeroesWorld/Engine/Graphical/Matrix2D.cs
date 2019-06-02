@@ -4,8 +4,9 @@ namespace HeroesWorld.Engine.Graphical
 {
     public class Matrix2D
     {
-        double [] _data =new double[9];
-        public override string ToString() 
+        double[] _data = new double[9];
+
+        public override string ToString()
             => string.Join(",", _data);
 
         public static Matrix2D MakeIdentity()
@@ -46,7 +47,7 @@ namespace HeroesWorld.Engine.Graphical
                 {
                     var sum = 0.0;
                     for (var k = 0; k < 3; k++)
-                         sum += a[i,k] * other[k,j];
+                        sum += a[i, k] * other[k, j];
                     this[i, j] = sum;
                 }
             }
@@ -60,6 +61,7 @@ namespace HeroesWorld.Engine.Graphical
             Multiply(scale);
             return this;
         }
+
         public Matrix2D TranslateMatrix(double tx, double ty)
         {
             var scale = MakeIdentity();
@@ -73,7 +75,7 @@ namespace HeroesWorld.Engine.Graphical
         {
             var resX = coord.x * this[0, 0] + coord.y * this[1, 0] + this[2, 0];
             var resY = coord.y * this[0, 1] + coord.y * this[1, 1] + this[2, 1];
-            return ((int)resX, (int)resY);
+            return ((int) resX, (int) resY);
         }
 
         public double this[int row, int col]
