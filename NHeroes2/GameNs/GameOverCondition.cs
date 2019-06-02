@@ -1,5 +1,8 @@
-﻿namespace NHeroes2.GameNs
+﻿using System;
+
+namespace NHeroes2.GameNs
 {
+    [Flags]
     public enum GameOverCondition
     {
         COND_NONE = 0x0000,

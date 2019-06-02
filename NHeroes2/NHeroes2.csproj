@@ -158,7 +158,6 @@
     <Compile Include="SpellNs\SpellType.cs" />
     <Compile Include="SystemNs\Players.cs" />
     <Compile Include="SystemNs\Rand.cs" />
-    <Compile Include="SystemNs\Settings.cs" />
     <Compile Include="SystemNs\System.cs" />
     <Compile Include="SystemNs\Translation.cs" />
     <Compile Include="Utilities\Extensions.cs" />

@@ -174,15 +174,15 @@ namespace NHeroes2.KingdomNs
             vec_kingdoms.AddCastles(vec_castles);
 
             // update wins, loss conditions
-            if (((int)GameOverCondition.WINS_HERO & H2Settings.Get().ConditionWins()) != 0)
+            if ((GameOverCondition.WINS_HERO & H2Settings.Get().ConditionWins()) != 0)
             {
-                Heroes hero = GetHeroes(Settings.Get().WinsMapsPositionObject());
+                Heroes hero = GetHeroes(H2Settings.Get().WinsMapsPositionObject());
                 heroes_cond_wins = hero != null ? hero.GetID() : (int) HeroesKind.UNKNOWN;
             }
 
-            if (((int)GameOverCondition.LOSS_HERO & Settings.Get().ConditionLoss()) != 0)
+            if ((GameOverCondition.LOSS_HERO & H2Settings.Get().ConditionLoss()) != 0)
             {
-                Heroes hero = GetHeroes(Settings.Get().LossMapsPositionObject());
+                Heroes hero = GetHeroes(H2Settings.Get().LossMapsPositionObject());
                 if (hero != null)
                 {
                     heroes_cond_loss = hero.GetID();
@@ -196,11 +196,11 @@ namespace NHeroes2.KingdomNs
             // play with hero
             vec_kingdoms.ApplyPlayWithStartingHero();
 
-            if (Settings.Get().ExtWorldStartHeroLossCond4Humans())
+            if (H2Settings.Get().ExtWorldStartHeroLossCond4Humans())
                 vec_kingdoms.AddCondLossHeroes(vec_heroes);
 
             // play with debug hero
-            if (Settings.IS_DEVEL())
+            if (H2Settings.IS_DEVEL())
             {
                 // get first castle position
                 Kingdom kingdom = GetKingdom(H2Color.GetFirst(Players.HumanColors()));

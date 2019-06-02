@@ -1,3 +1,6 @@
+using System;
+using NHeroes2.Engine;
+using NHeroes2.GameNs;
 using NHeroes2.MapsNs;
 
 namespace NHeroes2.SystemNs
@@ -13,9 +16,34 @@ namespace NHeroes2.SystemNs
             return false;
         }
 
-        public int ConditionWins()
+        public GameOverCondition ConditionWins()
         {
-            throw new System.NotImplementedException();
+            return current_maps_file.ConditionWins();
+        }
+
+        public static bool IS_DEVEL()
+        {
+            throw new NotImplementedException();
+        }
+
+        public H2Point WinsMapsPositionObject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public GameOverCondition ConditionLoss()
+        {
+            return current_maps_file.ConditionLoss();
+        }
+
+        public H2Point LossMapsPositionObject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ExtWorldStartHeroLossCond4Humans()
+        {
+            throw new NotImplementedException();
         }
     }
 }
