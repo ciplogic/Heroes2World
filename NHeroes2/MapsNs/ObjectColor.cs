@@ -7,17 +7,17 @@ namespace NHeroes2.MapsNs
         public ObjectColor()
         {
             Obj = ObjKind.OBJ_ZERO;
-            Color = H2Color.NONE;
+            ColorKind = ColorKind.NONE;
         }
 
-        public ObjectColor(ObjKind obj, H2Color color)
+        public ObjectColor(ObjKind obj, ColorKind colorKind)
         {
             Obj = obj;
-            Color = color;
+            ColorKind = colorKind;
         }
 
         public ObjKind Obj { get; set; }
-        public H2Color Color { get; set; }
+        public ColorKind ColorKind { get; set; }
 
 
         public bool isObject(ObjKind obj) 
@@ -25,9 +25,9 @@ namespace NHeroes2.MapsNs
             return obj == Obj;
         }
 
-        public bool isColor(H2Color colors)
+        public bool isColor(ColorKind colorsKind)
         {
-            return colors == Color;
+            return colorsKind == ColorKind;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace NHeroes2.MapsNs
 
         }
 
-        public static (H2Color, RaceType) ColorRaceFromHeroSprite(TilesAddon addon)
+        public static (ColorKind, RaceType) ColorRaceFromHeroSprite(TilesAddon addon)
         {
             throw new NotImplementedException();
         }

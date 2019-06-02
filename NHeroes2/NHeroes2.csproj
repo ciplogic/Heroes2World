@@ -86,7 +86,8 @@
     <Compile Include="CastleNs\VecCastles.cs" />
     <Compile Include="Engine\H2Point.cs" />
     <Compile Include="Engine\H2Size.cs" />
-    <Compile Include="Game\GameStatic.cs" />
+    <Compile Include="GameNs\GameOverCondition.cs" />
+    <Compile Include="GameNs\GameStatic.cs" />
     <Compile Include="HeroesNs\AllHeroes.cs" />
     <Compile Include="HeroesNs\DirectionNs.cs" />
     <Compile Include="HeroesNs\HeroBase.cs" />
@@ -95,14 +96,19 @@
     <Compile Include="HeroesNs\Route\H2Path.cs" />
     <Compile Include="HeroesNs\SecSkills.cs" />
     <Compile Include="HeroesNs\VecHeroes.cs" />
+    <Compile Include="KingdomNs\BarrierColor.cs" />
     <Compile Include="KingdomNs\CapturedObject.cs" />
     <Compile Include="KingdomNs\CapturedObjects.cs" />
     <Compile Include="KingdomNs\ColorBase.cs" />
     <Compile Include="KingdomNs\EventDate.cs" />
     <Compile Include="KingdomNs\EventsDate.cs" />
+    <Compile Include="KingdomNs\ColorKind.cs" />
     <Compile Include="KingdomNs\H2Color.cs" />
     <Compile Include="KingdomNs\HeroesFlags.cs" />
+    <Compile Include="KingdomNs\IndexObject.cs" />
     <Compile Include="KingdomNs\Kingdom.cs" />
+    <Compile Include="KingdomNs\KingdomCastles.cs" />
+    <Compile Include="KingdomNs\Kingdoms.cs" />
     <Compile Include="KingdomNs\MapActions.cs" />
     <Compile Include="KingdomNs\MapEvent.cs" />
     <Compile Include="KingdomNs\MapObjects.cs" />
@@ -111,6 +117,7 @@
     <Compile Include="KingdomNs\MapsTiles.cs" />
     <Compile Include="KingdomNs\RaceType.cs" />
     <Compile Include="KingdomNs\Rumors.cs" />
+    <Compile Include="KingdomNs\Week.cs" />
     <Compile Include="KingdomNs\World.cs" />
     <Compile Include="MapsNs\Addons.cs" />
     <Compile Include="MapsNs\IndexObject.cs" />
@@ -130,9 +137,14 @@
     <Compile Include="MonsterNs\MonsterLevel.cs" />
     <Compile Include="MonsterNs\MonsterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceNs\Artifact.cs" />
+    <Compile Include="ResourceNs\ArtifactLevel.cs" />
+    <Compile Include="ResourceNs\ArtifactType.cs" />
     <Compile Include="ResourceNs\cost_t.cs" />
     <Compile Include="ResourceNs\Funds.cs" />
     <Compile Include="ResourceNs\ResourceKind.cs" />
+    <Compile Include="ResourceNs\UltimateArtifact.cs" />
+    <Compile Include="RouteNs\Path.cs" />
     <Compile Include="Serialize\ByteVectorReader.cs" />
     <Compile Include="Serialize\ByteVectorReflect.cs" />
     <Compile Include="Serialize\ByteVectorWriter.cs" />
@@ -141,7 +153,11 @@
     <Compile Include="SpellNs\spellstats_t.cs" />
     <Compile Include="SpellNs\SpellStorage.cs" />
     <Compile Include="SpellNs\SpellType.cs" />
+    <Compile Include="SystemNs\Players.cs" />
+    <Compile Include="SystemNs\Rand.cs" />
+    <Compile Include="SystemNs\Settings.cs" />
     <Compile Include="SystemNs\System.cs" />
+    <Compile Include="SystemNs\Translation.cs" />
     <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>

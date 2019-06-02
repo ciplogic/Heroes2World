@@ -8,6 +8,91 @@ using NHeroes2.Serialize;
 
 namespace NHeroes2.HeroesNs
 {
+    enum HeroesKind
+    {
+    // knight
+    LORDKILBURN,
+    SIRGALLANTH,
+    ECTOR,
+    GVENNETH,
+    TYRO,
+    AMBROSE,
+    RUBY,
+    MAXIMUS,
+    DIMITRY,
+    // barbarian
+    THUNDAX,
+    FINEOUS,
+    JOJOSH,
+    CRAGHACK,
+    JEZEBEL,
+    JACLYN,
+    ERGON,
+    TSABU,
+    ATLAS,
+    // sorceress
+    ASTRA,
+    NATASHA,
+    TROYAN,
+    VATAWNA,
+    REBECCA,
+    GEM,
+    ARIEL,
+    CARLAWN,
+    LUNA,
+    // warlock
+    ARIE,
+    ALAMAR,
+    VESPER,
+    CRODO,
+    BAROK,
+    KASTORE,
+    AGAR,
+    FALAGAR,
+    WRATHMONT,
+    // wizard
+    MYRA,
+    FLINT,
+    DAWN,
+    HALON,
+    MYRINI,
+    WILFREY,
+    SARAKIN,
+    KALINDRA,
+    MANDIGAL,
+    // necromancer
+    ZOM,
+    DARLANA,
+    ZAM,
+    RANLOO,
+    CHARITY,
+    RIALDO,
+    ROXANA,
+    SANDRO,
+    CELIA,
+    // from campain
+    ROLAND,
+    CORLAGON,
+    ELIZA,
+    ARCHIBALD,
+    HALTON,
+    BAX,
+    // from extended
+    SOLMYR,
+    DAINWIN,
+    MOG,
+    UNCLEIVAN,
+    JOSEPH,
+    GALLAVANT,
+    ELDERIAN,
+    CEALLACH,
+    DRAKONIA,
+    MARTINE,
+    JARKONAS,
+    // debugger
+    SANDYSANDY,
+    UNKNOWN
+    };
     public class Heroes
     {
         string name;
@@ -34,12 +119,35 @@ namespace NHeroes2.HeroesNs
 
         List<IndexObject> visit_object;
         public MapPosition position = new MapPosition();
+        string name;
+        ColorKind _killerColorKind;
+        uint experience;
+        int move_point_scale;
+
+        SecSkills secondary_skills;
+
+        Army army;
+
+        int hid; /* hero id */
+        int portrait; /* hero id */
+        int race;
+        int save_maps_object;
+
+        RouteNs.Path path;
+
+        int direction;
+        int sprite_index;
+
+        H2Point patrol_center;
+        int patrol_square;
+
+        List<IndexObject> visit_object = new List<IndexObject>();
         public RaceType GetRace()
         {
             throw new System.NotImplementedException();
         }
 
-        public void LoadFromMP2(int findobject, H2Color none, RaceType getRace, ByteVectorReader bvr)
+        public void LoadFromMP2(int findobject, ColorKind none, RaceType getRace, ByteVectorReader bvr)
         {
             throw new System.NotImplementedException();
         }

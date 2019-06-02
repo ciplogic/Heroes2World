@@ -22,7 +22,7 @@ namespace NHeroes2.CastleNs
             throw new System.NotImplementedException();
         }
 
-        public H2Color GetColor()
+        public ColorKind GetColor()
         {
             throw new System.NotImplementedException();
         }

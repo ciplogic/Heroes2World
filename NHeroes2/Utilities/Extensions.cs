@@ -15,6 +15,23 @@ namespace NHeroes2.Utilities
             dictionary[key] = result;
             return result;
         }
+
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
+        {
+            foreach (var item in items)
+            {
+                action(item);
+            }
+        }
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> action)
+        {
+            var pos = -1;
+            foreach (var item in items)
+            {
+                ++pos;
+                action(item, pos);
+            }
+        }
         public static void SerializeToJsonFile(this Object data, string fileName)
         {
             var jsonText = data.SerializeToJsonString();

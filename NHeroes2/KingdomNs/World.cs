@@ -7,11 +7,14 @@ using NHeroes2.Agg.Icns;
 using NHeroes2.CastleNs;
 using NHeroes2.Engine;
 using NHeroes2.Game;
+using NHeroes2.GameNs;
 using NHeroes2.HeroesNs;
 using NHeroes2.MapsNs;
+using NHeroes2.ResourceNs;
 using NHeroes2.Serialize;
 using NHeroes2.SystemNs;
 using NHeroes2.Utilities;
+using static NHeroes2.SystemNs.Translation;
 
 namespace NHeroes2.KingdomNs
 {
@@ -22,6 +25,7 @@ namespace NHeroes2.KingdomNs
 
         AllHeroes vec_heroes = new AllHeroes();
         CapturedObjects map_captureobj = new CapturedObjects();
+        Kingdoms vec_kingdoms = new Kingdoms();
 
 
         MapObjects map_objects = new MapObjects();
@@ -29,6 +33,15 @@ namespace NHeroes2.KingdomNs
         EventsDate vec_eventsday = new EventsDate();
         Rumors vec_rumors = new Rumors();
         private int day, week, month;
+        UltimateArtifact ultimate_artifact;
+
+
+        int heroes_cond_wins;
+        int heroes_cond_loss;
+
+        Week week_current;
+        Week week_next;
+
 
         private World()
         {
@@ -44,7 +57,7 @@ namespace NHeroes2.KingdomNs
 
 
 
-        private KingdomNs.Kingdom GetKingdom(H2Color color)
+        private KingdomNs.Kingdom GetKingdom(ColorKind colorKind)
         {
             throw new NotImplementedException();
         }
@@ -162,28 +175,24 @@ namespace NHeroes2.KingdomNs
             vec_kingdoms.AddCastles(vec_castles);
 
             // update wins, loss conditions
-            if (GameOver.WINS_HERO && H2Settings.Get().ConditionWins())
-    {
-                Heroes* hero = GetHeroes(Settings.Get().WinsMapsPositionObject());
-                heroes_cond_wins = hero ? hero.GetID() : Heroes.UNKNOWN;
+            if (((int)GameOverCondition.WINS_HERO & H2Settings.Get().ConditionWins()) != 0)
+            {
+                Heroes hero = GetHeroes(Settings.Get().WinsMapsPositionObject());
+                heroes_cond_wins = hero != null ? hero.GetID() : (int) HeroesKind.UNKNOWN;
             }
-            if (GameOver.LOSS_HERO  Settings.Get().ConditionLoss())
-    {
-                Heroes* hero = GetHeroes(Settings.Get().LossMapsPositionObject());
-                if (hero)
+
+            if (((int)GameOverCondition.LOSS_HERO & Settings.Get().ConditionLoss()) != 0)
+            {
+                Heroes hero = GetHeroes(Settings.Get().LossMapsPositionObject());
+                if (hero != null)
                 {
                     heroes_cond_loss = hero.GetID();
-                    hero.SetModes(Heroes.NOTDISMISS | Heroes.NOTDEFAULTS);
+                    hero.SetModes(HeroesFlags.NOTDISMISS | HeroesFlags.NOTDEFAULTS);
                 }
             }
 
             // update tile passable
-            for_each(vec_tiles.begin(), vec_tiles.end(),
-        
-                     [](Maps.Tiles tile)
-             {
-                tile.UpdatePassable();
-            });
+            vec_tiles.ForEach(tile => { tile.UpdatePassable(); });
 
             // play with hero
             vec_kingdoms.ApplyPlayWithStartingHero();
@@ -192,117 +201,113 @@ namespace NHeroes2.KingdomNs
                 vec_kingdoms.AddCondLossHeroes(vec_heroes);
 
             // play with debug hero
-            if (IS_DEVEL())
+            if (Settings.IS_DEVEL())
             {
                 // get first castle position
-                Kingdom kingdom = GetKingdom(Color.GetFirst(Players.HumanColors()));
+                Kingdom kingdom = GetKingdom(H2Color.GetFirst(Players.HumanColors()));
 
                 if (!kingdom.GetCastles()._items.empty())
                 {
-                    Castle* castle = kingdom.GetCastles()._items.front();
-                    Heroes* hero = vec_heroes.Get(Heroes.SANDYSANDY);
+                    Castle castle = kingdom.GetCastles()._items[0];
+                    Heroes hero = vec_heroes.Get((int) HeroesKind.SANDYSANDY);
 
-                    if (hero)
+                    if (hero != null)
                     {
-                        Point cp = castle.GetCenter();
-                        hero.Recruit(castle.GetColor(), Point(cp.x, cp.y + 1));
+                        var cp = castle.GetCenter();
+                        hero.Recruit(castle.GetColor(), new H2Point(cp.x, cp.y + 1));
                     }
                 }
             }
 
             // set ultimate
-            var it = find_if(vec_tiles.begin(), vec_tiles.end(),
-        
-                              [](Maps.Tiles tile)
-                      {
-                return tile.isObject(static_cast<int>(MP2.OBJ_RNDULTIMATEARTIFACT));
-            });
+            var it = vec_tiles.FirstOrDefault(tile => tile.isObject(ObjKind.OBJ_RNDULTIMATEARTIFACT));
 
-            Point ultimate_pos;
+
+            H2Point ultimate_pos = new H2Point();
 
             // not found
-            if (vec_tiles.end() == it)
+            if (it == null)
             {
                 // generate position for ultimate
-                MapsIndexes pools;
-                pools.reserve(vec_tiles.size() / 2);
+                MapsIndexes pools = new MapsIndexes();
 
-                for (var tile : vec_tiles)
+                foreach (var tile in vec_tiles)
                 {
-                    s32 x = tile.GetIndex() % w();
-                    s32 y = tile.GetIndex() / w();
-                    if (tile.GoodForUltimateArtifact()
-                        x > 5  x < w() - 5  y > 5  y < h() - 5)
-                pools.Add(tile.GetIndex());
-            }
+                    var x = tile.GetIndex() % w();
+                    var y = tile.GetIndex() / w();
+                    if (tile.GoodForUltimateArtifact() &&
+                        x > 5 && x < w() - 5 && y > 5 && y < h() - 5)
+                        pools.Add(tile.GetIndex());
+                }
 
-            if (!pools.empty())
+                if (!pools.empty())
+                {
+                    var pos = Rand.Get(pools);
+                    ultimate_artifact.Set(pos, new Artifact(Artifact.Rand(ArtifactLevel.ART_ULTIMATE)));
+                    ultimate_pos = MapsStatic.GetPoint(pos);
+                }
+            }
+            else
             {
-                s32 pos = *Rand.Get(pools);
-                ultimate_artifact.Set(pos, Artifact.Rand(Artifact.ART_ULTIMATE));
-                ultimate_pos = Maps.GetPoint(pos);
+                var addon = it.FindObjectConst(ObjKind.OBJ_RNDULTIMATEARTIFACT);
+
+                // remove ultimate artifact sprite
+                if (addon != null)
+                {
+                    ultimate_artifact.Set(it.GetIndex(), Artifact.FromMP2IndexSprite(addon.index));
+                    it.Remove(addon.uniq);
+                    it.SetObject((byte) ObjKind.OBJ_ZERO);
+                    ultimate_pos = it.GetCenter();
+                }
             }
-        }
-    else
-    {
-        Maps.TilesAddon* addon = it.FindObjectConst(MP2.OBJ_RNDULTIMATEARTIFACT);
 
-        // remove ultimate artifact sprite
-        if (addon)
-        {
-            ultimate_artifact.Set((* it).GetIndex(), Artifact.FromMP2IndexSprite(addon.index));
-            (* it).Remove(addon.uniq);
-        (* it).SetObject(MP2.OBJ_ZERO);
-        ultimate_pos = (* it).GetCenter();
-    }
-}
+            string rumor = _("The ultimate artifact is really the %{name}");
+            StringReplace(ref rumor, "%{name}", ultimate_artifact.GetName());
+            vec_rumors.Add(rumor);
 
-string rumor = _("The ultimate artifact is really the %{name}");
-StringReplace(rumor, "%{name}", ultimate_artifact.GetName());
-vec_rumors.Add(rumor);
+            rumor = _("The ultimate artifact may be found in the %{name} regions of the world.");
+            var world = World.Instance;
+            if (world.h() / 3 > ultimate_pos.y)
+            {
+                if (world.w() / 3 > ultimate_pos.x)
+                    StringReplace(ref rumor, "%{name}", _("north-west"));
+                else if (2 * world.w() / 3 > ultimate_pos.x)
+                    StringReplace(ref rumor, "%{name}", _("north"));
+                else
+                    StringReplace(ref rumor, "%{name}", _("north-east"));
+            }
+            else if (2 * world.h() / 3 > ultimate_pos.y)
+            {
+                if (world.w() / 3 > ultimate_pos.x)
+                    StringReplace(ref rumor, "%{name}", _("west"));
+                else if (2 * world.w() / 3 > ultimate_pos.x)
+                    StringReplace(ref rumor, "%{name}", _("center"));
+                else
+                    StringReplace(ref rumor, "%{name}", _("east"));
+            }
+            else
+            {
+                if (world.w() / 3 > ultimate_pos.x)
+                    StringReplace(ref rumor, "%{name}", _("south-west"));
+                else if (2 * world.w() / 3 > ultimate_pos.x)
+                    StringReplace(ref rumor, "%{name}", _("south"));
+                else
+                    StringReplace(ref rumor, "%{name}", _("south-east"));
+            }
 
-    rumor = _("The ultimate artifact may be found in the %{name} regions of the world.");
+            vec_rumors.Add(rumor);
 
-    if (world.h() / 3 > ultimate_pos.y)
-    {
-        if (world.w() / 3 > ultimate_pos.x)
-            StringReplace(rumor, "%{name}", _("north-west"));
-        else if (2 * world.w() / 3 > ultimate_pos.x)
-            StringReplace(rumor, "%{name}", _("north"));
-        else
-            StringReplace(rumor, "%{name}", _("north-east"));
-    }
-    else if (2 * world.h() / 3 > ultimate_pos.y)
-    {
-        if (world.w() / 3 > ultimate_pos.x)
-            StringReplace(rumor, "%{name}", _("west"));
-        else if (2 * world.w() / 3 > ultimate_pos.x)
-            StringReplace(rumor, "%{name}", _("center"));
-        else
-            StringReplace(rumor, "%{name}", _("east"));
-    }
-    else
-    {
-        if (world.w() / 3 > ultimate_pos.x)
-            StringReplace(rumor, "%{name}", _("south-west"));
-        else if (2 * world.w() / 3 > ultimate_pos.x)
-            StringReplace(rumor, "%{name}", _("south"));
-        else
-            StringReplace(rumor, "%{name}", _("south-east"));
-    }
-    vec_rumors.Add(rumor);
+            vec_rumors.Add(_("The truth is out there."));
+            vec_rumors.Add(_("The dark side is stronger."));
+            vec_rumors.Add(_("The end of the world is near."));
+            vec_rumors.Add(_("The bones of Lord Slayer are buried in the foundation of the arena."));
+            vec_rumors.Add(_("A Black Dragon will take out a Titan any day of the week."));
+            vec_rumors.Add(_("He told her: Yada yada yada...  and then she said: Blah, blah, blah..."));
 
-    vec_rumors.emplace_back(_("The truth is out there."));
-    vec_rumors.emplace_back(_("The dark side is stronger."));
-    vec_rumors.emplace_back(_("The end of the world is near."));
-    vec_rumors.emplace_back(_("The bones of Lord Slayer are buried in the foundation of the arena."));
-    vec_rumors.emplace_back(_("A Black Dragon will take out a Titan any day of the week."));
-    vec_rumors.emplace_back(_("He told her: Yada yada yada...  and then she said: Blah, blah, blah..."));
+            vec_rumors.Add(
+                _("You can load the newest version of game from a site:\n http://sf.net/projects/fheroes2"));
+            vec_rumors.Add(_("This game is now in beta development version. ;)"));
 
-    vec_rumors.emplace_back(
-        _("You can load the newest version of game from a site:\n http://sf.net/projects/fheroes2"));
-    vec_rumors.emplace_back(_("This game is now in beta development version. ;)"));
-}
 
         }
 
@@ -439,7 +444,6 @@ vec_rumors.Add(rumor);
             var addonsSize = fs.getLE32();
             var vec_mp2addons = new List<mp2addon_t>(/* count mp2addon_t */);
             vec_mp2addons.SetSize(addonsSize);
-            vec_mp2addons.SetSize(size);
 
             foreach (var mp2Addon in vec_mp2addons)
             {
@@ -575,7 +579,7 @@ vec_rumors.Add(rumor);
                 }
 
                 // preload in to capture objects cache
-                map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_CASTLE, H2Color.NONE);
+                map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_CASTLE, ColorKind.NONE);
             }
 
             fs.seek(endof_addons + 72 * 3);
@@ -595,12 +599,12 @@ vec_rumors.Add(rumor);
                 {
                     // mines: wood
                     case 0x00:
-                        map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_SAWMILL, H2Color.NONE);
+                        map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_SAWMILL, ColorKind.NONE);
                         break;
                     // mines: mercury
                     case 0x01:
                         map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_ALCHEMYLAB,
-                            H2Color.NONE);
+                            ColorKind.NONE);
                         break;
                     // mines: ore
                     case 0x02:
@@ -612,22 +616,22 @@ vec_rumors.Add(rumor);
                     case 0x05:
                     // mines: gold
                     case 0x06:
-                        map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_MINES, H2Color.NONE);
+                        map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_MINES, ColorKind.NONE);
                         break;
                     // lighthouse
                     case 0x64:
                         map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_LIGHTHOUSE,
-                            H2Color.NONE);
+                            ColorKind.NONE);
                         break;
                     // dragon city
                     case 0x65:
                         map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_DRAGONCITY,
-                            H2Color.NONE);
+                            ColorKind.NONE);
                         break;
                     // abandoned mines
                     case 0x67:
                         map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_ABANDONEDMINE,
-                            H2Color.NONE);
+                            ColorKind.NONE);
                         break;
                     default:
                         break;
@@ -757,7 +761,7 @@ vec_rumors.Add(rumor);
                                 {
 
                                     var bvr = new ByteVectorReader(pblock);
-                                    hero.LoadFromMP2(findobject, H2Color.NONE, hero.GetRace(), bvr);
+                                    hero.LoadFromMP2(findobject, ColorKind.NONE, hero.GetRace(), bvr);
                                     hero.SetModes(HeroesFlags.JAIL);
                                 }
                             }
@@ -774,7 +778,7 @@ vec_rumors.Add(rumor);
                                 var kingdom = GetKingdom(colorRace.Item1);
 
                                 if (colorRace.Item2 == RaceType.RAND &&
-                                    colorRace.Item1 != H2Color.NONE)
+                                    colorRace.Item1 != ColorKind.NONE)
                                     colorRace.Item2 = kingdom.GetRace();
 
                                 // check heroes max count

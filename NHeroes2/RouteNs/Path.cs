@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NHeroes2.HeroesNs
+namespace NHeroes2.RouteNs
 {
-    class SecSkills
+    class Path
     {
     }
 }

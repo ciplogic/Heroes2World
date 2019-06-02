@@ -11,5 +11,10 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public KingdomCastles GetCastles()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

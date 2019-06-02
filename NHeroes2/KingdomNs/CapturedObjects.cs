@@ -8,7 +8,7 @@ namespace NHeroes2.KingdomNs
     class CapturedObjects 
     {
         public Dictionary<int, CapturedObject> Items { get; } = new Dictionary<int, CapturedObject>();
-        public void Set(int index, ObjKind obj, H2Color col)
+        public void Set(int index, ObjKind obj, ColorKind col)
         {
             var co = Items.Set(index);
             
@@ -19,7 +19,7 @@ namespace NHeroes2.KingdomNs
             co.Set(obj, col);
         }
 
-        public void SetColor(int index, H2Color col)
+        public void SetColor(int index, ColorKind col)
         {
              Items.Set(index).SetColor(col);
             

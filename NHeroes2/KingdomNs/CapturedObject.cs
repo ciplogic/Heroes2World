@@ -18,9 +18,9 @@ namespace NHeroes2.KingdomNs
             return objcol.Obj;
         }
 
-        public H2Color GetColor() 
+        public ColorKind GetColor() 
         {
-            return objcol.Color;
+            return objcol.ColorKind;
         }
 
         Troop GetTroop()
@@ -28,15 +28,15 @@ namespace NHeroes2.KingdomNs
             return guardians;
         }
 
-        public void Set(ObjKind obj, H2Color col)
+        public void Set(ObjKind obj, ColorKind col)
         {
             objcol.Obj = obj;
-            objcol.Color = col;
+            objcol.ColorKind = col;
         }
 
-        public void SetColor(H2Color col)
+        public void SetColor(ColorKind col)
         {
-            objcol.Color = col;
+            objcol.ColorKind = col;
         }
 
         void SetSplit(int spl)

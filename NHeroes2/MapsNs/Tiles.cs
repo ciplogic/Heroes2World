@@ -1,6 +1,8 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using NHeroes2.Agg.Icns;
+using NHeroes2.Engine;
 using NHeroes2.HeroesNs;
 using NHeroes2.KingdomNs;
 using NHeroes2.SystemNs;
@@ -16,7 +18,7 @@ namespace NHeroes2.MapsNs
         public UInt16 pack_sprite_index = 0;
         public DirectionTypes tile_passable = 0;
         public byte mp2_object = 0;
-        public H2Color fog_colors = 0;
+        public ColorKind FogColorsKind = 0;
         public byte quantity1 = 0;
         public byte quantity2 = 0;
         public byte quantity3 = 0;
@@ -27,7 +29,7 @@ namespace NHeroes2.MapsNs
             quantity1 = mp2.quantity1;
             quantity2 = mp2.quantity2;
             quantity3 = 0;
-            fog_colors = H2Color.ALL;
+            FogColorsKind = ColorKind.ALL;
 
             SetTile(mp2.tileIndex, mp2.shape);
             SetIndex(index);
@@ -40,7 +42,7 @@ namespace NHeroes2.MapsNs
             AddonsPushLevel2(mp2);
         }
 
-        private void SetObject(byte mp2GeneralObject)
+        public void SetObject(byte mp2GeneralObject)
         {
             mp2_object = mp2GeneralObject;
         }
@@ -199,25 +201,25 @@ namespace NHeroes2.MapsNs
 
         public void SetHeroes(Heroes hero)
         {
-            if (hero!=null)
-            {
-                hero.SetMapsObject((ObjKind) mp2_object);
-                SetQuantity3(hero.GetID() + 1);
-                SetObject((byte) MapsNs.ObjKind.OBJ_HEROES);
-            }
-            else
-            {
-                hero = GetHeroes();
+            throw new NotImplementedException();
+        }
 
-                if (hero!=null)
-                {
-                    SetObject(hero.GetMapsObject());
-                    hero.SetMapsObject(MapsNs.ObjKind.OBJ_ZERO);
-                }
-                else
-                    SetObject((byte) ObjKind.OBJ_ZERO);
+        public bool isObject(ObjKind objRndultimateartifact)
+        {
+            throw new NotImplementedException();
+        }
 
-                SetQuantity3(0);
+        public bool GoodForUltimateArtifact()
+        {
+            throw new NotImplementedException();
+        }
+
+        public H2Point GetCenter()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdatePassable()
             }
         }
 

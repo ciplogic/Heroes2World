@@ -1,5 +1,8 @@
-﻿namespace NHeroes2.KingdomNs
+﻿using System;
+
+namespace NHeroes2.KingdomNs
 {
+    [Flags]
     public enum HeroesFlags
     {
 
