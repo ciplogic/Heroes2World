@@ -105,7 +105,6 @@
     <Compile Include="KingdomNs\ColorKind.cs" />
     <Compile Include="KingdomNs\H2Color.cs" />
     <Compile Include="KingdomNs\HeroesFlags.cs" />
-    <Compile Include="KingdomNs\IndexObject.cs" />
     <Compile Include="KingdomNs\Kingdom.cs" />
     <Compile Include="KingdomNs\KingdomCastles.cs" />
     <Compile Include="KingdomNs\Kingdoms.cs" />
@@ -120,6 +119,7 @@
     <Compile Include="KingdomNs\Week.cs" />
     <Compile Include="KingdomNs\World.cs" />
     <Compile Include="MapsNs\Addons.cs" />
+    <Compile Include="MapsNs\H2FileInfo.cs" />
     <Compile Include="MapsNs\IndexObject.cs" />
     <Compile Include="MapsNs\MapIndexes.cs" />
     <Compile Include="MapsNs\mapsize_t.cs" />

@@ -220,7 +220,7 @@ namespace NHeroes2.MapsNs
         }
 
         public void UpdatePassable()
-            }
+        { 
         }
 
         private Heroes GetHeroes()

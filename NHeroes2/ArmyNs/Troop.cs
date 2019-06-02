@@ -7,10 +7,6 @@ using NHeroes2.MonsterNs;
 
 namespace NHeroes2.ArmyNs
 {
-    class Army
-    {
-        
-    }
     class Troop
     {
         public Monster _monster;

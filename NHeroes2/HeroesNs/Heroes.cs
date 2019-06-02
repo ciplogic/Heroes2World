@@ -101,9 +101,6 @@ namespace NHeroes2.HeroesNs
         int move_point_scale;
 
         SecSkills secondary_skills;
-
-        Army army;
-
         int hid; /* hero id */
         int portrait; /* hero id */
         int race;
@@ -116,30 +113,9 @@ namespace NHeroes2.HeroesNs
 
         H2Point patrol_center;
         int patrol_square;
-
-        List<IndexObject> visit_object;
         public MapPosition position = new MapPosition();
-        string name;
         ColorKind _killerColorKind;
-        uint experience;
-        int move_point_scale;
 
-        SecSkills secondary_skills;
-
-        Army army;
-
-        int hid; /* hero id */
-        int portrait; /* hero id */
-        int race;
-        int save_maps_object;
-
-        RouteNs.Path path;
-
-        int direction;
-        int sprite_index;
-
-        H2Point patrol_center;
-        int patrol_square;
 
         List<IndexObject> visit_object = new List<IndexObject>();
         public RaceType GetRace()
@@ -178,6 +154,11 @@ namespace NHeroes2.HeroesNs
         }
 
         public byte GetMapsObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Recruit(ColorKind getColor, H2Point h2Point)
         {
             throw new System.NotImplementedException();
         }
