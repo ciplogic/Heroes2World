@@ -5,6 +5,7 @@ using NHeroes2.Engine;
 using NHeroes2.HeroesNs;
 using NHeroes2.MapsNs;
 using NHeroes2.ResourceNs;
+using NHeroes2.SystemNs;
 using NHeroes2.Utilities;
 
 namespace NHeroes2.KingdomNs
@@ -29,9 +30,8 @@ namespace NHeroes2.KingdomNs
         uint visited_tents_colors;
 
         KingdomHeroes heroes_cond_loss;
-        public const int KINGDOMMAX = 6;
-
-        public Kingdom[] kingdoms = new Kingdom[KINGDOMMAX + 1];
+        
+        public Kingdom[] kingdoms = new Kingdom[H2Consts.KINGDOMMAX + 1];
 
         public void AddHeroes(AllHeroes heroes)
         {
@@ -122,7 +122,7 @@ namespace NHeroes2.KingdomNs
 
         private bool isPlay()
         {
-            throw new NotImplementedException();
+            return Players.GetPlayerInGame(color);
         }
 
         public void AddCondLossHeroes(AllHeroes vecHeroes)

@@ -13,5 +13,28 @@
 
             return ColorKind.NONE;
         }
+
+        public static int GetIndex(int color)
+        {   switch ((ColorKind)color)
+             {
+             case ColorKind.BLUE:
+                 return 0;
+             case ColorKind.GREEN:
+                 return 1;
+             case ColorKind.RED:
+                 return 2;
+             case ColorKind.YELLOW:
+                 return 3;
+             case ColorKind.ORANGE:
+                 return 4;
+             case ColorKind.PURPLE:
+                 return 5;
+             default:
+                 break;
+             }
+         
+             // NONE
+             return 6;
+        }
     }
 }

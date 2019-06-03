@@ -160,6 +160,8 @@
     <Compile Include="SpellNs\spellstats_t.cs" />
     <Compile Include="SpellNs\SpellStorage.cs" />
     <Compile Include="SpellNs\SpellType.cs" />
+    <Compile Include="SystemNs\H2Consts.cs" />
+    <Compile Include="SystemNs\Player.cs" />
     <Compile Include="SystemNs\Players.cs" />
     <Compile Include="SystemNs\Rand.cs" />
     <Compile Include="SystemNs\System.cs" />

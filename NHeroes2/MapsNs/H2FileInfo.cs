@@ -1,5 +1,6 @@
 ﻿using NHeroes2.GameNs;
 using NHeroes2.KingdomNs;
+using NHeroes2.SystemNs;
 
 namespace NHeroes2.MapsNs
 {
@@ -12,8 +13,8 @@ namespace NHeroes2.MapsNs
         public ushort size_w;
         public ushort size_h;
         public byte difficulty;
-        public byte[] races = new byte[Kingdoms.KINGDOMMAX];
-        public byte[] unions = new byte[Kingdoms.KINGDOMMAX];
+        public byte[] races = new byte[H2Consts.KINGDOMMAX];
+        public byte[] unions = new byte[H2Consts.KINGDOMMAX];
 
         public byte kingdom_colors;
         public byte allow_human_colors;
