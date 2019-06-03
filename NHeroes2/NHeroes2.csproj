@@ -153,6 +153,7 @@
     <Compile Include="Serialize\ByteVectorWriter.cs" />
     <Compile Include="SpellNs\Spell.cs" />
     <Compile Include="SpellNs\SpellBook.cs" />
+    <Compile Include="SpellNs\SpellStats.cs" />
     <Compile Include="SpellNs\spellstats_t.cs" />
     <Compile Include="SpellNs\SpellStorage.cs" />
     <Compile Include="SpellNs\SpellType.cs" />
