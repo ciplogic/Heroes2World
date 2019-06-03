@@ -1,11 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using NHeroes2.CastleNs;
+using NHeroes2.Engine;
 using NHeroes2.HeroesNs;
+using NHeroes2.MapsNs;
+using NHeroes2.ResourceNs;
+using NHeroes2.Utilities;
 
 namespace NHeroes2.KingdomNs
 {
     class Kingdoms
     {
+        
+        int color;
+        Funds resource;
+
+        uint lost_town_days;
+
+        KingdomCastles castles;
+        KingdomHeroes heroes;
+
+        Recruits recruits;
+        LastLoseHero lost_hero;
+
+        List<IndexObject>visit_object = new List<IndexObject>();
+
+        Puzzle puzzle_maps;
+        uint visited_tents_colors;
+
+        KingdomHeroes heroes_cond_loss;
         public const int KINGDOMMAX = 6;
 
         public Kingdom[] kingdoms = new Kingdom[KINGDOMMAX + 1];
@@ -54,6 +77,50 @@ namespace NHeroes2.KingdomNs
         }
 
         public void ApplyPlayWithStartingHero()
+        {
+            var world = World.Instance;
+            if (isPlay() && !castles._items.empty())
+            {
+                // get first castle
+                Castle first = castles.GetFirstCastle();
+                if (null == first) first = castles._items.front();
+
+                // check manual set hero (castle position + point(0, 1))?
+                var cp = first.Position.center;
+                var hero = world.GetTiles(cp.x, cp.y + 1).GetHeroes();
+
+                // and move manual set hero to castle
+                if (hero != null && hero.GetColor() == GetColor())
+                {
+                    bool patrol = hero.Modes(HeroesFlags.PATROL);
+                    hero.SetFreeman(0);
+                    hero.Recruit(first);
+
+                    if (patrol)
+                    {
+                        hero.SetModes(KingdomNs.HeroesFlags.PATROL);
+                        hero.SetCenterPatrol(cp);
+                    }
+                }
+                else if (SystemNs.H2Settings.Instance.GameStartWithHeroes())
+                {
+                    hero = world.GetFreemanHeroes(first.GetRace());
+                    if (hero != null && AllowRecruitHero(false, 0)) hero.Recruit(first);
+                }
+            }
+        }
+
+        private bool AllowRecruitHero(bool b, int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        private int GetColor()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool isPlay()
         {
             throw new NotImplementedException();
         }

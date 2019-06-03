@@ -45,5 +45,10 @@ namespace NHeroes2.SystemNs
         {
             throw new NotImplementedException();
         }
+
+        public bool GameStartWithHeroes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

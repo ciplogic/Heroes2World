@@ -61,7 +61,7 @@ namespace NHeroes2.KingdomNs
             throw new NotImplementedException();
         }
 
-        private Heroes GetFreemanHeroes(RaceType race)
+        public Heroes GetFreemanHeroes(RaceType race)
         {
             throw new NotImplementedException();
         }
@@ -877,6 +877,16 @@ namespace NHeroes2.KingdomNs
 
 
             return true;
+        }
+
+        public Tiles GetTiles(short ax, int ay)
+        {
+            return GetTiles(ay * W + ax);
+        }
+
+        private Tiles GetTiles(int index)
+        {
+            return vec_tiles[index];
         }
     }
 }

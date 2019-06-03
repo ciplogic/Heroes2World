@@ -241,7 +241,7 @@ namespace NHeroes2.MapsNs
         { 
         }
 
-        private Heroes GetHeroes()
+        internal Heroes GetHeroes()
         {
             var world = World.Instance;
             return MapsNs.ObjKind.OBJ_HEROES == (ObjKind) mp2_object && GetQuantity3()!=0 

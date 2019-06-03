@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NHeroes2.CastleNs;
 using NHeroes2.Engine;
 using NHeroes2.HeroesNs.Route;
 using NHeroes2.KingdomNs;
@@ -7,91 +8,6 @@ using NHeroes2.Serialize;
 
 namespace NHeroes2.HeroesNs
 {
-    enum HeroesKind
-    {
-    // knight
-    LORDKILBURN,
-    SIRGALLANTH,
-    ECTOR,
-    GVENNETH,
-    TYRO,
-    AMBROSE,
-    RUBY,
-    MAXIMUS,
-    DIMITRY,
-    // barbarian
-    THUNDAX,
-    FINEOUS,
-    JOJOSH,
-    CRAGHACK,
-    JEZEBEL,
-    JACLYN,
-    ERGON,
-    TSABU,
-    ATLAS,
-    // sorceress
-    ASTRA,
-    NATASHA,
-    TROYAN,
-    VATAWNA,
-    REBECCA,
-    GEM,
-    ARIEL,
-    CARLAWN,
-    LUNA,
-    // warlock
-    ARIE,
-    ALAMAR,
-    VESPER,
-    CRODO,
-    BAROK,
-    KASTORE,
-    AGAR,
-    FALAGAR,
-    WRATHMONT,
-    // wizard
-    MYRA,
-    FLINT,
-    DAWN,
-    HALON,
-    MYRINI,
-    WILFREY,
-    SARAKIN,
-    KALINDRA,
-    MANDIGAL,
-    // necromancer
-    ZOM,
-    DARLANA,
-    ZAM,
-    RANLOO,
-    CHARITY,
-    RIALDO,
-    ROXANA,
-    SANDRO,
-    CELIA,
-    // from campain
-    ROLAND,
-    CORLAGON,
-    ELIZA,
-    ARCHIBALD,
-    HALTON,
-    BAX,
-    // from extended
-    SOLMYR,
-    DAINWIN,
-    MOG,
-    UNCLEIVAN,
-    JOSEPH,
-    GALLAVANT,
-    ELDERIAN,
-    CEALLACH,
-    DRAKONIA,
-    MARTINE,
-    JARKONAS,
-    // debugger
-    SANDYSANDY,
-    UNKNOWN
-    };
     public class Heroes
     {
         string name;
@@ -158,6 +74,10 @@ namespace NHeroes2.HeroesNs
             throw new System.NotImplementedException();
         }
 
+        public void Recruit(Castle castle)
+        {
+            
+        }
         public void Recruit(ColorKind getColor, H2Point h2Point)
         {
             throw new System.NotImplementedException();
@@ -166,6 +86,21 @@ namespace NHeroes2.HeroesNs
         public int GetColor()
         {
             return color.Color;
+        }
+
+        public bool Modes(HeroesFlags patrol)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetFreeman(int i)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetCenterPatrol(H2Point cp)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

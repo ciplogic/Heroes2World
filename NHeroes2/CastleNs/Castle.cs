@@ -4,7 +4,7 @@ using NHeroes2.Serialize;
 
 namespace NHeroes2.CastleNs
 {
-    class Castle
+    public class Castle
     {
         public MapPosition Position;
         public ColorBase Color= new ColorBase();

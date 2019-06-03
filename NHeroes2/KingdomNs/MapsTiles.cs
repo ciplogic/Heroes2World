@@ -3,7 +3,7 @@ using NHeroes2.MapsNs;
 
 namespace NHeroes2.KingdomNs
 {
-    class MapsTiles : List<Tiles>
+    public class MapsTiles : List<Tiles>
     {
         
     }

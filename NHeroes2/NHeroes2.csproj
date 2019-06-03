@@ -92,6 +92,8 @@
     <Compile Include="HeroesNs\DirectionNs.cs" />
     <Compile Include="HeroesNs\HeroBase.cs" />
     <Compile Include="HeroesNs\Heroes.cs" />
+    <Compile Include="HeroesNs\HeroesKind.cs" />
+    <Compile Include="HeroesNs\HeroFlags.cs" />
     <Compile Include="HeroesNs\HeroKinds.cs" />
     <Compile Include="HeroesNs\Recruits.cs" />
     <Compile Include="HeroesNs\Route\H2Path.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="KingdomNs\HeroesFlags.cs" />
     <Compile Include="KingdomNs\Kingdom.cs" />
     <Compile Include="KingdomNs\KingdomCastles.cs" />
+    <Compile Include="KingdomNs\KingdomHeroes.cs" />
     <Compile Include="KingdomNs\Kingdoms.cs" />
     <Compile Include="KingdomNs\LastLoseHero.cs" />
     <Compile Include="KingdomNs\MapActions.cs" />
