@@ -13,5 +13,8 @@ namespace NHeroes2.MonsterNs
         {
             throw new System.NotImplementedException();
         }
+
+        public string GetName() => monstats_t.monsters[(int) id].name;
+        public string GetMultiName() => monstats_t.monsters[(int) id].multiname;
     }
 }

@@ -122,7 +122,9 @@
     <Compile Include="KingdomNs\Puzzle.cs" />
     <Compile Include="KingdomNs\RaceType.cs" />
     <Compile Include="KingdomNs\Rumors.cs" />
+    <Compile Include="KingdomNs\Speed.cs" />
     <Compile Include="KingdomNs\Week.cs" />
+    <Compile Include="KingdomNs\WeekKind.cs" />
     <Compile Include="KingdomNs\World.cs" />
     <Compile Include="MapsNs\Addons.cs" />
     <Compile Include="MapsNs\H2FileInfo.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="MapsNs\ObjKind.cs" />
     <Compile Include="MapsNs\Tiles.cs" />
     <Compile Include="MapsNs\TilesAddon.cs" />
+    <Compile Include="MonsterNs\monstats_t.cs" />
     <Compile Include="MonsterNs\Monster.cs" />
     <Compile Include="MonsterNs\MonsterJoinCondition.cs" />
     <Compile Include="MonsterNs\MonsterLevel.cs" />
