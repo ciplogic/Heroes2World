@@ -86,6 +86,7 @@
     <Compile Include="CastleNs\VecCastles.cs" />
     <Compile Include="Engine\H2Point.cs" />
     <Compile Include="Engine\H2Size.cs" />
+    <Compile Include="Engine\ListDirs.cs" />
     <Compile Include="GameNs\GameOverCondition.cs" />
     <Compile Include="GameNs\GameStatic.cs" />
     <Compile Include="HeroesNs\AllHeroes.cs" />
@@ -163,10 +164,15 @@
     <Compile Include="SpellNs\spellstats_t.cs" />
     <Compile Include="SpellNs\SpellStorage.cs" />
     <Compile Include="SpellNs\SpellType.cs" />
+    <Compile Include="SystemNs\BitModes.cs" />
+    <Compile Include="SystemNs\control_t.cs" />
+    <Compile Include="SystemNs\Focus.cs" />
+    <Compile Include="SystemNs\focus_t.cs" />
     <Compile Include="SystemNs\H2Consts.cs" />
     <Compile Include="SystemNs\Player.cs" />
     <Compile Include="SystemNs\Players.cs" />
     <Compile Include="SystemNs\Rand.cs" />
+    <Compile Include="SystemNs\SettingsFlags.cs" />
     <Compile Include="SystemNs\System.cs" />
     <Compile Include="SystemNs\Translation.cs" />
     <Compile Include="Utilities\Extensions.cs" />
