@@ -1,6 +1,6 @@
 namespace NHeroes2.ResourceNs
 {
-    enum ResourceKind
+    internal enum ResourceKind
     {
         UNKNOWN = 0x00,
         WOOD = 0x01,
@@ -11,5 +11,5 @@ namespace NHeroes2.ResourceNs
         GEMS = 0x20,
         GOLD = 0x40,
         ALL = WOOD | MERCURY | ORE | SULFUR | CRYSTAL | GEMS | GOLD
-    };
+    }
 }

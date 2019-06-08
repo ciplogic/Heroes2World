@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NHeroes2.KingdomNs;
 
 namespace NHeroes2.SystemNs
 {
     public class Players
     {
-        static Player[] _players = new Player[H2Consts.KINGDOMMAX + 1];
-        static int human_colors;
+        private static readonly Player[] _players = new Player[H2Consts.KINGDOMMAX + 1];
+        private static int human_colors;
 
-        List<Player> _items = new List<Player>();
-        int current_color;
+        private readonly List<Player> _items = new List<Player>();
+        private int current_color;
 
         public static int HumanColors()
         {
@@ -21,12 +20,12 @@ namespace NHeroes2.SystemNs
 
         private int GetColors(int control, bool strong)
         {
-            int res = 0;
+            var res = 0;
 
             foreach (var it in _items)
                 if (control == 0xFF ||
-                    (strong && it.GetControl() == control) ||
-                    (!strong && (it.GetControl() & control) != 0))
+                    strong && it.GetControl() == control ||
+                    !strong && (it.GetControl() & control) != 0)
                     res |= it.GetColor();
 
             return res;

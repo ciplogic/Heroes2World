@@ -1,7 +1,6 @@
 ﻿namespace NHeroes2.KingdomNs
 {
-    class LastLoseHero
+    internal class LastLoseHero
     {
-
     }
 }

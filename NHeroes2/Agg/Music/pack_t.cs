@@ -1,13 +1,14 @@
-using System;
 using NHeroes2.Utilities;
 
 namespace NHeroes2.Agg.Music
 {
     internal class pack_t
     {
-        public UInt32 first, second;
+        public uint first, second;
 
-        public override string ToString() 
-            => this.SerializeToJsonString();
+        public override string ToString()
+        {
+            return this.SerializeToJsonString();
+        }
     }
 }

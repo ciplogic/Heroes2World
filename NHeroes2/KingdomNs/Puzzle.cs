@@ -1,7 +1,6 @@
 ﻿namespace NHeroes2.KingdomNs
 {
-    class Puzzle
+    internal class Puzzle
     {
-        
     }
 }

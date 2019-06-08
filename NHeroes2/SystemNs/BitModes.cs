@@ -3,10 +3,12 @@ namespace NHeroes2.SystemNs
     internal class BitModes
     {
         public uint modes;
+
         public bool Modes(uint f)
         {
             return (modes & f) != 0;
         }
+
         public void SetModes(uint f)
         {
             modes |= f;
@@ -17,10 +19,9 @@ namespace NHeroes2.SystemNs
             modes &= ~f;
         }
 
-        void ToggleModes(uint f)
+        private void ToggleModes(uint f)
         {
             modes ^= f;
         }
-
     }
 }

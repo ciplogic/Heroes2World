@@ -5,8 +5,17 @@ namespace NHeroes2.Agg.Music
 {
     public class MidTrack
     {
-        IFFChunkHeader mtrk;
-        MidEvents events;
+        private readonly MidEvents events;
+        private readonly IFFChunkHeader mtrk;
+
+        static MidTrack()
+        {
+            ByteVectorReflect.AddTypeWriter((ByteVectorWriter sb, MidTrack st) =>
+            {
+                sb.Write(st.mtrk);
+                sb.Write(st.events);
+            });
+        }
 
         public MidTrack(XMITrack track)
         {
@@ -20,16 +29,5 @@ namespace NHeroes2.Agg.Music
         {
             return this.SerializeToJsonString();
         }
-
-        static MidTrack()
-        {
-            
-            ByteVectorReflect.AddTypeWriter((ByteVectorWriter sb, MidTrack st) =>
-            {
-                sb.Write(st.mtrk);
-                sb.Write(st.events);
-            });
-        }
-
     }
 }

@@ -3,12 +3,14 @@ using System;
 namespace NHeroes2.HeroesNs
 {
     [Flags]
-    enum HeroFlags
+    internal enum HeroFlags
     {
         SHIPMASTER = 0x00000001,
+
         //UNUSED	= 0x00000002,
         SPELLCASTED = 0x00000004,
         ENABLEMOVE = 0x00000008,
+
         //UNUSED	= 0x00000010,
         //UNUSED	= 0x00000020,
         //UNUSED	= 0x00000040,
@@ -23,5 +25,5 @@ namespace NHeroes2.HeroesNs
         PATROL = 0x00008000,
         CUSTOMARMY = 0x00010000,
         CUSTOMSKILLS = 0x00020000
-    };
+    }
 }

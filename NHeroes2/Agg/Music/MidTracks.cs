@@ -1,23 +1,12 @@
 using System.Collections.Generic;
 using NHeroes2.Serialize;
-
 using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {
-    class MidTracks
+    internal class MidTracks
     {
         public readonly List<MidTrack> _items = new List<MidTrack>();
-
-        public MidTracks(XMITracks xmiTracks)
-        {
-
-            foreach (var track in xmiTracks)
-            {
-                _items.Add(new MidTrack(track));
-            }
-
-        }
 
         static MidTracks()
         {
@@ -30,8 +19,12 @@ namespace NHeroes2.Agg.Music
                         writeBuf("MidEvent", sb);
                     }
                 }
-                );
+            );
         }
 
+        public MidTracks(XMITracks xmiTracks)
+        {
+            foreach (var track in xmiTracks) _items.Add(new MidTrack(track));
+        }
     }
 }

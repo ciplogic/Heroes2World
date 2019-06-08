@@ -1,6 +1,6 @@
 namespace NHeroes2.Agg
 {
-    class AggFat
+    internal class AggFat
     {
         public int crc;
         public int offset;

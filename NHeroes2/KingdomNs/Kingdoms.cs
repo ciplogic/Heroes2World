@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using NHeroes2.CastleNs;
-using NHeroes2.Engine;
 using NHeroes2.HeroesNs;
 using NHeroes2.MapsNs;
 using NHeroes2.ResourceNs;
@@ -10,42 +9,40 @@ using NHeroes2.Utilities;
 
 namespace NHeroes2.KingdomNs
 {
-    class Kingdoms
+    internal class Kingdoms
     {
-        
-        int color;
-        Funds resource;
+        private KingdomCastles castles;
 
-        uint lost_town_days;
+        private int color;
+        private KingdomHeroes heroes;
 
-        KingdomCastles castles;
-        KingdomHeroes heroes;
+        private KingdomHeroes heroes_cond_loss;
 
-        Recruits recruits;
-        LastLoseHero lost_hero;
-
-        List<IndexObject>visit_object = new List<IndexObject>();
-
-        Puzzle puzzle_maps;
-        uint visited_tents_colors;
-
-        KingdomHeroes heroes_cond_loss;
-        
         public Kingdom[] kingdoms = new Kingdom[H2Consts.KINGDOMMAX + 1];
+        private LastLoseHero lost_hero;
+
+        private uint lost_town_days;
+
+        private Puzzle puzzle_maps;
+
+        private Recruits recruits;
+        private Funds resource;
+
+        private List<IndexObject> visit_object = new List<IndexObject>();
+        private uint visited_tents_colors;
 
         public void AddHeroes(AllHeroes heroes)
         {
             heroes.ForEach(heroe =>
             {
-                if (heroe.GetColor()!=0) GetKingdom((ColorKind) heroe.GetColor()).AddHeroes(heroe);
+                if (heroe.GetColor() != 0) GetKingdom((ColorKind) heroe.GetColor()).AddHeroes(heroe);
             });
             // skip gray color
-            
         }
 
-        Kingdom GetKingdom(ColorKind color)
+        private Kingdom GetKingdom(ColorKind color)
         {
-            switch ((ColorKind)color)
+            switch (color)
             {
                 case ColorKind.BLUE:
                     return kingdoms[0];
@@ -59,8 +56,6 @@ namespace NHeroes2.KingdomNs
                     return kingdoms[4];
                 case ColorKind.PURPLE:
                     return kingdoms[5];
-                default:
-                    break;
             }
 
             return kingdoms[6];
@@ -71,7 +66,7 @@ namespace NHeroes2.KingdomNs
             castles._items.ForEach(castle =>
             {
                 // skip gray color
-                if (castle.GetColor()!=0)
+                if (castle.GetColor() != 0)
                     GetKingdom(castle.GetColor()).AddCastle(castle);
             });
         }
@@ -82,7 +77,7 @@ namespace NHeroes2.KingdomNs
             if (isPlay() && !castles._items.empty())
             {
                 // get first castle
-                Castle first = castles.GetFirstCastle();
+                var first = castles.GetFirstCastle();
                 if (null == first) first = castles._items.front();
 
                 // check manual set hero (castle position + point(0, 1))?
@@ -92,17 +87,17 @@ namespace NHeroes2.KingdomNs
                 // and move manual set hero to castle
                 if (hero != null && hero.GetColor() == GetColor())
                 {
-                    bool patrol = hero.Modes(HeroesFlags.PATROL);
+                    var patrol = hero.Modes(HeroesFlags.PATROL);
                     hero.SetFreeman(0);
                     hero.Recruit(first);
 
                     if (patrol)
                     {
-                        hero.SetModes(KingdomNs.HeroesFlags.PATROL);
+                        hero.SetModes(HeroesFlags.PATROL);
                         hero.SetCenterPatrol(cp);
                     }
                 }
-                else if (SystemNs.H2Settings.Instance.GameStartWithHeroes())
+                else if (H2Settings.Instance.GameStartWithHeroes())
                 {
                     hero = world.GetFreemanHeroes(first.GetRace());
                     if (hero != null && AllowRecruitHero(false, 0)) hero.Recruit(first);

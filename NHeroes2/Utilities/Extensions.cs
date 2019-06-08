@@ -18,11 +18,9 @@ namespace NHeroes2.Utilities
 
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
         {
-            foreach (var item in items)
-            {
-                action(item);
-            }
+            foreach (var item in items) action(item);
         }
+
         public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> action)
         {
             var pos = -1;
@@ -32,18 +30,19 @@ namespace NHeroes2.Utilities
                 action(item, pos);
             }
         }
-        public static void SerializeToJsonFile(this Object data, string fileName)
+
+        public static void SerializeToJsonFile(this object data, string fileName)
         {
             var jsonText = data.SerializeToJsonString();
             File.WriteAllText(fileName, jsonText);
         }
 
-        public static string SerializeToJsonString(this Object data)
+        public static string SerializeToJsonString(this object data)
         {
             return JsonConvert.SerializeObject(data);
         }
 
-        public static T back<T>(this IList<T> items) 
+        public static T back<T>(this IList<T> items)
         {
             if (items.Count == 0)
                 return default(T);
@@ -51,7 +50,7 @@ namespace NHeroes2.Utilities
         }
 
 
-        public static T front<T>(this IList<T> items) 
+        public static T front<T>(this IList<T> items)
         {
             if (items.Count == 0)
                 return default(T);
@@ -64,14 +63,11 @@ namespace NHeroes2.Utilities
         }
 
         public static void SetSize<T>(this List<T> collection, int newSize)
-        where T:new()
+            where T : new()
         {
             collection.Clear();
             collection.Capacity = newSize;
-            for (var i = 0; i < newSize; i++)
-            {
-                collection.Add(new T());
-            }
+            for (var i = 0; i < newSize; i++) collection.Add(new T());
         }
     }
 }

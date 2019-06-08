@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.KingdomNs
 {
-    enum BarrierColor
+    internal enum BarrierColor
     {
         NONE = 0,
         AQUA = 1,
@@ -11,5 +11,5 @@
         ORANGE = 6,
         PURPLE = 7,
         RED = 8
-    };
+    }
 }

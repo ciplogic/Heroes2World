@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NHeroes2.CastleNs;
 using NHeroes2.HeroesNs;
 using NHeroes2.MapsNs;
@@ -6,48 +7,48 @@ using NHeroes2.ResourceNs;
 
 namespace NHeroes2.KingdomNs
 {
-    class Kingdom
+    internal class Kingdom
     {
-        int color;
-        Funds resource;
+        private KingdomCastles castles;
+        private int color;
+        private KingdomHeroes heroes;
 
-        uint lost_town_days;
+        private KingdomHeroes heroes_cond_loss;
+        private LastLoseHero lost_hero;
 
-        KingdomCastles castles;
-        KingdomHeroes heroes;
+        private uint lost_town_days;
 
-        Recruits recruits;
-        LastLoseHero lost_hero;
+        private Puzzle puzzle_maps;
 
-        List<IndexObject> visit_object = new List<IndexObject>();
+        private Recruits recruits;
+        private Funds resource;
 
-        Puzzle puzzle_maps;
-        uint visited_tents_colors;
+        private List<IndexObject> visit_object = new List<IndexObject>();
+        private uint visited_tents_colors;
 
-        KingdomHeroes heroes_cond_loss;
         public RaceType GetRace()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool AllowRecruitHero(bool b, int i)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public KingdomCastles GetCastles()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void AddHeroes(Heroes heroe)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void AddCastle(Castle castle)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

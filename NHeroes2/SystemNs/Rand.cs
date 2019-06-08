@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace NHeroes2.SystemNs
 {
-    class Rand
+    internal class Rand
     {
-        static Random rnd = new Random();
+        private static readonly Random rnd = new Random();
+
         public static T Get<T>(IList<T> items)
         {
-            int r = rnd.Next(items.Count);
+            var r = rnd.Next(items.Count);
             return items[r];
         }
     }

@@ -5,6 +5,5 @@ namespace NHeroes2.KingdomNs
 {
     public class MapsTiles : List<Tiles>
     {
-        
     }
 }

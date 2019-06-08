@@ -5,15 +5,16 @@ using NHeroes2.Serialize;
 
 namespace NHeroes2.Agg.Music
 {
-    static class MiniLog
+    internal static class MiniLog
     {
-        static StringBuilder _logText = new StringBuilder();
+        private static readonly StringBuilder _logText = new StringBuilder();
         private static int _bufPos;
 
         public static void addLine(string row, int val)
         {
             addLine(row + ": " + val);
         }
+
         public static void addLine(string row)
         {
             _logText.AppendLine(row);
@@ -24,13 +25,14 @@ namespace NHeroes2.Agg.Music
             return string.Join(",", value.Skip(startPos).Select(b => (int) b));
         }
 
-        static void addLine(string row, byte[] value, int startPos)
+        private static void addLine(string row, byte[] value, int startPos)
         {
             _logText
                 .Append(row)
                 .Append(": ")
                 .AppendLine(JoinValues(value, startPos));
         }
+
         public static void addLine(string row, byte[] value)
         {
             addLine(row, value, 0);
@@ -41,6 +43,7 @@ namespace NHeroes2.Agg.Music
             addLine(text, st.data(), _bufPos);
             _bufPos = st.data().Length;
         }
+
         public static void flushLog()
         {
             File.WriteAllText("eventsLog.txt", _logText.ToString());

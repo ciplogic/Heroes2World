@@ -1,6 +1,6 @@
 namespace NHeroes2.KingdomNs
 {
-    enum WeekKind
+    internal enum WeekKind
     {
         UNNAMED,
         PLAGUE,
@@ -29,5 +29,5 @@ namespace NHeroes2.KingdomNs
         CONDOR,
 
         MONSTERS // week of monsters game
-    };
+    }
 }

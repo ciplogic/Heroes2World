@@ -3,7 +3,7 @@ namespace NHeroes2.Serialize
     public class ByteVectorReader
     {
         private readonly byte[] _fileContent;
-        int _pos;
+        private int _pos;
 
         public ByteVectorReader(byte[] fileContent)
         {
@@ -36,10 +36,7 @@ namespace NHeroes2.Serialize
             for (var i = 0; i < lenText; i++)
             {
                 var curChar = (char) Get8();
-                if (curChar == 0 && lenTextFinal == -1)
-                {
-                    lenTextFinal = i;
-                }
+                if (curChar == 0 && lenTextFinal == -1) lenTextFinal = i;
 
                 chars[i] = curChar;
             }
@@ -60,10 +57,7 @@ namespace NHeroes2.Serialize
         public byte[] getRaw(int size)
         {
             var result = new byte[size];
-            for (var i = 0; i < size; i++)
-            {
-                result[i] = _fileContent[i + _pos];
-            }
+            for (var i = 0; i < size; i++) result[i] = _fileContent[i + _pos];
 
             _pos += size;
             return result;

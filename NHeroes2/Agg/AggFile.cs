@@ -8,70 +8,17 @@ using NHeroes2.Serialize;
 
 namespace NHeroes2.Agg
 {
-    class MutPoint
+    internal class MutPoint
     {
         public int x, y;
     }
 
     public class AggFile
     {
-        const int FATSIZENAME = 15;
-
-        string filename;
-        Dictionary<string, AggFat> fat = new Dictionary<string, AggFat>();
-        int count_items = 0;
-        private int size;
-        private ByteVectorReader stream;
-        byte[] fileContent;
-        string key;
-        byte[] body;
-
-        public bool Open(string fname)
-        {
-            filename = fname;
-            if (!File.Exists(fname))
-                return false;
-
-            fileContent = File.ReadAllBytes(filename);
-            size = fileContent.Length;
-            stream = new ByteVectorReader(fileContent);
-
-            count_items = stream.getLE16();
-
-            stream.seek(size - FATSIZENAME * count_items);
-            var vectorNames = new List<string>(count_items);
-
-            for (var ii = 0; ii < count_items; ++ii)
-            {
-                vectorNames.Add(stream.toString(FATSIZENAME));
-            }
-
-            stream.seek(2);
-            for (var ii = 0; ii < count_items; ++ii)
-            {
-                var itemName = vectorNames[ii];
-                var f = new AggFat();
-                var crc = stream.getLE32();
-                f.crc = crc;
-                var offset = stream.getLE32();
-                f.offset = offset;
-                var sizeChunk = stream.getLE32();
-                f.size = sizeChunk;
-                fat[itemName] = f;
-            }
-
-            return true;
-        }
+        private const int FATSIZENAME = 15;
 
 
-        byte[] ReadICNChunk(IcnKind icn)
-        {
-            // hard fix artifact "ultimate stuff" sprite for loyalty version
-            return Read(Icn.GetString(icn));
-        }
-
-
-        static byte[] kb_pal =
+        private static readonly byte[] kb_pal =
         {
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x3f,
@@ -123,16 +70,67 @@ namespace NHeroes2.Agg
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
         };
 
-        void DrawPointFast(Bitmap srf, int x, int y, byte palette)
+        private byte[] body;
+        private int count_items;
+        private readonly Dictionary<string, AggFat> fat = new Dictionary<string, AggFat>();
+        private byte[] fileContent;
+
+        private string filename;
+        private string key;
+        private int size;
+        private ByteVectorReader stream;
+
+        public bool Open(string fname)
         {
-            if(x<0 || y<0)
+            filename = fname;
+            if (!File.Exists(fname))
+                return false;
+
+            fileContent = File.ReadAllBytes(filename);
+            size = fileContent.Length;
+            stream = new ByteVectorReader(fileContent);
+
+            count_items = stream.getLE16();
+
+            stream.seek(size - FATSIZENAME * count_items);
+            var vectorNames = new List<string>(count_items);
+
+            for (var ii = 0; ii < count_items; ++ii) vectorNames.Add(stream.toString(FATSIZENAME));
+
+            stream.seek(2);
+            for (var ii = 0; ii < count_items; ++ii)
+            {
+                var itemName = vectorNames[ii];
+                var f = new AggFat();
+                var crc = stream.getLE32();
+                f.crc = crc;
+                var offset = stream.getLE32();
+                f.offset = offset;
+                var sizeChunk = stream.getLE32();
+                f.size = sizeChunk;
+                fat[itemName] = f;
+            }
+
+            return true;
+        }
+
+
+        private byte[] ReadICNChunk(IcnKind icn)
+        {
+            // hard fix artifact "ultimate stuff" sprite for loyalty version
+            return Read(Icn.GetString(icn));
+        }
+
+        private void DrawPointFast(Bitmap srf, int x, int y, byte palette)
+        {
+            if (x < 0 || y < 0)
                 return;
 
             if (x >= srf.Width || y >= srf.Height)
                 return;
-            var r = kb_pal[palette * 3]*4;
-            var g = kb_pal[palette * 3 + 1]*4;
-            var b = kb_pal[palette * 3 + 2]*4;
+            var r = kb_pal[palette * 3] * 4;
+            var g = kb_pal[palette * 3 + 1] * 4;
+            var b = kb_pal[palette * 3 + 2] * 4;
             var palColor = Color.FromArgb(r, g, b);
             srf.SetPixel(x, y, palColor);
         }
@@ -141,10 +139,7 @@ namespace NHeroes2.Agg
         public int IcnSpriteCount(IcnKind icn)
         {
             var body = ReadICNChunk(icn);
-            if (body.Length == 0)
-            {
-                return 0;
-            }
+            if (body.Length == 0) return 0;
 
             var st = new ByteVectorReader(body);
 
@@ -157,18 +152,12 @@ namespace NHeroes2.Agg
             var res = new IcnSprite();
 
             var body = ReadICNChunk(icn);
-            if (body.Length == 0)
-            {
-                return res;
-            }
+            if (body.Length == 0) return res;
 
             var st = new ByteVectorReader(body);
 
             var count = st.getLE16();
-            if (index >= count)
-            {
-                return res;
-            }
+            if (index >= count) return res;
 
             var blockSize = st.getLE32();
 
@@ -176,14 +165,16 @@ namespace NHeroes2.Agg
 
             var header1 = st.ReadData<IcnHeader>();
 
-            UInt32 sizeData = 0;
+            uint sizeData = 0;
             if (index + 1 != count)
             {
                 var header2 = st.ReadData<IcnHeader>();
                 sizeData = header2.offsetData - header1.offsetData;
             }
             else
-                sizeData = (UInt32) blockSize - header1.offsetData;
+            {
+                sizeData = (uint) blockSize - header1.offsetData;
+            }
 
 
             Render(res, header1, body, sizeData);
@@ -220,7 +211,7 @@ namespace NHeroes2.Agg
                 else
                     // 0x7F - count data
                 {
-                    UInt32 c;
+                    uint c;
                     if (0x80 > buf[bufPos])
                     {
                         c = buf[bufPos];
@@ -251,7 +242,9 @@ namespace NHeroes2.Agg
                     {
                         ++bufPos;
                         if (buf[bufPos] % 4 != 0)
+                        {
                             c = (uint) (buf[bufPos] % 4);
+                        }
                         else
                         {
                             ++bufPos;
@@ -265,10 +258,7 @@ namespace NHeroes2.Agg
                         }
                         else
                         {
-                            if (res.second == null)
-                            {
-                                res.SetSize(false, sz.Width, sz.Height, true);
-                            }
+                            if (res.second == null) res.SetSize(false, sz.Width, sz.Height, true);
 
                             while (c-- != 0)
                             {
@@ -308,24 +298,15 @@ namespace NHeroes2.Agg
                     }
                 }
 
-                if (bufPos >= max)
-                {
-                    break;
-                }
+                if (bufPos >= max) break;
             }
         }
 
         public byte[] Read(string fileName)
         {
-            if (!fat.TryGetValue(fileName, out var f))
-            {
-                return Array.Empty<byte>();
-            }
+            if (!fat.TryGetValue(fileName, out var f)) return Array.Empty<byte>();
 
-            if (f.size == 0)
-            {
-                return Array.Empty<byte>();
-            }
+            if (f.size == 0) return Array.Empty<byte>();
 
             stream.seek(f.offset);
             var body = stream.getRaw(f.size);

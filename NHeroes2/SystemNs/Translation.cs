@@ -1,9 +1,11 @@
 ﻿namespace NHeroes2.SystemNs
 {
-    static class Translation
+    internal static class Translation
     {
         public static string _(string text)
-            => text;
+        {
+            return text;
+        }
 
         public static void StringReplace(ref string text, string from, string to)
         {

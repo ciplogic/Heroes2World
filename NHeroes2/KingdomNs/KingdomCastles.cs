@@ -1,4 +1,5 @@
-﻿using NHeroes2.CastleNs;
+﻿using System;
+using NHeroes2.CastleNs;
 
 namespace NHeroes2.KingdomNs
 {
@@ -6,7 +7,7 @@ namespace NHeroes2.KingdomNs
     {
         public Castle GetFirstCastle()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

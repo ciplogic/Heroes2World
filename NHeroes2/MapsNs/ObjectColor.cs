@@ -2,7 +2,7 @@
 
 namespace NHeroes2.MapsNs
 {
-    class ObjectColor
+    internal class ObjectColor
     {
         public ObjectColor()
         {
@@ -20,7 +20,7 @@ namespace NHeroes2.MapsNs
         public ColorKind ColorKind { get; set; }
 
 
-        public bool isObject(ObjKind obj) 
+        public bool isObject(ObjKind obj)
         {
             return obj == Obj;
         }

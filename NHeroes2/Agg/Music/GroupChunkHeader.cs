@@ -1,17 +1,17 @@
-using System;
+using NHeroes2.Serialize;
 using NHeroes2.Utilities;
 
 namespace NHeroes2.Agg.Music
 {
-    class GroupChunkHeader
+    internal class GroupChunkHeader
     {
-        public UInt32 ID = 0; // 4 byte ASCII string, either 'FORM', 'CAT ' or 'LIST'
-        public UInt32 length = 0;
-        public UInt32 type = 0; // 4 byte ASCII string
+        public uint ID; // 4 byte ASCII string, either 'FORM', 'CAT ' or 'LIST'
+        public uint length;
+        public uint type; // 4 byte ASCII string
 
         static GroupChunkHeader()
         {
-            Serialize.ByteVectorReflect.AddTypeReader<GroupChunkHeader>((sb,st) =>
+            ByteVectorReflect.AddTypeReader<GroupChunkHeader>((sb, st) =>
             {
                 st.ID = sb.getBE32();
                 st.length = sb.getBE32();

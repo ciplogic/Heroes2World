@@ -77,5 +77,5 @@ namespace NHeroes2.SpellNs
         RANDOM5,
 
         STONE
-    };
+    }
 }

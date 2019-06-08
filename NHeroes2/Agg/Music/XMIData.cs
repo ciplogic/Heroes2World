@@ -4,7 +4,7 @@ using static NHeroes2.Agg.Music.Xml2Mid;
 
 namespace NHeroes2.Agg.Music
 {
-    class XMIData
+    internal class XMIData
     {
         public XMITracks tracks = new XMITracks();
 
@@ -19,6 +19,7 @@ namespace NHeroes2.Agg.Music
                 H2Log.H2ERROR("parse H2ERROR: " + "form xdir");
                 return;
             }
+
             // INFO
             var iff = sb.ReadData<IFFChunkHeader>();
             if (iff.ID != TAG_INFO || iff.length != 2)
@@ -26,6 +27,7 @@ namespace NHeroes2.Agg.Music
                 H2Log.H2ERROR("parse H2ERROR: " + "info");
                 return;
             }
+
             var numTracks = sb.getLE16();
 
             // CAT XMID
@@ -35,17 +37,19 @@ namespace NHeroes2.Agg.Music
                 H2Log.H2ERROR("parse H2ERROR: " + "cat xmid");
                 return;
             }
+
             for (var track = 0; track < numTracks; ++track)
             {
                 var xmiTrack = new XMITrack();
                 tracks.Add(xmiTrack);
-                group =sb.ReadData<GroupChunkHeader>();
+                group = sb.ReadData<GroupChunkHeader>();
                 // FORM XMID
                 if (group.ID != TAG_FORM || group.type != TAG_XMID)
                 {
                     H2Log.H2ERROR("unknown tag: " + group.ID + " (expected FORM), " + group.type + " (expected XMID)");
                     continue;
                 }
+
                 iff = sb.ReadData<IFFChunkHeader>();
                 // [TIMB]
                 if (iff.ID == TAG_TIMB)
@@ -56,6 +60,7 @@ namespace NHeroes2.Agg.Music
                         H2Log.H2ERROR("parse H2ERROR: " + "out of range");
                         break;
                     }
+
                     iff = sb.ReadData<IFFChunkHeader>();
                 }
 
@@ -65,7 +70,7 @@ namespace NHeroes2.Agg.Music
                     sb.skip(iff.length);
                     iff = sb.ReadData<IFFChunkHeader>();
                 }
-            
+
                 // EVNT
                 if (iff.ID != TAG_EVNT)
                 {
@@ -83,9 +88,9 @@ namespace NHeroes2.Agg.Music
             }
         }
 
-        public bool isvalid() 
+        public bool isvalid()
         {
-            return tracks.Count !=0;
+            return tracks.Count != 0;
         }
-    };
+    }
 }

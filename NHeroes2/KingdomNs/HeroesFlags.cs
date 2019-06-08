@@ -5,7 +5,6 @@ namespace NHeroes2.KingdomNs
     [Flags]
     public enum HeroesFlags
     {
-
         SHIPMASTER = 0x00000001,
 
         //UNUSED	= 0x00000002,

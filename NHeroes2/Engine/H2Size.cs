@@ -3,7 +3,15 @@
     public class H2Size
     {
         public ushort W, H;
-        public int w() => W;
-        public int h() => H;
-    };
+
+        public int w()
+        {
+            return W;
+        }
+
+        public int h()
+        {
+            return H;
+        }
+    }
 }

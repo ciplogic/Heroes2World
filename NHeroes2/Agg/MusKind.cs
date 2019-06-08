@@ -1,6 +1,6 @@
 namespace NHeroes2.Agg
 {
-    enum MusKind
+    internal enum MusKind
     {
         UNUSED,
         DATATRACK,

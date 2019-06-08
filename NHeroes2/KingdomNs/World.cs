@@ -19,32 +19,31 @@ namespace NHeroes2.KingdomNs
 {
     public class World : H2Size
     {
-        MapsTiles vec_tiles = new MapsTiles();
-        AllCastles vec_castles = new AllCastles();
-
-        AllHeroes vec_heroes = new AllHeroes();
-        CapturedObjects map_captureobj = new CapturedObjects();
-        Kingdoms vec_kingdoms = new Kingdoms();
-
-
-        MapObjects map_objects = new MapObjects();
-        MapActions map_actions = new MapActions();
-        EventsDate vec_eventsday = new EventsDate();
-        Rumors vec_rumors = new Rumors();
         private int day, week, month;
-        UltimateArtifact ultimate_artifact;
+        private int heroes_cond_loss;
 
 
-        int heroes_cond_wins;
-        int heroes_cond_loss;
+        private int heroes_cond_wins;
+        private MapActions map_actions = new MapActions();
+        private readonly CapturedObjects map_captureobj = new CapturedObjects();
 
-        Week week_current;
-        Week week_next;
+
+        private readonly MapObjects map_objects = new MapObjects();
+        private UltimateArtifact ultimate_artifact;
+        private readonly AllCastles vec_castles = new AllCastles();
+        private readonly EventsDate vec_eventsday = new EventsDate();
+
+        private readonly AllHeroes vec_heroes = new AllHeroes();
+        private readonly Kingdoms vec_kingdoms = new Kingdoms();
+        private readonly Rumors vec_rumors = new Rumors();
+        private readonly MapsTiles vec_tiles = new MapsTiles();
+
+        private Week week_current;
+        private Week week_next;
 
 
         private World()
         {
-
         }
 
         public static World Instance { get; } = new World();
@@ -55,8 +54,7 @@ namespace NHeroes2.KingdomNs
         }
 
 
-
-        private KingdomNs.Kingdom GetKingdom(ColorKind colorKind)
+        private Kingdom GetKingdom(ColorKind colorKind)
         {
             throw new NotImplementedException();
         }
@@ -161,9 +159,6 @@ namespace NHeroes2.KingdomNs
                         tile.SetHeroes(GetHeroes(MapsStatic.GetPoint(ii)));
                     }
                         break;
-
-                    default:
-                        break;
                 }
             }
 
@@ -176,13 +171,13 @@ namespace NHeroes2.KingdomNs
             // update wins, loss conditions
             if ((GameOverCondition.WINS_HERO & H2Settings.Get().ConditionWins()) != 0)
             {
-                Heroes hero = GetHeroes(H2Settings.Get().WinsMapsPositionObject());
+                var hero = GetHeroes(H2Settings.Get().WinsMapsPositionObject());
                 heroes_cond_wins = hero != null ? hero.GetID() : (int) HeroesKind.UNKNOWN;
             }
 
             if ((GameOverCondition.LOSS_HERO & H2Settings.Get().ConditionLoss()) != 0)
             {
-                Heroes hero = GetHeroes(H2Settings.Get().LossMapsPositionObject());
+                var hero = GetHeroes(H2Settings.Get().LossMapsPositionObject());
                 if (hero != null)
                 {
                     heroes_cond_loss = hero.GetID();
@@ -203,12 +198,12 @@ namespace NHeroes2.KingdomNs
             if (H2Settings.IS_DEVEL())
             {
                 // get first castle position
-                Kingdom kingdom = GetKingdom(H2Color.GetFirst(Players.HumanColors()));
+                var kingdom = GetKingdom(H2Color.GetFirst(Players.HumanColors()));
 
                 if (!kingdom.GetCastles()._items.empty())
                 {
-                    Castle castle = kingdom.GetCastles()._items[0];
-                    Heroes hero = vec_heroes.Get((int) HeroesKind.SANDYSANDY);
+                    var castle = kingdom.GetCastles()._items[0];
+                    var hero = vec_heroes.Get((int) HeroesKind.SANDYSANDY);
 
                     if (hero != null)
                     {
@@ -222,13 +217,13 @@ namespace NHeroes2.KingdomNs
             var it = vec_tiles.FirstOrDefault(tile => tile.isObject(ObjKind.OBJ_RNDULTIMATEARTIFACT));
 
 
-            H2Point ultimate_pos = new H2Point();
+            var ultimate_pos = new H2Point();
 
             // not found
             if (it == null)
             {
                 // generate position for ultimate
-                MapsIndexes pools = new MapsIndexes();
+                var pools = new MapsIndexes();
 
                 foreach (var tile in vec_tiles)
                 {
@@ -260,12 +255,12 @@ namespace NHeroes2.KingdomNs
                 }
             }
 
-            string rumor = _("The ultimate artifact is really the %{name}");
+            var rumor = _("The ultimate artifact is really the %{name}");
             StringReplace(ref rumor, "%{name}", ultimate_artifact.GetName());
             vec_rumors.Add(rumor);
 
             rumor = _("The ultimate artifact may be found in the %{name} regions of the world.");
-            var world = World.Instance;
+            var world = Instance;
             if (world.h() / 3 > ultimate_pos.y)
             {
                 if (world.w() / 3 > ultimate_pos.x)
@@ -306,17 +301,13 @@ namespace NHeroes2.KingdomNs
             vec_rumors.Add(
                 _("You can load the newest version of game from a site:\n http://sf.net/projects/fheroes2"));
             vec_rumors.Add(_("This game is now in beta development version. ;)"));
-
-
         }
 
         public Heroes GetHeroes(H2Point center)
         {
             foreach (var hero in vec_heroes)
-            {
                 if (hero.isPosition(center))
                     return hero;
-            }
 
             return null;
         }
@@ -371,10 +362,7 @@ namespace NHeroes2.KingdomNs
         {
             Reset();
             Defaults();
-            if (!File.Exists(filename))
-            {
-                throw new Exception("load maps");
-            }
+            if (!File.Exists(filename)) throw new Exception("load maps");
 
             var vectorBytes = File.ReadAllBytes(filename);
             var fs = new ByteVectorReader(vectorBytes);
@@ -397,19 +385,19 @@ namespace NHeroes2.KingdomNs
             fs.seek(Mp2Consts.MP2OFFSETDATA - 2 * 4);
 
             // width
-            switch ((mapsize_t) (fs.getLE32()))
+            switch ((mapsize_t) fs.getLE32())
             {
                 case mapsize_t.SMALL:
-                    W = (ushort) (mapsize_t.SMALL);
+                    W = (ushort) mapsize_t.SMALL;
                     break;
                 case mapsize_t.MEDIUM:
-                    W = (ushort) (mapsize_t.MEDIUM);
+                    W = (ushort) mapsize_t.MEDIUM;
                     break;
                 case mapsize_t.LARGE:
-                    W = (ushort) (mapsize_t.LARGE);
+                    W = (ushort) mapsize_t.LARGE;
                     break;
                 case mapsize_t.XLARGE:
-                    W = (ushort) (mapsize_t.XLARGE);
+                    W = (ushort) mapsize_t.XLARGE;
                     break;
                 default:
                     W = 0;
@@ -417,36 +405,33 @@ namespace NHeroes2.KingdomNs
             }
 
             // height
-            switch ((mapsize_t) (fs.getLE32()))
+            switch ((mapsize_t) fs.getLE32())
             {
                 case mapsize_t.SMALL:
-                    H = (ushort) (mapsize_t.SMALL);
+                    H = (ushort) mapsize_t.SMALL;
                     break;
                 case mapsize_t.MEDIUM:
-                    H = (ushort) (mapsize_t.MEDIUM);
+                    H = (ushort) mapsize_t.MEDIUM;
                     break;
                 case mapsize_t.LARGE:
-                    H = (ushort) (mapsize_t.LARGE);
+                    H = (ushort) mapsize_t.LARGE;
                     break;
                 case mapsize_t.XLARGE:
-                    H = (ushort) (mapsize_t.XLARGE);
+                    H = (ushort) mapsize_t.XLARGE;
                     break;
                 default:
                     H = 0;
                     break;
             }
 
-            if (W == 0 || H == 0 || W != H)
-            {
-                return false;
-            }
+            if (W == 0 || H == 0 || W != H) return false;
 
             // seek to ADDONS block
             fs.skip(w() * h() * Mp2Consts.SIZEOFMP2TILE);
 
             // read all addons
             var addonsSize = fs.getLE32();
-            var vec_mp2addons = new List<mp2addon_t>(/* count mp2addon_t */);
+            var vec_mp2addons = new List<mp2addon_t>( /* count mp2addon_t */);
             vec_mp2addons.SetSize(addonsSize);
 
             foreach (var mp2Addon in vec_mp2addons)
@@ -498,8 +483,6 @@ namespace NHeroes2.KingdomNs
                     case ObjKind.OBJ_JAIL:
                         vec_object.Add(index);
                         break;
-                    default:
-                        break;
                 }
 
                 // offset first addon
@@ -513,10 +496,7 @@ namespace NHeroes2.KingdomNs
                 // load all addon for current tils
                 while (offsetAddonsBlock != 0)
                 {
-                    if (vec_mp2addons.Count <= offsetAddonsBlock)
-                    {
-                        break;
-                    }
+                    if (vec_mp2addons.Count <= offsetAddonsBlock) break;
 
                     tile.AddonsPushLevel1(vec_mp2addons[offsetAddonsBlock]);
                     tile.AddonsPushLevel2(vec_mp2addons[offsetAddonsBlock]);
@@ -532,7 +512,7 @@ namespace NHeroes2.KingdomNs
 
             // cood castles
             // 72 x 3 byte (cx, cy, id)
-            for (UInt32 ii = 0; ii < 72; ++ii)
+            for (uint ii = 0; ii < 72; ++ii)
             {
                 var cx = fs.get();
                 var cy = fs.get();
@@ -577,9 +557,6 @@ namespace NHeroes2.KingdomNs
                     case 0x86: // castle: random
                         vec_castles._items.Add(new Castle(cx, cy, RaceType.NONE));
                         break;
-
-                    default:
-                        break;
                 }
 
                 // preload in to capture objects cache
@@ -590,7 +567,7 @@ namespace NHeroes2.KingdomNs
 
             // cood resource kingdoms
             // 144 x 3 byte (cx, cy, id)
-            for (UInt32 ii = 0; ii < 144; ++ii)
+            for (uint ii = 0; ii < 144; ++ii)
             {
                 var cx = fs.get();
                 var cy = fs.get();
@@ -603,7 +580,8 @@ namespace NHeroes2.KingdomNs
                 {
                     // mines: wood
                     case 0x00:
-                        map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_SAWMILL, ColorKind.NONE);
+                        map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_SAWMILL,
+                            ColorKind.NONE);
                         break;
                     // mines: mercury
                     case 0x01:
@@ -637,8 +615,6 @@ namespace NHeroes2.KingdomNs
                         map_captureobj.Set(MapsStatic.GetIndexFromAbsPoint(cx, cy), ObjKind.OBJ_ABANDONEDMINE,
                             ColorKind.NONE);
                         break;
-                    default:
-                        break;
                 }
             }
 
@@ -648,7 +624,7 @@ namespace NHeroes2.KingdomNs
             fs.skip(1);
 
             // count final mp2 blocks
-            UInt32 countblock = 0;
+            uint countblock = 0;
             while (true)
             {
                 var l = fs.get();
@@ -659,7 +635,7 @@ namespace NHeroes2.KingdomNs
             }
 
             // castle or heroes or (events, rumors, etc)
-            for (UInt32 ii = 0; ii < countblock; ++ii)
+            for (uint ii = 0; ii < countblock; ++ii)
             {
                 var findobject = -1;
 
@@ -677,7 +653,7 @@ namespace NHeroes2.KingdomNs
                     orders |= tile.GetQuantity1();
 
 
-                    if (orders != 0 && (orders % 0x08 == 0) && (ii + 1 == orders / 0x08))
+                    if (orders != 0 && orders % 0x08 == 0 && ii + 1 == orders / 0x08)
                         findobject = it_index;
                 }
 
@@ -724,9 +700,6 @@ namespace NHeroes2.KingdomNs
                                     MapsStatic.MinimizeAreaForCastle(castle.GetCenter());
                                     map_captureobj.SetColor(tile.GetIndex(), castle.GetColor());
                                 }
-                                else
-                                {
-                                }
                             }
 
                             break;
@@ -755,15 +728,12 @@ namespace NHeroes2.KingdomNs
                                     case 5:
                                         race = RaceType.NECR;
                                         break;
-                                    default:
-                                        break;
                                 }
 
                                 var hero = GetFreemanHeroes(race);
 
                                 if (hero != null)
                                 {
-
                                     var bvr = new ByteVectorReader(pblock);
                                     hero.LoadFromMP2(findobject, ColorKind.NONE, hero.GetRace(), bvr);
                                     hero.SetModes(HeroesFlags.JAIL);
@@ -839,8 +809,6 @@ namespace NHeroes2.KingdomNs
                             }
 
                             break;
-                        default:
-                            break;
                     }
                 }
                 // other events
@@ -868,9 +836,6 @@ namespace NHeroes2.KingdomNs
                     }
                 }
                 // debug
-                else
-                {
-                }
             }
 
             PostLoad();

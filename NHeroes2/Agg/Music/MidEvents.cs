@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using NHeroes2.Serialize;
 using NHeroes2.Utilities;
@@ -7,7 +6,7 @@ using static NHeroes2.Agg.Music.MiniLog;
 
 namespace NHeroes2.Agg.Music
 {
-    class MidEvents
+    internal class MidEvents
     {
         public readonly List<MidEvent> _items = new List<MidEvent>();
 
@@ -31,7 +30,7 @@ namespace NHeroes2.Agg.Music
             var ptrPos = 0;
             var endSize = t.evnt.Length;
 
-            UInt32 delta = 0;
+            uint delta = 0;
             var notesoff = new List<meta_t>();
 
             while (ptr[ptrPos] != 0 && ptrPos < endSize)
@@ -44,11 +43,10 @@ namespace NHeroes2.Agg.Music
 
                     var it1 = 0;
                     var it2 = notesoff.Count;
-                    UInt32 delta2 = 0;
+                    uint delta2 = 0;
 
                     // apply delta
                     for (; it1 != it2; ++it1)
-                    {
                         if (notesoff[it1].duration <= delta)
                         {
                             var item = notesoff[it1];
@@ -57,7 +55,6 @@ namespace NHeroes2.Agg.Music
 
                             delta2 += item.duration - delta2;
                         }
-                    }
 
                     // remove end notes
                     while (!notesoff.empty() && notesoff.front().duration <= delta)
@@ -158,7 +155,7 @@ namespace NHeroes2.Agg.Music
                     break;
                 }
 
-                res.first |= (UInt32) (0x0000007F & ptr[p]);
+                res.first |= (uint) (0x0000007F & ptr[p]);
                 res.first <<= 7;
                 ++p;
             }
@@ -172,13 +169,9 @@ namespace NHeroes2.Agg.Music
         public int size()
         {
             var res = 0;
-            foreach (var it in _items)
-            {
-                res += it.size();
-            }
+            foreach (var it in _items) res += it.size();
 
             return res;
-
         }
     }
 }

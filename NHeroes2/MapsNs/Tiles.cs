@@ -12,15 +12,15 @@ namespace NHeroes2.MapsNs
     {
         public Addons addons_level1 = new Addons();
         public Addons addons_level2 = new Addons(); // 16
-
-        public UInt32 maps_index = 0;
-        public UInt16 pack_sprite_index = 0;
-        public DirectionTypes tile_passable = 0;
-        public byte mp2_object = 0;
         public ColorKind FogColorsKind = 0;
-        public byte quantity1 = 0;
-        public byte quantity2 = 0;
-        public byte quantity3 = 0;
+
+        public uint maps_index;
+        public byte mp2_object;
+        public ushort pack_sprite_index;
+        public byte quantity1;
+        public byte quantity2;
+        public byte quantity3;
+        public DirectionTypes tile_passable = 0;
 
         public void Init(int index, mp2tile_t mp2)
         {
@@ -58,7 +58,7 @@ namespace NHeroes2.MapsNs
 
         private ushort PackTileSpriteIndex(int index, int shape)
         {
-            return (ushort) (shape << 14 | 0x3FFF & index);
+            return (ushort) ((shape << 14) | (0x3FFF & index));
         }
 
         public void AddonsPushLevel1(mp2tile_t mt)
@@ -103,8 +103,8 @@ namespace NHeroes2.MapsNs
 
         public void AddonsSort()
         {
-            addons_level1._items.Sort((ta1, ta2) => (ta1.level % 4) > (ta2.level % 4) ? 1 : -1);
-            addons_level2._items.Sort((ta1, ta2) => (ta1.level % 4) > (ta2.level % 4) ? 1 : -1);
+            addons_level1._items.Sort((ta1, ta2) => ta1.level % 4 > ta2.level % 4 ? 1 : -1);
+            addons_level2._items.Sort((ta1, ta2) => ta1.level % 4 > ta2.level % 4 ? 1 : -1);
         }
 
         public int GetQuantity2()
@@ -119,67 +119,59 @@ namespace NHeroes2.MapsNs
 
         public ObjKind GetObject()
         {
-            return (ObjKind) this.mp2_object;
+            return (ObjKind) mp2_object;
         }
 
         public int GetIndex()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public TilesAddon FindObjectConst(ObjKind objHeroes)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public static void FixedPreload(Tiles tile)
         {
-    // fix skeleton: left position
-    var it = tile.addons_level1._items.FirstOrDefault(addon => TilesAddon.isSkeletonFix(addon));
+            // fix skeleton: left position
+            var it = tile.addons_level1._items.FirstOrDefault(addon => TilesAddon.isSkeletonFix(addon));
 
-    if (it != null)
-    {
-        tile.SetObject((byte) ObjKind.OBJN_SKELETON);
-    }
+            if (it != null) tile.SetObject((byte) ObjKind.OBJN_SKELETON);
 
-    // fix price loyalty objects.
-    if (!H2Settings.Get().PriceLoyaltyVersion())
-        return;
-    switch (tile.GetObject())
-    {
-    case ObjKind.OBJ_UNKNW_79:
-    case ObjKind.OBJ_UNKNW_7A:
-    case ObjKind.OBJ_UNKNW_F9:
-    case ObjKind.OBJ_UNKNW_FA:
-        {
-            var newobj = ObjKind.OBJ_ZERO;
-            it = tile.addons_level1._items.FirstOrDefault(TilesAddon.isX_LOC123);
-            if (it != null)
+            // fix price loyalty objects.
+            if (!H2Settings.Get().PriceLoyaltyVersion())
+                return;
+            switch (tile.GetObject())
             {
-                newobj = TilesAddon.GetLoyaltyObject(it);
-            }
-            else
-            {
-                it = tile.addons_level2._items.FirstOrDefault(TilesAddon.isX_LOC123);
-                if (it != null)
-                    newobj = TilesAddon.GetLoyaltyObject(it);
-            }
+                case ObjKind.OBJ_UNKNW_79:
+                case ObjKind.OBJ_UNKNW_7A:
+                case ObjKind.OBJ_UNKNW_F9:
+                case ObjKind.OBJ_UNKNW_FA:
+                {
+                    var newobj = ObjKind.OBJ_ZERO;
+                    it = tile.addons_level1._items.FirstOrDefault(TilesAddon.isX_LOC123);
+                    if (it != null)
+                    {
+                        newobj = TilesAddon.GetLoyaltyObject(it);
+                    }
+                    else
+                    {
+                        it = tile.addons_level2._items.FirstOrDefault(TilesAddon.isX_LOC123);
+                        if (it != null)
+                            newobj = TilesAddon.GetLoyaltyObject(it);
+                    }
 
-            if (ObjKind.OBJ_ZERO != newobj)
-                tile.SetObject((byte) newobj);
-        }
-        break;
-
-    default:
-        break;
-    }
+                    if (ObjKind.OBJ_ZERO != newobj)
+                        tile.SetObject((byte) newobj);
+                }
+                    break;
+            }
         }
 
         public void QuantityUpdate()
         {
             //TODO Finish
-            
-            
         }
 
         public void QuantityReset()
@@ -200,7 +192,7 @@ namespace NHeroes2.MapsNs
 
         public void SetHeroes(Heroes hero)
         {
-            if (hero!=null)
+            if (hero != null)
             {
                 hero.SetMapsObject((ObjKind) mp2_object);
                 SetQuantity3(hero.GetID() + 1);
@@ -216,7 +208,9 @@ namespace NHeroes2.MapsNs
                     hero.SetMapsObject(ObjKind.OBJ_ZERO);
                 }
                 else
+                {
                     SetObject((byte) ObjKind.OBJ_ZERO);
+                }
 
                 SetQuantity3(0);
             }
@@ -238,14 +232,14 @@ namespace NHeroes2.MapsNs
         }
 
         public void UpdatePassable()
-        { 
+        {
         }
 
         internal Heroes GetHeroes()
         {
             var world = World.Instance;
-            return MapsNs.ObjKind.OBJ_HEROES == (ObjKind) mp2_object && GetQuantity3()!=0 
-                ? world.GetHeroes(GetQuantity3() - 1) 
+            return ObjKind.OBJ_HEROES == (ObjKind) mp2_object && GetQuantity3() != 0
+                ? world.GetHeroes(GetQuantity3() - 1)
                 : null;
         }
 

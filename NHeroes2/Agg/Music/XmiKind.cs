@@ -19,6 +19,6 @@ namespace NHeroes2.Agg.Music
         MIDI0017,
         MIDI0018,
         MIDI0042,
-        MIDI0043 
+        MIDI0043
     }
 }

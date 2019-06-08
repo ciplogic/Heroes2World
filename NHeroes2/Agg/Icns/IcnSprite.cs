@@ -6,8 +6,8 @@ namespace NHeroes2.Agg.Icns
     public class IcnSprite
     {
         public Bitmap first;
-        public Bitmap second;
         public Point offset;
+        public Bitmap second;
 
         public void SetSize(bool isFirst, int width, int height, bool b)
         {

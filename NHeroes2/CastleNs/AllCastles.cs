@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.CastleNs
 {
-    class AllCastles : VecCastles
+    internal class AllCastles : VecCastles
     {
     }
 }

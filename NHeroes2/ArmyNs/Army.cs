@@ -1,7 +1,6 @@
 namespace NHeroes2.ArmyNs
 {
-    class Army
+    internal class Army
     {
-        
     }
 }

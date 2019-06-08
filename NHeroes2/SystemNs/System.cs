@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using NHeroes2.Engine;
 using NHeroes2.GameNs;
@@ -9,63 +8,64 @@ namespace NHeroes2.SystemNs
 {
     public class H2Settings
     {
+        private bool _isQuickCombat;
+        private bool _isUiHeroesBar;
+        private int ai_speed;
+        private int battle_speed;
+        private int blit_speed;
+        private readonly H2FileInfo current_maps_file = new H2FileInfo();
+        private string data_params;
+
+
+        private int debug;
+
+        private string font_normal;
+        private string font_small;
+        private string force_lang;
+        private bool fullScreen;
+        private int game_difficulty;
+
+        private int game_type;
+        private int heroes_speed;
+        private string maps_charset;
+        private ListDirs maps_params = new ListDirs();
+        private uint memory_limit;
+        private int music_volume;
+        private readonly BitModes opt_addons = new BitModes();
+        private readonly BitModes opt_battle = new BitModes();
+        private readonly BitModes opt_game = new BitModes();
+
+
+        private BitModes opt_global = new BitModes();
+        private readonly BitModes opt_world = new BitModes();
+
+        private string path_program;
+
+        private readonly Players players = new Players();
+
+        private int port;
+        private H2Point pos_bttn;
+        private H2Point pos_icon;
+
+        private H2Point pos_radr;
+        private H2Point pos_stat;
+        private int preferably_count_players;
+        private int scroll_speed;
+        private int size_normal;
+        private int size_small;
+
+
+        private int sound_volume;
+
+        private string video_driver;
+        private Size video_mode;
         public static H2Settings Instance { get; } = new H2Settings();
 
-        public static H2Settings Get() => Instance;
-        H2FileInfo current_maps_file = new H2FileInfo();
-        
-        
-        BitModes opt_global = new BitModes();
-        BitModes opt_game= new BitModes();
-        BitModes opt_battle= new BitModes();
-        BitModes opt_world= new BitModes();
-        BitModes opt_addons= new BitModes();
-        
-        
-        int debug;
-        Size video_mode;
-        bool fullScreen;
-        int game_difficulty;
+        public static H2Settings Get()
+        {
+            return Instance;
+        }
 
-        string path_program;
-        string data_params;
-        ListDirs maps_params = new ListDirs();
-
-        string font_normal;
-        string font_small;
-        string force_lang;
-        string maps_charset;
-        int size_normal;
-        int size_small;
-
-        bool _isQuickCombat;
-        bool _isUiHeroesBar;
-
-
-        
-        int sound_volume;
-        int music_volume;
-        int heroes_speed;
-        int ai_speed;
-        int scroll_speed;
-        int battle_speed;
-        int blit_speed;
-
-        int game_type;
-        int preferably_count_players;
-
-        string video_driver;
-
-        int port;
-        uint memory_limit;
-
-        H2Point pos_radr;
-        H2Point pos_bttn;
-        H2Point pos_icon;
-        H2Point pos_stat;
-
-        Players players = new Players();
-        
         public bool PriceLoyaltyVersion()
         {
             return false;
@@ -78,11 +78,11 @@ namespace NHeroes2.SystemNs
 
         public static bool IS_DEVEL()
         {
-            #if DEBUG
+#if DEBUG
             return true;
-            #else
+#else
             return false;
-            #endif
+#endif
         }
 
         public H2Point WinsMapsPositionObject()
@@ -113,9 +113,8 @@ namespace NHeroes2.SystemNs
                     return opt_addons.Modes(f & mask);
                 case 0x04:
                     return opt_battle.Modes(f & mask);
-                default:
-                    break;
             }
+
             return false;
         }
 

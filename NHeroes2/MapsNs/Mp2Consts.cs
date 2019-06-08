@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.MapsNs
 {
-    class Mp2Consts
+    internal class Mp2Consts
     {
         public const int MP2OFFSETDATA = 428;
         public const int SIZEOFMP2TILE = 20;

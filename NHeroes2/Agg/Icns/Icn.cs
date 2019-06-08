@@ -2,9 +2,9 @@
 
 namespace NHeroes2.Agg.Icns
 {
-    class Icn
+    internal class Icn
     {
-        static Dictionary<IcnKind, string> Values = new Dictionary<IcnKind, string>()
+        private static readonly Dictionary<IcnKind, string> Values = new Dictionary<IcnKind, string>
         {
             {IcnKind.UNKNOWN, "UNKNOWN"},
             {IcnKind.ADVBORDE, "ADVBORDE.ICN"},
@@ -893,7 +893,7 @@ namespace NHeroes2.Agg.Icns
 
         public static string GetString(IcnKind icn)
         {
-            return ((int) IcnKind.UNKNOWN <= icn) && (IcnKind.LASTICN > icn) ? Values[(IcnKind) icn] : "CUSTOM";
+            return (int) IcnKind.UNKNOWN <= icn && IcnKind.LASTICN > icn ? Values[icn] : "CUSTOM";
         }
     }
 }

@@ -13,9 +13,8 @@ namespace NHeroes2.Agg.Music
             var xmi = (XmiKind) midSong;
             var v = GetMID(aggFile, xmi);
             Play(v);
-            
-            //PlayMid(v, loop);
 
+            //PlayMid(v, loop);
         }
 
         private static byte[] GetMID(AggFile aggFile, XmiKind xmi)
@@ -23,14 +22,13 @@ namespace NHeroes2.Agg.Music
             var xmiName = xmi + ".XMI";
             var chunk = aggFile.Read(xmiName);
             return Xmi2Mid(chunk);
-
         }
 
-        static byte[] Xmi2Mid(byte[] buf)
+        private static byte[] Xmi2Mid(byte[] buf)
         {
-            var xmi = new XMIData (buf);
+            var xmi = new XMIData(buf);
 
-            if (!xmi.isvalid()) 
+            if (!xmi.isvalid())
                 return Array.Empty<byte>();
             var sb = new ByteVectorWriter(16 * 4096);
             var mid = new MidData(xmi.tracks, 64);
@@ -39,12 +37,11 @@ namespace NHeroes2.Agg.Music
             return sb.data();
         }
 
-        static void Play(byte[] buf)
+        private static void Play(byte[] buf)
         {
             File.WriteAllBytes("play.mid", buf);
             var mix = SDL_mixer.Mix_LoadMUS("play.mid");
             SDL_mixer.Mix_PlayMusic(mix, 1);
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using NHeroes2.Serialize;
+﻿using System;
+using NHeroes2.Serialize;
 
 namespace NHeroes2.KingdomNs
 {
@@ -6,7 +7,7 @@ namespace NHeroes2.KingdomNs
     {
         public void LoadFromMP2(int findobject, ByteVectorReader bvr)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

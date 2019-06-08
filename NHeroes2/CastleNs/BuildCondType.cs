@@ -1,6 +1,6 @@
 namespace NHeroes2.CastleNs
 {
-    enum BuildCondType
+    internal enum BuildCondType
     {
         NOT_TODAY = -1,
         ALREADY_BUILT = -2,

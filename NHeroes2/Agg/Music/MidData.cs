@@ -6,43 +6,44 @@ namespace NHeroes2.Agg.Music
 {
     internal class MidData
     {
-        public IFFChunkHeader mthd;
         public int format;
+        public IFFChunkHeader mthd;
         public int ppqn;
         public MidTracks tracks;
 
-        public override string ToString()
+        static MidData()
         {
-            return this.SerializeToJsonString();
+            ByteVectorReflect.AddTypeWriter<MidData>(
+                (sb, st) =>
+                {
+                    sb.Write(st.mthd);
+                    sb.putBE16((ushort) st.format);
+                    sb.putBE16((ushort) st.tracks._items.Count);
+                    sb.putBE16((ushort) st.ppqn);
+
+                    sb.Write(st.tracks);
+
+
+                    flushLog();
+                }
+            );
         }
 
-        public MidData() 
+        public MidData()
         {
             mthd = new IFFChunkHeader(Xml2Mid.TAG_MTHD, 6);
         }
 
-        public MidData(XMITracks t, int p) 
+        public MidData(XMITracks t, int p)
         {
             mthd = new IFFChunkHeader(Xml2Mid.TAG_MTHD, 6);
             ppqn = p;
             tracks = new MidTracks(t);
         }
-        static MidData()
+
+        public override string ToString()
         {
-        ByteVectorReflect.AddTypeWriter<MidData>(
-            (sb, st) =>
-            {
-                sb.Write(st.mthd); 
-                sb.putBE16((ushort) st.format);
-                sb.putBE16((ushort) st.tracks._items.Count);
-                sb.putBE16((ushort) st.ppqn);
-                
-                sb.Write(st.tracks);
-                
-                
-                flushLog();
-            }
-            );
+            return this.SerializeToJsonString();
         }
     }
 }

@@ -7,7 +7,6 @@ namespace NHeroes2.MapsNs
     {
         public static IcnKind GetICNObject(int type)
         {
-
             switch (type)
             {
                 // reserverd
@@ -324,9 +323,6 @@ namespace NHeroes2.MapsNs
                 case 0xFE:
                 case 0xFF:
                     if (H2Settings.Get().PriceLoyaltyVersion()) return IcnKind.X_LOC3;
-                    break;
-
-                default:
                     break;
             }
 

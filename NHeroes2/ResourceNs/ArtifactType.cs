@@ -1,6 +1,6 @@
 ﻿namespace NHeroes2.ResourceNs
 {
-    enum ArtifactType
+    internal enum ArtifactType
     {
         ULTIMATE_BOOK,
         ULTIMATE_SWORD,
@@ -110,5 +110,5 @@
         SPADE_NECROMANCY,
 
         UNKNOWN
-    };
+    }
 }

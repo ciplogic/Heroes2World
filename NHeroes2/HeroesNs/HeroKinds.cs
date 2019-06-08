@@ -12,6 +12,7 @@
         RUBY,
         MAXIMUS,
         DIMITRY,
+
         // barbarian
         THUNDAX,
         FINEOUS,
@@ -22,6 +23,7 @@
         ERGON,
         TSABU,
         ATLAS,
+
         // sorceress
         ASTRA,
         NATASHA,
@@ -32,6 +34,7 @@
         ARIEL,
         CARLAWN,
         LUNA,
+
         // warlock
         ARIE,
         ALAMAR,
@@ -42,6 +45,7 @@
         AGAR,
         FALAGAR,
         WRATHMONT,
+
         // wizard
         MYRA,
         FLINT,
@@ -52,6 +56,7 @@
         SARAKIN,
         KALINDRA,
         MANDIGAL,
+
         // necromancer
         ZOM,
         DARLANA,
@@ -62,6 +67,7 @@
         ROXANA,
         SANDRO,
         CELIA,
+
         // from campain
         ROLAND,
         CORLAGON,
@@ -69,6 +75,7 @@
         ARCHIBALD,
         HALTON,
         BAX,
+
         // from extended
         SOLMYR,
         DAINWIN,
@@ -81,9 +88,9 @@
         DRAKONIA,
         MARTINE,
         JARKONAS,
+
         // debugger
         SANDYSANDY,
         UNKNOWN
- 
     }
 }

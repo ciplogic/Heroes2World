@@ -1,6 +1,6 @@
 namespace NHeroes2.CastleNs
 {
-    enum CastleFlags
+    internal enum CastleFlags
     {
         ALLOWCASTLE = 0x0002,
         CUSTOMARMY = 0x0004,

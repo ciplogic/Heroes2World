@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NHeroes2.CastleNs;
 using NHeroes2.Engine;
 using NHeroes2.HeroesNs.Route;
@@ -10,48 +11,49 @@ namespace NHeroes2.HeroesNs
 {
     public class Heroes
     {
-        string name;
+        private ColorKind _killerColorKind;
         public ColorBase color;
-        ColorBase killer_color;
-        uint experience;
-        int move_point_scale;
 
-        SecSkills secondary_skills;
-        int hid; /* hero id */
-        int portrait; /* hero id */
-        int race;
-        int save_maps_object;
+        private int direction;
+        private uint experience;
+        private int hid; /* hero id */
+        private ColorBase killer_color;
+        private int move_point_scale;
+        private string name;
 
-        H2Path path;
+        private H2Path path;
 
-        int direction;
-        int sprite_index;
-
-        H2Point patrol_center;
-        int patrol_square;
+        private H2Point patrol_center;
+        private int patrol_square;
+        private int portrait; /* hero id */
         public MapPosition position = new MapPosition();
-        ColorKind _killerColorKind;
+        private int race;
+        private int save_maps_object;
+
+        private SecSkills secondary_skills;
+        private int sprite_index;
 
 
-        List<IndexObject> visit_object = new List<IndexObject>();
+        private List<IndexObject> visit_object = new List<IndexObject>();
+
         public RaceType GetRace()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void LoadFromMP2(int findobject, ColorKind none, RaceType getRace, ByteVectorReader bvr)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void SetModes(HeroesFlags jail)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool isFreeman()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool isPosition(H2Point center)
@@ -66,21 +68,21 @@ namespace NHeroes2.HeroesNs
 
         public int GetID()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public byte GetMapsObject()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Recruit(Castle castle)
         {
-            
         }
+
         public void Recruit(ColorKind getColor, H2Point h2Point)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int GetColor()
@@ -90,17 +92,17 @@ namespace NHeroes2.HeroesNs
 
         public bool Modes(HeroesFlags patrol)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void SetFreeman(int i)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void SetCenterPatrol(H2Point cp)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

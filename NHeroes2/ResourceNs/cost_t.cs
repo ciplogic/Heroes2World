@@ -1,16 +1,15 @@
-using System;
-
 namespace NHeroes2.ResourceNs
 {
-    class cost_t
+    internal class cost_t
     {
+        public static cost_t COST_NONE = new cost_t(0, 0, 0, 0, 0, 0, 0);
+        public byte crystal;
+        public byte gems;
         public ushort gold;
-        public byte wood;
         public byte mercury;
         public byte ore;
         public byte sulfur;
-        public byte crystal;
-        public byte gems;
+        public byte wood;
 
         public cost_t(ushort gold, byte wood, byte mercury, byte ore, byte sulfur, byte crystal, byte gems)
         {
@@ -22,7 +21,5 @@ namespace NHeroes2.ResourceNs
             this.crystal = crystal;
             this.gems = gems;
         }
-        
-        public static cost_t COST_NONE = new cost_t(0,0,0,0,0,0,0);
     }
 }

@@ -12,9 +12,11 @@ namespace NHeroes2.CastleNs
         BUILD_RIGHTTURRET = 0x00000040,
         BUILD_MARKETPLACE = 0x00000080,
         BUILD_WEL2 = 0x00000100,
+
         // Farm, Garbage He, Crystal Gar, Waterfall, Orchard, Skull Pile
         BUILD_MOAT = 0x00000200,
         BUILD_SPEC = 0x00000400,
+
         // Fortification, Coliseum, Rainbow, Dungeon, Library, Storm
         BUILD_CASTLE = 0x00000800,
         BUILD_CAPTAIN = 0x00001000,
@@ -26,6 +28,7 @@ namespace NHeroes2.CastleNs
         BUILD_MAGEGUILD5 = 0x00040000,
         BUILD_MAGEGUILD = BUILD_MAGEGUILD1 | BUILD_MAGEGUILD2 | BUILD_MAGEGUILD3 | BUILD_MAGEGUILD4 | BUILD_MAGEGUILD5,
         BUILD_TENT = 0x00080000,
+
         // deprecated
         DWELLING_MONSTER1 = 0x00100000,
         DWELLING_MONSTER2 = 0x00200000,
@@ -33,6 +36,7 @@ namespace NHeroes2.CastleNs
         DWELLING_MONSTER4 = 0x00800000,
         DWELLING_MONSTER5 = 0x01000000,
         DWELLING_MONSTER6 = 0x02000000,
+
         DWELLING_MONSTERS =
             DWELLING_MONSTER1 | DWELLING_MONSTER2 | DWELLING_MONSTER3 | DWELLING_MONSTER4 | DWELLING_MONSTER5 |
             DWELLING_MONSTER6,
@@ -42,9 +46,10 @@ namespace NHeroes2.CastleNs
         DWELLING_UPGRADE5 = 0x20000000,
         DWELLING_UPGRADE6 = 0x40000000,
         DWELLING_UPGRADE7 = 0x80000000,
+
         // black dragon
         DWELLING_UPGRADES =
             DWELLING_UPGRADE2 | DWELLING_UPGRADE3 | DWELLING_UPGRADE4 | DWELLING_UPGRADE5 | DWELLING_UPGRADE6 |
-            DWELLING_UPGRADE7       
+            DWELLING_UPGRADE7
     }
 }

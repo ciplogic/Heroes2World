@@ -13,6 +13,4 @@ namespace NHeroes2.KingdomNs
         BLAZING = 8,
         INSTANT = 9
     }
-    
-    
 }

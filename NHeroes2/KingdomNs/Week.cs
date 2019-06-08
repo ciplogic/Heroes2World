@@ -3,14 +3,10 @@ using static NHeroes2.SystemNs.Translation;
 
 namespace NHeroes2.KingdomNs
 {
-    class Week
+    internal class Week
     {
-        public WeekKind first;
-        public MonsterType second;
-
-        private static string[] str_name = new[]
+        private static readonly string[] str_name =
         {
-
             "Unnamed", _("week|PLAGUE"),
             _("week|Ant"), _("week|Grasshopper"), _("week|Dragonfly"), _("week|Spider"),
             _("week|Butterfly"), _("week|Bumblebee"),
@@ -20,6 +16,9 @@ namespace NHeroes2.KingdomNs
             _("week|Mongoose"), _("week|Aardvark"),
             _("week|Lizard"), _("week|Tortoise"), _("week|Hedgehog"), _("week|Condor")
         };
+
+        public WeekKind first;
+        public MonsterType second;
 
         public string Name
         {
@@ -77,8 +76,6 @@ namespace NHeroes2.KingdomNs
                         return str_name[24];
                     case WeekKind.MONSTERS:
                         return new Monster(second).GetName();
-                    default:
-                        break;
                 }
 
                 return str_name[0];

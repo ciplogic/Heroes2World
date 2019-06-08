@@ -5,7 +5,7 @@ namespace NHeroes2.SpellNs
 {
     public class SpellStats
     {
-        internal static spellstats_t[] spells = new[]
+        internal static spellstats_t[] spells =
         {
             //  name                      sp   mp  spr value  bits cost     description
             new spellstats_t("Unknown", 0, 0, 0, 0, 0, COST_NONE, "Unknown spell."),
@@ -215,7 +215,7 @@ namespace NHeroes2.SpellNs
             new spellstats_t("Random 3", 0, 0, 0, 0, 0, COST_NONE, "Random 3"),
             new spellstats_t("Random 4", 0, 0, 0, 0, 0, COST_NONE, "Random 4"),
             new spellstats_t("Random 5", 0, 0, 0, 0, 0, COST_NONE, "Random 5"),
-            new spellstats_t("Stone", 0, 0, 0, 0, 0, COST_NONE, "Stone spell from Medusa."),
+            new spellstats_t("Stone", 0, 0, 0, 0, 0, COST_NONE, "Stone spell from Medusa.")
         };
     }
 }

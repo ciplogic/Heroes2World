@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using NHeroes2.Utilities;
 
 namespace NHeroes2.Agg.Music
 {
-
     internal class MetaTComparer : IComparer<meta_t>
     {
         public int Compare(meta_t x, meta_t y)
@@ -15,26 +13,30 @@ namespace NHeroes2.Agg.Music
             return (int) x.duration - (int) y.duration;
         }
     }
-    
-    class meta_t
+
+    internal class meta_t
     {
+        public byte command;
+        public uint duration;
+        public byte quantity;
+
         public meta_t()
         {
         }
 
-        public meta_t(byte c, byte q, UInt32 d)
+        public meta_t(byte c, byte q, uint d)
         {
             command = c;
             quantity = q;
             duration = d;
         }
 
-        public bool LessThan(meta_t m) 
+        public bool LessThan(meta_t m)
         {
             return duration < m.duration;
         }
 
-        public void decrease_duration(UInt32 delta)
+        public void decrease_duration(uint delta)
         {
             duration -= delta;
         }
@@ -43,9 +45,5 @@ namespace NHeroes2.Agg.Music
         {
             return this.SerializeToJsonString();
         }
-
-        public byte command = 0;
-        public byte  quantity = 0;
-        public UInt32 duration = 0;
-    };
+    }
 }

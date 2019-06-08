@@ -1,6 +1,6 @@
 namespace NHeroes2.HeroesNs
 {
-    enum HeroesKind
+    internal enum HeroesKind
     {
         // knight
         LORDKILBURN,
@@ -12,6 +12,7 @@ namespace NHeroes2.HeroesNs
         RUBY,
         MAXIMUS,
         DIMITRY,
+
         // barbarian
         THUNDAX,
         FINEOUS,
@@ -22,6 +23,7 @@ namespace NHeroes2.HeroesNs
         ERGON,
         TSABU,
         ATLAS,
+
         // sorceress
         ASTRA,
         NATASHA,
@@ -32,6 +34,7 @@ namespace NHeroes2.HeroesNs
         ARIEL,
         CARLAWN,
         LUNA,
+
         // warlock
         ARIE,
         ALAMAR,
@@ -42,6 +45,7 @@ namespace NHeroes2.HeroesNs
         AGAR,
         FALAGAR,
         WRATHMONT,
+
         // wizard
         MYRA,
         FLINT,
@@ -52,6 +56,7 @@ namespace NHeroes2.HeroesNs
         SARAKIN,
         KALINDRA,
         MANDIGAL,
+
         // necromancer
         ZOM,
         DARLANA,
@@ -62,6 +67,7 @@ namespace NHeroes2.HeroesNs
         ROXANA,
         SANDRO,
         CELIA,
+
         // from campain
         ROLAND,
         CORLAGON,
@@ -69,6 +75,7 @@ namespace NHeroes2.HeroesNs
         ARCHIBALD,
         HALTON,
         BAX,
+
         // from extended
         SOLMYR,
         DAINWIN,
@@ -81,8 +88,9 @@ namespace NHeroes2.HeroesNs
         DRAKONIA,
         MARTINE,
         JARKONAS,
+
         // debugger
         SANDYSANDY,
         UNKNOWN
-    };
+    }
 }

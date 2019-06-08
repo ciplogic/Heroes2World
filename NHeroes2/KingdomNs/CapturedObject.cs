@@ -5,25 +5,26 @@ namespace NHeroes2.KingdomNs
 {
     internal class CapturedObject
     {
-        public ObjectColor objcol = new ObjectColor();
         public Troop guardians;
+        public ObjectColor objcol = new ObjectColor();
         public int split = 1;
-        int GetSplit() 
+
+        private int GetSplit()
         {
             return split;
         }
 
-        public ObjKind GetObject() 
+        public ObjKind GetObject()
         {
             return objcol.Obj;
         }
 
-        public ColorKind GetColor() 
+        public ColorKind GetColor()
         {
             return objcol.ColorKind;
         }
 
-        Troop GetTroop()
+        private Troop GetTroop()
         {
             return guardians;
         }
@@ -39,12 +40,12 @@ namespace NHeroes2.KingdomNs
             objcol.ColorKind = col;
         }
 
-        void SetSplit(int spl)
+        private void SetSplit(int spl)
         {
             split = spl;
         }
 
-        bool GuardiansProtected() 
+        private bool GuardiansProtected()
         {
             return guardians.IsValid();
         }

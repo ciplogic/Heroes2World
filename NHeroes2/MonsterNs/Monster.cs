@@ -1,3 +1,5 @@
+using System;
+
 namespace NHeroes2.MonsterNs
 {
     public class Monster
@@ -11,10 +13,17 @@ namespace NHeroes2.MonsterNs
 
         public bool IsValid()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public string GetName() => monstats_t.monsters[(int) id].name;
-        public string GetMultiName() => monstats_t.monsters[(int) id].multiname;
+        public string GetName()
+        {
+            return monstats_t.monsters[(int) id].name;
+        }
+
+        public string GetMultiName()
+        {
+            return monstats_t.monsters[(int) id].multiname;
+        }
     }
 }

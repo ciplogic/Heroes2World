@@ -3,21 +3,23 @@ using System;
 namespace NHeroes2.SystemNs
 {
     internal class Player
-    {    int control;
-         int color;
-         int race;
-         int friends;
-         string name;
-         uint id;
-         Focus focus;
+    {
+        private int color;
+        private int control;
+        private Focus focus;
+        private int friends;
+        private uint id;
+        private string name;
+        private int race;
+
         public bool isPlay()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int GetControl()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int GetColor()
