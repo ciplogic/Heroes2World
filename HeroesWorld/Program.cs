@@ -15,9 +15,9 @@ using Screen = HeroesWorld.Engine.Graphical.Screen;
 
 namespace HeroesWorld
 {
-    internal class Program
+    public class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             if (!File.Exists("../DATA/HEROES2.AGG"))
             {
@@ -37,7 +37,7 @@ namespace HeroesWorld
                 Console.WriteLine("Pic: "+pic.SerializeToJsonString());
             }*/
             var world = World.Instance;
-            world.LoadMapMP2("../MAPS/BROKENA.MP2");
+           // world.LoadMapMP2("../MAPS/BROKENA.MP2");
 
             var settings = new GameSettings
             {
