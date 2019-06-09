@@ -70,9 +70,10 @@ namespace NHeroes2.Agg
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
         };
 
+        private readonly Dictionary<string, AggFat> fat = new Dictionary<string, AggFat>();
+
         private byte[] body;
         private int count_items;
-        private readonly Dictionary<string, AggFat> fat = new Dictionary<string, AggFat>();
         private byte[] fileContent;
 
         private string filename;

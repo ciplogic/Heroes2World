@@ -1,29 +1,18 @@
-﻿namespace NHeroes2.HeroesNs
-{
-    public enum DirectionTypes : ushort
-    {
-        UNKNOWN = 0x0000,
-        TOP_LEFT = 0x0001,
-        TOP = 0x0002,
-        TOP_RIGHT = 0x0004,
-        RIGHT = 0x0008,
-        BOTTOM_RIGHT = 0x0010,
-        BOTTOM = 0x0020,
-        BOTTOM_LEFT = 0x0040,
-        LEFT = 0x0080,
-        CENTER = 0x0100,
+﻿using System.Collections.Generic;
 
-        DIRECTION_TOP_ROW = TOP_LEFT | TOP | TOP_RIGHT,
-        DIRECTION_BOTTOM_ROW = BOTTOM_LEFT | BOTTOM | BOTTOM_RIGHT,
-        DIRECTION_CENTER_ROW = LEFT | CENTER | RIGHT,
-        DIRECTION_LEFT_COL = TOP_LEFT | LEFT | BOTTOM_LEFT,
-        DIRECTION_CENTER_COL = TOP | CENTER | BOTTOM,
-        DIRECTION_RIGHT_COL = TOP_RIGHT | RIGHT | BOTTOM_RIGHT,
-        DIRECTION_ALL = DIRECTION_TOP_ROW | DIRECTION_BOTTOM_ROW | DIRECTION_CENTER_ROW,
-        DIRECTION_AROUND = DIRECTION_TOP_ROW | DIRECTION_BOTTOM_ROW | LEFT | RIGHT,
-        DIRECTION_TOP_RIGHT_CORNER = TOP | TOP_RIGHT | RIGHT,
-        DIRECTION_TOP_LEFT_CORNER = TOP | TOP_LEFT | LEFT,
-        DIRECTION_BOTTOM_RIGHT_CORNER = BOTTOM | BOTTOM_RIGHT | RIGHT,
-        DIRECTION_BOTTOM_LEFT_CORNER = BOTTOM | BOTTOM_LEFT | LEFT
+namespace NHeroes2.HeroesNs
+{
+    internal static class Direction
+    {
+        private static readonly List<DirectionType> directs = new List<DirectionType>
+        {
+            DirectionType.TOP_LEFT, DirectionType.TOP, DirectionType.TOP_RIGHT, DirectionType.RIGHT,
+            DirectionType.BOTTOM_RIGHT, DirectionType.BOTTOM, DirectionType.BOTTOM_LEFT, DirectionType.LEFT
+        };
+
+        public static Directions All()
+        {
+            return new Directions(directs);
+        }
     }
 }

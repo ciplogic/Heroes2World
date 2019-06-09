@@ -8,12 +8,18 @@ namespace NHeroes2.SystemNs
 {
     public class H2Settings
     {
+        private readonly H2FileInfo current_maps_file = new H2FileInfo();
+        private readonly BitModes opt_addons = new BitModes();
+        private readonly BitModes opt_battle = new BitModes();
+        private readonly BitModes opt_game = new BitModes();
+        private readonly BitModes opt_world = new BitModes();
+
+        private readonly Players players = new Players();
         private bool _isQuickCombat;
         private bool _isUiHeroesBar;
         private int ai_speed;
         private int battle_speed;
         private int blit_speed;
-        private readonly H2FileInfo current_maps_file = new H2FileInfo();
         private string data_params;
 
 
@@ -31,17 +37,11 @@ namespace NHeroes2.SystemNs
         private ListDirs maps_params = new ListDirs();
         private uint memory_limit;
         private int music_volume;
-        private readonly BitModes opt_addons = new BitModes();
-        private readonly BitModes opt_battle = new BitModes();
-        private readonly BitModes opt_game = new BitModes();
 
 
         private BitModes opt_global = new BitModes();
-        private readonly BitModes opt_world = new BitModes();
 
         private string path_program;
-
-        private readonly Players players = new Players();
 
         private int port;
         private H2Point pos_bttn;
@@ -131,6 +131,11 @@ namespace NHeroes2.SystemNs
         public Players GetPlayers()
         {
             return players;
+        }
+
+        public int CurrentColor()
+        {
+            return players.current_color;
         }
     }
 }

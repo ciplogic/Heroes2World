@@ -10,7 +10,11 @@ namespace NHeroes2.ResourceNs
         public int sulfur;
         public int wood;
 
-        private Funds(cost_t cost)
+        public Funds()
+        {
+        }
+
+        public Funds(cost_t cost)
         {
             wood = cost.wood;
             mercury = cost.mercury;

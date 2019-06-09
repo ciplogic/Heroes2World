@@ -9,7 +9,7 @@ namespace NHeroes2.SystemNs
         private static int human_colors;
 
         private readonly List<Player> _items = new List<Player>();
-        private int current_color;
+        public int current_color;
 
         public static int HumanColors()
         {

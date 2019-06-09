@@ -104,5 +104,10 @@ namespace NHeroes2.HeroesNs
         {
             throw new NotImplementedException();
         }
+
+        public bool isShipMaster()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

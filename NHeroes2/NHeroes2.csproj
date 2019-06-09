@@ -91,6 +91,8 @@
     <Compile Include="GameNs\GameStatic.cs" />
     <Compile Include="HeroesNs\AllHeroes.cs" />
     <Compile Include="HeroesNs\DirectionNs.cs" />
+    <Compile Include="HeroesNs\Directions.cs" />
+    <Compile Include="HeroesNs\DirectionType.cs" />
     <Compile Include="HeroesNs\HeroBase.cs" />
     <Compile Include="HeroesNs\Heroes.cs" />
     <Compile Include="HeroesNs\HeroesKind.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="KingdomNs\WeekKind.cs" />
     <Compile Include="KingdomNs\World.cs" />
     <Compile Include="MapsNs\Addons.cs" />
+    <Compile Include="MapsNs\GroundType.cs" />
     <Compile Include="MapsNs\H2FileInfo.cs" />
     <Compile Include="MapsNs\IndexObject.cs" />
     <Compile Include="MapsNs\MapIndexes.cs" />

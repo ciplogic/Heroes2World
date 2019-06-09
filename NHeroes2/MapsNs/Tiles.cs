@@ -10,8 +10,12 @@ namespace NHeroes2.MapsNs
 {
     public class Tiles
     {
+        private static readonly World world = World.Instance;
         public Addons addons_level1 = new Addons();
         public Addons addons_level2 = new Addons(); // 16
+
+        public byte fog_colors = 0;
+
         public ColorKind FogColorsKind = 0;
 
         public uint maps_index;
@@ -20,11 +24,11 @@ namespace NHeroes2.MapsNs
         public byte quantity1;
         public byte quantity2;
         public byte quantity3;
-        public DirectionTypes tile_passable = 0;
+        public DirectionType tile_passable = 0;
 
         public void Init(int index, mp2tile_t mp2)
         {
-            tile_passable = DirectionTypes.DIRECTION_ALL;
+            tile_passable = DirectionType.DIRECTION_ALL;
             quantity1 = mp2.quantity1;
             quantity2 = mp2.quantity2;
             quantity3 = 0;
@@ -124,7 +128,7 @@ namespace NHeroes2.MapsNs
 
         public int GetIndex()
         {
-            throw new NotImplementedException();
+            return (int) maps_index;
         }
 
         public TilesAddon FindObjectConst(ObjKind objHeroes)
@@ -216,14 +220,32 @@ namespace NHeroes2.MapsNs
             }
         }
 
-        public bool isObject(ObjKind objRndultimateartifact)
+        public bool isObject(ObjKind obj)
         {
-            throw new NotImplementedException();
+            return obj == (ObjKind) mp2_object;
+        }
+
+        public uint TileSpriteIndex()
+        {
+            return (uint) (pack_sprite_index & 0x3FFF);
+        }
+
+        public uint TileSpriteShape()
+        {
+            return (uint) (pack_sprite_index >> 14);
         }
 
         public bool GoodForUltimateArtifact()
         {
+            if (isWater())
+                return false;
+
             throw new NotImplementedException();
+        }
+
+        private bool isWater()
+        {
+            return 30 > TileSpriteIndex();
         }
 
         public H2Point GetCenter()
@@ -241,6 +263,156 @@ namespace NHeroes2.MapsNs
             return ObjKind.OBJ_HEROES == (ObjKind) mp2_object && GetQuantity3() != 0
                 ? world.GetHeroes(GetQuantity3() - 1)
                 : null;
+        }
+
+        public bool isPassable(Heroes hero, DirectionType direct, bool skipfog)
+        {
+            if (!skipfog && isFog(H2Settings.Get().CurrentColor()))
+                return false;
+
+            return !(hero != null && !isPassable(hero)) && (direct & tile_passable) != 0;
+        }
+
+        private bool isPassable(Heroes hero)
+        {
+            if (hero.isShipMaster()) return isWater() && ObjKind.OBJ_BOAT != GetObject();
+            if (!isWater())
+                return true;
+            switch (GetObject())
+            {
+                // fix shipwreck: place on water
+                case ObjKind.OBJ_SHIPWRECK:
+                    // check later
+                    break;
+
+                // for: meetings/attack hero
+                case ObjKind.OBJ_HEROES:
+                {
+                    // scan ground
+                    var v = new MapsIndexes();
+                    GetAroundIndexes(GetIndex(), v);
+                    if (v.Any(it => { return TileIsGround(it, GroundType.WATER); }))
+                        return false;
+                }
+                    break;
+
+                default:
+                    // ! hero->isShipMaster() && isWater()
+                    return false;
+            }
+
+            return true;
+        }
+
+        private bool TileIsGround(int index, GroundType ground)
+        {
+            return ground == world.GetTiles(index).GetGround();
+        }
+
+        private GroundType GetGround()
+        {
+            var index = TileSpriteIndex();
+
+            // list grounds from GROUND32.TIL
+            if (30 > index)
+                return GroundType.WATER;
+            if (92 > index)
+                return GroundType.GRASS;
+            if (146 > index)
+                return GroundType.SNOW;
+            if (208 > index)
+                return GroundType.SWAMP;
+            if (262 > index)
+                return GroundType.LAVA;
+            if (321 > index)
+                return GroundType.DESERT;
+            if (361 > index)
+                return GroundType.DIRT;
+            if (415 > index)
+                return GroundType.WASTELAND;
+
+            //else if(432 > pack_sprite_index)
+
+            return GroundType.BEACH;
+        }
+
+        private void GetAroundIndexes(int center, MapsIndexes result)
+        {
+            result.Clear();
+            if (!isValidAbsIndex(center)) return;
+
+            var directions = Direction.All();
+
+            var world = World.Instance;
+            var wSize = new H2Size(world.w(), world.h());
+            foreach (var direction in directions)
+                if (isValidDirection(center, direction, wSize))
+                    result.Add(GetDirectionIndex(center, direction));
+        }
+
+        private int GetDirectionIndex(int from, DirectionType vector)
+        {
+            switch (vector)
+            {
+                case DirectionType.TOP:
+                    return from - world.w();
+                case DirectionType.TOP_RIGHT:
+                    return from - world.w() + 1;
+                case DirectionType.RIGHT:
+                    return from + 1;
+                case DirectionType.BOTTOM_RIGHT:
+                    return from + world.w() + 1;
+                case DirectionType.BOTTOM:
+                    return from + world.w();
+                case DirectionType.BOTTOM_LEFT:
+                    return from + world.w() - 1;
+                case DirectionType.LEFT:
+                    return from - 1;
+                case DirectionType.TOP_LEFT:
+                    return from - world.w() - 1;
+            }
+
+            return -1;
+        }
+
+        private bool isValidDirection(int from, DirectionType vector, H2Size world)
+        {
+            switch (vector)
+            {
+                case DirectionType.TOP:
+                    return from >= world.W;
+                case DirectionType.RIGHT:
+                    return from % world.W < world.W - 1;
+                case DirectionType.BOTTOM:
+                    return from < world.W * (world.H - 1);
+                case DirectionType.LEFT:
+                    return from % world.W != 0;
+
+                case DirectionType.TOP_RIGHT:
+                    return from >= world.W && from % world.W < world.W - 1;
+
+                case DirectionType.BOTTOM_RIGHT:
+                    return from < world.W * (world.H - 1) && from % world.W < world.W - 1;
+
+                case DirectionType.BOTTOM_LEFT:
+                    return from < world.W * (world.H - 1) && from % world.W != 0;
+
+                case DirectionType.TOP_LEFT:
+                    return from >= world.W && from % world.W != 0;
+            }
+
+            return false;
+        }
+
+        private bool isValidAbsIndex(int ii)
+        {
+            return 0 <= ii && ii < world.w() * world.h();
+        }
+
+        private bool isFog(int colors)
+        {
+            // colors may be the union friends
+            return (fog_colors & colors) == colors;
         }
 
         private int GetQuantity3()

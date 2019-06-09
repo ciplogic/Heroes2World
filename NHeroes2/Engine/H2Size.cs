@@ -4,6 +4,16 @@
     {
         public ushort W, H;
 
+        public H2Size()
+        {
+        }
+
+        public H2Size(int w, int h)
+        {
+            W = (ushort) w;
+            H = (ushort) h;
+        }
+
         public int w()
         {
             return W;

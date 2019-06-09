@@ -18,7 +18,7 @@ namespace NHeroes2.KingdomNs
 
         private KingdomHeroes heroes_cond_loss;
 
-        public Kingdom[] kingdoms = new Kingdom[H2Consts.KINGDOMMAX + 1];
+        public List<Kingdom> kingdoms = new List<Kingdom>();
         private LastLoseHero lost_hero;
 
         private uint lost_town_days;
@@ -31,6 +31,11 @@ namespace NHeroes2.KingdomNs
         private List<IndexObject> visit_object = new List<IndexObject>();
         private uint visited_tents_colors;
 
+        public Kingdoms()
+        {
+            kingdoms.SetSize(H2Consts.KINGDOMMAX + 1);
+        }
+
         public void AddHeroes(AllHeroes heroes)
         {
             heroes.ForEach(heroe =>
@@ -40,7 +45,7 @@ namespace NHeroes2.KingdomNs
             // skip gray color
         }
 
-        private Kingdom GetKingdom(ColorKind color)
+        public Kingdom GetKingdom(ColorKind color)
         {
             switch (color)
             {

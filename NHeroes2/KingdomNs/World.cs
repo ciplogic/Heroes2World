@@ -19,17 +19,10 @@ namespace NHeroes2.KingdomNs
 {
     public class World : H2Size
     {
-        private int day, week, month;
-        private int heroes_cond_loss;
-
-
-        private int heroes_cond_wins;
-        private MapActions map_actions = new MapActions();
         private readonly CapturedObjects map_captureobj = new CapturedObjects();
 
 
         private readonly MapObjects map_objects = new MapObjects();
-        private UltimateArtifact ultimate_artifact;
         private readonly AllCastles vec_castles = new AllCastles();
         private readonly EventsDate vec_eventsday = new EventsDate();
 
@@ -37,6 +30,13 @@ namespace NHeroes2.KingdomNs
         private readonly Kingdoms vec_kingdoms = new Kingdoms();
         private readonly Rumors vec_rumors = new Rumors();
         private readonly MapsTiles vec_tiles = new MapsTiles();
+        private int day, week, month;
+        private int heroes_cond_loss;
+
+
+        private int heroes_cond_wins;
+        private MapActions map_actions = new MapActions();
+        private UltimateArtifact ultimate_artifact;
 
         private Week week_current;
         private Week week_next;
@@ -54,9 +54,9 @@ namespace NHeroes2.KingdomNs
         }
 
 
-        private Kingdom GetKingdom(ColorKind colorKind)
+        private Kingdom GetKingdom(ColorKind color)
         {
-            throw new NotImplementedException();
+            return vec_kingdoms.GetKingdom(color);
         }
 
         public Heroes GetFreemanHeroes(RaceType race)
@@ -835,6 +835,7 @@ namespace NHeroes2.KingdomNs
                         }
                     }
                 }
+
                 // debug
             }
 
@@ -849,7 +850,7 @@ namespace NHeroes2.KingdomNs
             return GetTiles(ay * W + ax);
         }
 
-        private Tiles GetTiles(int index)
+        public Tiles GetTiles(int index)
         {
             return vec_tiles[index];
         }

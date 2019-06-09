@@ -9,19 +9,19 @@ namespace NHeroes2.KingdomNs
 {
     internal class Kingdom
     {
-        private KingdomCastles castles;
+        private readonly KingdomCastles castles = new KingdomCastles();
         private int color;
-        private KingdomHeroes heroes;
+        private KingdomHeroes heroes = new KingdomHeroes();
 
-        private KingdomHeroes heroes_cond_loss;
-        private LastLoseHero lost_hero;
+        private KingdomHeroes heroes_cond_loss = new KingdomHeroes();
+        private LastLoseHero lost_hero = new LastLoseHero();
 
         private uint lost_town_days;
 
-        private Puzzle puzzle_maps;
+        private Puzzle puzzle_maps = new Puzzle();
 
-        private Recruits recruits;
-        private Funds resource;
+        private Recruits recruits = new Recruits();
+        private Funds resource = new Funds();
 
         private List<IndexObject> visit_object = new List<IndexObject>();
         private uint visited_tents_colors;
@@ -38,7 +38,7 @@ namespace NHeroes2.KingdomNs
 
         public KingdomCastles GetCastles()
         {
-            throw new NotImplementedException();
+            return castles;
         }
 
         public void AddHeroes(Heroes heroe)
