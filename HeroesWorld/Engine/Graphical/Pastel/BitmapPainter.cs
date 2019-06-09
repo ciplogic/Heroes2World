@@ -26,10 +26,7 @@ namespace HeroesWorld.Engine.Graphical.Pastel
         {
             var graphics = Graphics.FromImage(_bitmap);
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            foreach (var command in Commands)
-            {
-                command.Paint(new Size(_width, _height), graphics);
-            }
+            foreach (var command in Commands) command.Paint(new Size(_width, _height), graphics);
 
             graphics.Dispose();
             _bitmap.Save(_outFile);

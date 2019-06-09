@@ -85,8 +85,10 @@
     <Compile Include="CastleNs\CastleFlags.cs" />
     <Compile Include="CastleNs\VecCastles.cs" />
     <Compile Include="Engine\H2Point.cs" />
+    <Compile Include="Engine\Rand.cs" />
     <Compile Include="Engine\H2Size.cs" />
     <Compile Include="Engine\ListDirs.cs" />
+    <Compile Include="Engine\Surface.cs" />
     <Compile Include="GameNs\GameOverCondition.cs" />
     <Compile Include="GameNs\GameStatic.cs" />
     <Compile Include="HeroesNs\AllHeroes.cs" />
@@ -164,8 +166,12 @@
     <Compile Include="Objects\ObjWat2.cs" />
     <Compile Include="Objects\ObjWatr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceNs\AllArtifacts.cs" />
     <Compile Include="ResourceNs\Artifact.cs" />
+    <Compile Include="ResourceNs\ArtifactBits.cs" />
     <Compile Include="ResourceNs\ArtifactLevel.cs" />
+    <Compile Include="ResourceNs\ArtifactKind.cs" />
+    <Compile Include="ResourceNs\artifactstats_t.cs" />
     <Compile Include="ResourceNs\ArtifactType.cs" />
     <Compile Include="ResourceNs\cost_t.cs" />
     <Compile Include="ResourceNs\Funds.cs" />
@@ -188,7 +194,6 @@
     <Compile Include="SystemNs\H2Consts.cs" />
     <Compile Include="SystemNs\Player.cs" />
     <Compile Include="SystemNs\Players.cs" />
-    <Compile Include="SystemNs\Rand.cs" />
     <Compile Include="SystemNs\SettingsFlags.cs" />
     <Compile Include="SystemNs\System.cs" />
     <Compile Include="SystemNs\Translation.cs" />

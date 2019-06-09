@@ -100,7 +100,7 @@ namespace Sdl2.Core
         /* IntPtr refers to a TTF_Font* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_OpenFont(
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string file,
             int ptsize
         );
@@ -117,7 +117,7 @@ namespace Sdl2.Core
         /* IntPtr refers to a TTF_Font* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_OpenFontIndex(
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string file,
             int ptsize,
             long index
@@ -227,7 +227,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int TTF_SizeText(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string text,
             out int w,
             out int h
@@ -237,7 +237,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int TTF_SizeUTF8(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string text,
             out int w,
             out int h
@@ -247,8 +247,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int TTF_SizeUNICODE(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPWStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string text,
             out int w,
             out int h
         );
@@ -257,8 +256,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderText_Solid(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPStr)] string text,
             SDL.SDL_Color fg
         );
 
@@ -266,7 +264,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUTF8_Solid(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string text,
             SDL.SDL_Color fg
         );
@@ -275,8 +273,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUNICODE_Solid(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPWStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string text,
             SDL.SDL_Color fg
         );
 
@@ -292,8 +289,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderText_Shaded(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPStr)] string text,
             SDL.SDL_Color fg,
             SDL.SDL_Color bg
         );
@@ -302,7 +298,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUTF8_Shaded(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string text,
             SDL.SDL_Color fg,
             SDL.SDL_Color bg
@@ -312,8 +308,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUNICODE_Shaded(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPWStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string text,
             SDL.SDL_Color fg,
             SDL.SDL_Color bg
         );
@@ -331,8 +326,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderText_Blended(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPStr)] string text,
             SDL.SDL_Color fg
         );
 
@@ -340,7 +334,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUTF8_Blended(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string text,
             SDL.SDL_Color fg
         );
@@ -349,8 +343,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUNICODE_Blended(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPWStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string text,
             SDL.SDL_Color fg
         );
 
@@ -358,8 +351,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderText_Blended_Wrapped(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPStr)] string text,
             SDL.SDL_Color fg,
             uint wrapped
         );
@@ -368,7 +360,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUTF8_Blended_Wrapped(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string text,
             SDL.SDL_Color fg,
             uint wrapped
@@ -378,8 +370,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TTF_RenderUNICODE_Blended_Wrapped(
             IntPtr font,
-            [In()] [MarshalAs(UnmanagedType.LPWStr)]
-            string text,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string text,
             SDL.SDL_Color fg,
             uint wrapped
         );

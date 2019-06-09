@@ -1,13 +1,13 @@
 ﻿namespace CodeReplacer
 {
-    class ReplaceRule
+    internal class ReplaceRule
     {
         public string From;
         public string To;
 
-        public ReplaceRule(string @from, string to)
+        public ReplaceRule(string from, string to)
         {
-            From = @from;
+            From = from;
             To = to;
         }
     }

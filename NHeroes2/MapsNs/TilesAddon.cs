@@ -257,9 +257,9 @@ namespace NHeroes2.MapsNs
                    IcnKind.X_LOC3 == Mp2.GetICNObject(ta.obj);
         }
 
-        public bool IsShadow(TilesAddon ta)
+        public static bool IsShadow(TilesAddon ta)
         {
-            IcnKind icn = Mp2.GetICNObject(ta.obj);
+            var icn = Mp2.GetICNObject(ta.obj);
 
             switch (icn)
             {
@@ -314,9 +314,6 @@ namespace NHeroes2.MapsNs
                     return ta.index > 31;
                 case IcnKind.OBJNTWSH:
                     return true;
-
-                default:
-                    break;
             }
 
             return false;

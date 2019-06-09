@@ -6,10 +6,10 @@ namespace HeroesWorld.Engine.Graphical
 {
     public class Screen
     {
-        public IntPtr win;
         public IntPtr ren;
 
         public Matrix2D Transforms = Matrix2D.MakeIdentity();
+        public IntPtr win;
 
         public void SetWindow(int screenWidth, int screenHeight, string title = "Heroes World",
             SDL.SDL_WindowFlags flags = SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN)
@@ -25,19 +25,22 @@ namespace HeroesWorld.Engine.Graphical
         {
             SDL.SDL_RenderCopy(ren, myTexture, ref sourceRect, ref destinationRect);
         }
+
         public void DrawSprite(Surface surface, int x, int y)
         {
             var sourceRect = surface.Sizes.ToSdlRect();
-            
-            var topLeftCoord = (x:x, y:y);
+
+            var topLeftCoord = (x: x, y: y);
             topLeftCoord = Transforms.TransformCoordinate(topLeftCoord);
-            var botRight = (x:x + sourceRect.w, y: y + sourceRect.h);
+            var botRight = (x: x + sourceRect.w, y: y + sourceRect.h);
             botRight = Transforms.TransformCoordinate(botRight);
 
 
-            var destinationRect = new SDL.SDL_Rect {
+            var destinationRect = new SDL.SDL_Rect
+            {
                 x = topLeftCoord.x, y = topLeftCoord.y,
-                w = botRight.x-topLeftCoord.x, h = botRight.y - topLeftCoord.y};
+                w = botRight.x - topLeftCoord.x, h = botRight.y - topLeftCoord.y
+            };
             SDL.SDL_RenderCopy(ren, surface._texture, ref sourceRect, ref destinationRect);
         }
 

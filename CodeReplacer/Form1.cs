@@ -6,17 +6,7 @@ namespace CodeReplacer
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = Clipboard.GetText().Trim();
-        }
-
-        private List<ReplaceRule> _replaceRules = new List<ReplaceRule>()
+        private readonly List<ReplaceRule> _replaceRules = new List<ReplaceRule>
         {
             new ReplaceRule("->", "."),
             new ReplaceRule("struct", "class"),
@@ -29,18 +19,25 @@ namespace CodeReplacer
             new ReplaceRule("vector<", "List<"),
             new ReplaceRule("push_back", "Add"),
             new ReplaceRule("null_ptr ", "null "),
-            new ReplaceRule( " null_ptr", " null"),
+            new ReplaceRule(" null_ptr", " null"),
             new ReplaceRule("auto ", "var "),
-            new ReplaceRule("::", "."),
+            new ReplaceRule("::", ".")
         };
 
-
-        static string ReplaceText(string text, List<ReplaceRule> convertPairs)
+        public Form1()
         {
-            foreach (var convertPair in convertPairs)
-            {
-                text = text.Replace(convertPair.From, convertPair.To);
-            }
+            InitializeComponent();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = Clipboard.GetText().Trim();
+        }
+
+
+        private static string ReplaceText(string text, List<ReplaceRule> convertPairs)
+        {
+            foreach (var convertPair in convertPairs) text = text.Replace(convertPair.From, convertPair.To);
 
             return text;
         }

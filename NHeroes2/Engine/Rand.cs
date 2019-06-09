@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace NHeroes2.SystemNs
+namespace NHeroes2.Engine
 {
     internal class Rand
     {

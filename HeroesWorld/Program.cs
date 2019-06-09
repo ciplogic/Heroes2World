@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using HeroesWorld.Engine;
@@ -16,16 +15,17 @@ using Screen = HeroesWorld.Engine.Graphical.Screen;
 
 namespace HeroesWorld
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (!File.Exists("../DATA/HEROES2.AGG"))
             {
                 var mapsDownloader = new DownloaderMaps();
-                if(!mapsDownloader.DownloadSuccessful())
+                if (!mapsDownloader.DownloadSuccessful())
                     return;
             }
+
             var aggFile = new AggFile();
             aggFile.Open("../DATA/HEROES2.AGG");
 
@@ -59,7 +59,7 @@ namespace HeroesWorld
 
 
             var myCore = new Core(false);
-            MusicPlayer.Play(aggFile, (int) 16);
+            MusicPlayer.Play(aggFile, 16);
 
             //load a sample image
             //IntPtr myTexture = screen.LoadTexture("mmmmIcon.png");

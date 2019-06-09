@@ -11,7 +11,7 @@ namespace HeroesWorld.Engine.Graphical.Pastel
     {
         private const double Epsilon = 1e-6;
 
-        static double Distance(double x1, double y1, double x2, double y2)
+        private static double Distance(double x1, double y1, double x2, double y2)
         {
             var deltaX = x2 - x1;
             var deltaY = y2 - y1;
@@ -19,14 +19,15 @@ namespace HeroesWorld.Engine.Graphical.Pastel
             return distance;
         }
 
-        static bool IsInteger(double x)
+        private static bool IsInteger(double x)
         {
             var intX = (int) x;
-            var deltaX = (x - intX);
+            var deltaX = x - intX;
             return deltaX < Epsilon;
         }
 
-        static void Add(List<DistanceColor> colors, Bitmap rawBitmap, double x, double y, int targetX, int targetY)
+        private static void Add(List<DistanceColor> colors, Bitmap rawBitmap, double x, double y, int targetX,
+            int targetY)
         {
             var col = rawBitmap.GetPixel(targetX, targetY);
             var distance = Distance(x, y, targetX, targetY);
@@ -52,7 +53,7 @@ namespace HeroesWorld.Engine.Graphical.Pastel
                 Add(colors, rawBitmap, x, y, intX + 1, intY + 1);
         }
 
-        static Color InterpolateColors(List<DistanceColor> colors, List<double> ratios)
+        private static Color InterpolateColors(List<DistanceColor> colors, List<double> ratios)
         {
             if (colors.Count == 1)
                 return colors[0].color;
@@ -118,13 +119,11 @@ namespace HeroesWorld.Engine.Graphical.Pastel
             var scaleHeight = (double) (rawImage.Height - 1) / (newHeight - 1);
 
             for (var y = 0; y < newHeight; y++)
+            for (var x = 0; x < newWidth; x++)
             {
-                for (var x = 0; x < newWidth; x++)
-                {
-                    var optimalColor = rawImage.GetPixel((int) (x * scaleWidth), (int) (y * scaleHeight));
+                var optimalColor = rawImage.GetPixel((int) (x * scaleWidth), (int) (y * scaleHeight));
 
-                    cloneBitmap.SetPixel(x, y, optimalColor);
-                }
+                cloneBitmap.SetPixel(x, y, optimalColor);
             }
 
             return cloneBitmap;
@@ -143,12 +142,10 @@ namespace HeroesWorld.Engine.Graphical.Pastel
             var lx = area.X;
             var ly = area.Y;
             for (var y = 0; y < h; y++)
+            for (var x = 0; x < w; x++)
             {
-                for (var x = 0; x < w; x++)
-                {
-                    var pixel = rawBitmap.GetPixel(lx + x, ly + y);
-                    cloneBitmap.SetPixel(x, y, pixel);
-                }
+                var pixel = rawBitmap.GetPixel(lx + x, ly + y);
+                cloneBitmap.SetPixel(x, y, pixel);
             }
 
 

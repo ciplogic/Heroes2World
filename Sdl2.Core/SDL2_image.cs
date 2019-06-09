@@ -95,7 +95,7 @@ namespace Sdl2.Core
         /* IntPtr refers to an SDL_Surface* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr IMG_Load(
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string file
         );
 
@@ -113,7 +113,7 @@ namespace Sdl2.Core
         public static extern IntPtr IMG_LoadTyped_RW(
             IntPtr src,
             int freesrc,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string type
         );
 
@@ -121,7 +121,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr IMG_LoadTexture(
             IntPtr renderer,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string file
         );
 
@@ -147,7 +147,7 @@ namespace Sdl2.Core
             IntPtr renderer,
             IntPtr src,
             int freesrc,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string type
         );
 
@@ -157,7 +157,7 @@ namespace Sdl2.Core
         /* IntPtr refers to an SDL_Surface* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr IMG_ReadXPMFromArray(
-            [In()] [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)]
+            [In] [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)]
             string[] xpm
         );
 
@@ -165,7 +165,7 @@ namespace Sdl2.Core
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int IMG_SavePNG(
             IntPtr surface,
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string file
         );
 

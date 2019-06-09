@@ -36,7 +36,7 @@ namespace NHeroes2.KingdomNs
 
         private int heroes_cond_wins;
         private MapActions map_actions = new MapActions();
-        private UltimateArtifact ultimate_artifact;
+        private readonly UltimateArtifact ultimate_artifact = new UltimateArtifact((int) ArtifactKind.UNKNOWN);
 
         private Week week_current;
         private Week week_next;

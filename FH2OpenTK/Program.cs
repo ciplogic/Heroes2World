@@ -2,33 +2,21 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using OpenTK;
-using BeginMode = OpenTK.Graphics.BeginMode;
-using ClearBufferMask = OpenTK.Graphics.ClearBufferMask;
-using EnableCap = OpenTK.Graphics.EnableCap;
-using GL = OpenTK.Graphics.GL;
-using HintMode = OpenTK.Graphics.HintMode;
-using HintTarget = OpenTK.Graphics.HintTarget;
-using MatrixMode = OpenTK.Graphics.MatrixMode;
-using PixelFormat = OpenTK.Graphics.PixelFormat;
-using PixelInternalFormat = OpenTK.Graphics.PixelInternalFormat;
-using PixelType = OpenTK.Graphics.PixelType;
-using TextureMagFilter = OpenTK.Graphics.TextureMagFilter;
-using TextureMinFilter = OpenTK.Graphics.TextureMinFilter;
-using TextureParameterName = OpenTK.Graphics.TextureParameterName;
-using TextureTarget = OpenTK.Graphics.TextureTarget;
+using OpenTK.Graphics;
+using OpenTK.Input;
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace FH2OpenTK
 {
-
     namespace Examples.Tutorial
     {
         /// <summary>
-        /// Demonstrates simple OpenGL Texturing.
+        ///     Demonstrates simple OpenGL Texturing.
         /// </summary>
         public class Textures : GameWindow
         {
-            Bitmap bitmap = new Bitmap("Data/Textures/logo.jpg");
-            int texture;
+            private readonly Bitmap bitmap = new Bitmap("Data/Textures/logo.jpg");
+            private int texture;
 
             public Textures() : base(800, 600)
             {
@@ -37,7 +25,7 @@ namespace FH2OpenTK
             #region OnLoad
 
             /// <summary>
-            /// Setup OpenGL and load resources here.
+            ///     Setup OpenGL and load resources here.
             /// </summary>
             /// <param name="e">Not used.</param>
             protected override void OnLoad(EventArgs e)
@@ -54,11 +42,11 @@ namespace FH2OpenTK
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
                     (int) TextureMagFilter.Linear);
 
-                var data = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                    ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                    ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
 
                 GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, data.Width, data.Height, 0,
-                    PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
+                    OpenTK.Graphics.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
 
                 bitmap.UnlockBits(data);
             }
@@ -77,7 +65,7 @@ namespace FH2OpenTK
             #region OnResize
 
             /// <summary>
-            /// Respond to resize events here.
+            ///     Respond to resize events here.
             /// </summary>
             /// <param name="e">Contains information on the new GameWindow size.</param>
             /// <remarks>There is no need to call the base implementation.</remarks>
@@ -95,15 +83,15 @@ namespace FH2OpenTK
             #region OnUpdateFrame
 
             /// <summary>
-            /// Add your game logic here.
+            ///     Add your game logic here.
             /// </summary>
             /// <param name="e">Contains timing information.</param>
             /// <remarks>There is no need to call the base implementation.</remarks>
             protected override void OnUpdateFrame(FrameEventArgs e)
             {
                 var keyboard = OpenTK.Input.Keyboard.GetState();
-                if (keyboard[OpenTK.Input.Key.Escape])
-                    this.Exit();
+                if (keyboard[Key.Escape])
+                    Exit();
             }
 
             #endregion
@@ -111,7 +99,7 @@ namespace FH2OpenTK
             #region OnRenderFrame
 
             /// <summary>
-            /// Add your game rendering code here.
+            ///     Add your game rendering code here.
             /// </summary>
             /// <param name="e">Contains timing information.</param>
             /// <remarks>There is no need to call the base implementation.</remarks>
@@ -123,7 +111,7 @@ namespace FH2OpenTK
                 GL.LoadIdentity();
                 GL.BindTexture(TextureTarget.Texture2D, texture);
 
-                GL.Begin( BeginMode.Quads);
+                GL.Begin(BeginMode.Quads);
 
                 GL.TexCoord2(0.0f, 1.0f);
                 GL.Vertex2(-0.6f, -0.4f);
@@ -144,7 +132,7 @@ namespace FH2OpenTK
             #region public static void Main()
 
             /// <summary>
-            /// Entry point of this example.
+            ///     Entry point of this example.
             /// </summary>
             [STAThread]
             public static void Main()
@@ -152,7 +140,7 @@ namespace FH2OpenTK
                 using (var example = new Textures())
                 {
                     // Get the title and category  of this example using reflection.
-                    example.Title = $"OpenTK";
+                    example.Title = "OpenTK";
                     example.Run(30.0, 0.0);
                 }
             }

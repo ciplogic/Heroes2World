@@ -34,22 +34,13 @@ namespace Sdl2.Core
     {
         public const string LeaveAllocated = "LeaveAllocated";
 
-        private static ICustomMarshaler
-            _leaveAllocatedInstance = new LPUtf8StrMarshaler(true),
+        private static readonly ICustomMarshaler
+            _leaveAllocatedInstance = new LPUtf8StrMarshaler(true);
+
+        private static readonly ICustomMarshaler
             _defaultInstance = new LPUtf8StrMarshaler(false);
 
-        public static ICustomMarshaler GetInstance(string cookie)
-        {
-            switch (cookie)
-            {
-                case "LeaveAllocated":
-                    return _leaveAllocatedInstance;
-                default:
-                    return _defaultInstance;
-            }
-        }
-
-        private bool _leaveAllocated;
+        private readonly bool _leaveAllocated;
 
         public LPUtf8StrMarshaler(bool leaveAllocated)
         {
@@ -61,10 +52,7 @@ namespace Sdl2.Core
             if (pNativeData == IntPtr.Zero)
                 return null;
             var ptr = (byte*) pNativeData;
-            while (*ptr != 0)
-            {
-                ptr++;
-            }
+            while (*ptr != 0) ptr++;
 
             var bytes = new byte[ptr - (byte*) pNativeData];
             Marshal.Copy(pNativeData, bytes, 0, bytes.Length);
@@ -76,10 +64,7 @@ namespace Sdl2.Core
             if (ManagedObj == null)
                 return IntPtr.Zero;
             var str = ManagedObj as string;
-            if (str == null)
-            {
-                throw new ArgumentException("ManagedObj must be a string.", "ManagedObj");
-            }
+            if (str == null) throw new ArgumentException("ManagedObj must be a string.", "ManagedObj");
 
             var bytes = Encoding.UTF8.GetBytes(str);
             var mem = SDL.SDL_malloc((IntPtr) (bytes.Length + 1));
@@ -94,15 +79,23 @@ namespace Sdl2.Core
 
         public void CleanUpNativeData(IntPtr pNativeData)
         {
-            if (!_leaveAllocated)
-            {
-                SDL.SDL_free(pNativeData);
-            }
+            if (!_leaveAllocated) SDL.SDL_free(pNativeData);
         }
 
         public int GetNativeDataSize()
         {
             return -1;
+        }
+
+        public static ICustomMarshaler GetInstance(string cookie)
+        {
+            switch (cookie)
+            {
+                case "LeaveAllocated":
+                    return _leaveAllocatedInstance;
+                default:
+                    return _defaultInstance;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace HeroesWorld.Settings
 {
-    class GameSettings
+    internal class GameSettings
     {
         public int ScreenWidth, ScreenHeight;
     }

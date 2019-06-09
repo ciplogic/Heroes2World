@@ -4,10 +4,18 @@ namespace HeroesWorld.Engine.Graphical
 {
     public class Matrix2D
     {
-        double[] _data = new double[9];
+        private double[] _data = new double[9];
+
+        public double this[int row, int col]
+        {
+            get => GetCell(row, col);
+            set => SetCell(row, col, value);
+        }
 
         public override string ToString()
-            => string.Join(",", _data);
+        {
+            return string.Join(",", _data);
+        }
 
         public static Matrix2D MakeIdentity()
         {
@@ -27,11 +35,11 @@ namespace HeroesWorld.Engine.Graphical
             return _data[row * 3 + col];
         }
 
-        Matrix2D Clone()
+        private Matrix2D Clone()
         {
             var data = new double[9];
             Array.Copy(_data, data, 9);
-            return new Matrix2D()
+            return new Matrix2D
             {
                 _data = data
             };
@@ -42,14 +50,12 @@ namespace HeroesWorld.Engine.Graphical
             var a = Clone();
 
             for (var i = 0; i < 3; i++)
+            for (var j = 0; j < 3; j++)
             {
-                for (var j = 0; j < 3; j++)
-                {
-                    var sum = 0.0;
-                    for (var k = 0; k < 3; k++)
-                        sum += a[i, k] * other[k, j];
-                    this[i, j] = sum;
-                }
+                var sum = 0.0;
+                for (var k = 0; k < 3; k++)
+                    sum += a[i, k] * other[k, j];
+                this[i, j] = sum;
             }
         }
 
@@ -76,12 +82,6 @@ namespace HeroesWorld.Engine.Graphical
             var resX = coord.x * this[0, 0] + coord.y * this[1, 0] + this[2, 0];
             var resY = coord.y * this[0, 1] + coord.y * this[1, 1] + this[2, 1];
             return ((int) resX, (int) resY);
-        }
-
-        public double this[int row, int col]
-        {
-            get => GetCell(row, col);
-            set => SetCell(row, col, value);
         }
     }
 }

@@ -5,6 +5,7 @@ using NHeroes2.Engine;
 using NHeroes2.HeroesNs;
 using NHeroes2.KingdomNs;
 using NHeroes2.SystemNs;
+using NHeroes2.Utilities;
 
 namespace NHeroes2.MapsNs
 {
@@ -240,7 +241,12 @@ namespace NHeroes2.MapsNs
             if (isWater())
                 return false;
 
-            throw new NotImplementedException();
+            if (!addons_level1._items.empty() &&
+                addons_level1._items.Count !=
+                addons_level1._items.Count(TilesAddon.IsShadow))
+                return false;
+
+            return isPassable(null, DirectionType.CENTER, true);
         }
 
         private bool isWater()

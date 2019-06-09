@@ -83,7 +83,7 @@ private const string nativeLibName = "SDL2_mixer.dylib";
             MIX_INIT_MOD = 0x00000002,
             MIX_INIT_MP3 = 0x00000004,
             MIX_INIT_OGG = 0x00000008,
-            MIX_INIT_FLUIDSYNTH = 0x00000010,
+            MIX_INIT_FLUIDSYNTH = 0x00000010
         }
 
         public enum Mix_Fading
@@ -204,21 +204,21 @@ private const string nativeLibName = "SDL2_mixer.dylib";
         /* IntPtr refers to a Mix_Music* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr Mix_LoadMUS(
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string file
         );
 
         /* IntPtr refers to a Mix_Chunk* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr Mix_QuickLoad_WAV(
-            [In()] [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1)]
+            [In] [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1)]
             byte[] mem
         );
 
         /* IntPtr refers to a Mix_Chunk* */
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr Mix_QuickLoad_RAW(
-            [In()] [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1, SizeParamIndex = 1)]
+            [In] [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1, SizeParamIndex = 1)]
             byte[] mem,
             uint len
         );
@@ -470,7 +470,7 @@ private const string nativeLibName = "SDL2_mixer.dylib";
 
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Mix_SetMusicCMD(
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string command
         );
 
@@ -482,7 +482,7 @@ private const string nativeLibName = "SDL2_mixer.dylib";
 
         [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Mix_SetSoundFonts(
-            [In()] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
+            [In] [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(LPUtf8StrMarshaler))]
             string paths
         );
 
